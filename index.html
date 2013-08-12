@@ -7,55 +7,147 @@
 		<link rel="stylesheet" type="text/css" href="styles.css">
 	</head>
 	<body>
-		<div class="bubble">
-			<div id="header">
-				LIFTBOT
-			</div>
-			<div class="divider smallText">
-				Enter the amount of weight you lifted for the number of reps and sets and this calculator will tell you your one rep max.
-			</div>
-			<div class="divider">
-				<div class="label">
-					Weight
-				</div>
-				<div class="textBox">
-				  <input class="field" type="text" name="weight" value="225">
-				</div>
-			</div>
-			<div class="divider">
-				<div class="label">
-					Reps
-				</div>
-				<div class="textBox">
-					<input class="field" type="text" name="reps" value="5">
-				</div>
-			</div>
-			<div class="divider">
-				<div class="label">
-					Sets
-				</div> 
-				<div class="textBox">
-					<input class="field" type="text" name="sets" value="1">
-				</div>
-			</div>
-			<div class="divider">
-				<input type="button" class="button" value="Calculate One Rep Max" id="submit">
-			</div>
-
-			<div id="footer">
-				
-			</div>
+		<div>
+			<table>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<div class="topLabel">
+							Weight
+						</div>
+					</td>
+					<td>
+						<div class="topLabel">
+							Reps
+						</div>
+					</td>
+					<td>
+						<div class="topLabel">
+							Sets
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="label">
+							Squat
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="weightField" type="text" name="sWeight" value="315">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="repField" type="text" name="sReps" value="5">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="setField" type="text" name="sSets" value="1">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="label">
+							Bench
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="weightField" type="text" name="bWeight" value="225">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="repField" type="text" name="bReps" value="5">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="setField" type="text" name="bSets" value="1">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="label">
+							Deadlift
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="weightField" type="text" name="dWeight" value="405">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="repField" type="text" name="dReps" value="5">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="setField" type="text" name="dSets" value="1">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="label">
+							Row
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="weightField" type="text" name="rWeight" value="225">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="repField" type="text" name="rReps" value="5">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="setField" type="text" name="rSets" value="1">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="label">
+							Incline
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="weightField" type="text" name="iWeight" value="185">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="repField" type="text" name="iReps" value="5">&times;
+						</div>
+					</td>
+					<td>
+						<div class="textBox">
+				  			<input class="setField" type="text" name="iSets" value="1">
+						</div>
+					</td>
+				</tr>
+			</table>
+			<input type="button" class="button" value="Calculate One Rep Max" id="submit">
 		</div>
 
-		<div class="bubble" id="results">
+		<div id="results">
 			<div id="header">
-				1RM
+				One Rep Maxes
 			</div>
-			<div id="output" class="output">
+			<div id="output">
 
-			</div>
-			<div id="footer">
-				
 			</div>
 		</div>
 	</body>
