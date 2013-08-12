@@ -75,30 +75,26 @@ $(document).ready(function() {
 			weeks[week].Week.monday = {
 				squat: new Lift('Squat'),
 				bench: new Lift('Bench'),
-				row: new Lift('Row')
+				row: new Lift('Row'),
+				reps: new Array()
 			};
 			weeks[week].Week.wednesday = {
 				squat: new Lift('Squat'),
 				incline: new Lift('Incline'),
-				dead: new Lift('Deadlift')
+				dead: new Lift('Deadlift'),
+				reps: new Array()
 			};
 			weeks[week].Week.friday = {
 				squat: new Lift('Squat'),
 				bench: new Lift('Bench'),
-				row: new Lift('Row')
+				row: new Lift('Row'),
+				reps: new Array()
 			};
 		};
 
 		weeks[0].Week.monday.squat.set = fillDownSets(calcxRM(squatMax,5)*0.925, 5);
 		weeks[0].Week.monday.bench.set = fillDownSets(calcxRM(benchMax,5)*0.925, 5);
 		weeks[0].Week.monday.row.set = fillDownSets(calcxRM(rowMax,5)*0.925, 5);
-
-		for (week=1; week<10; week++) {
-			weeks[week].Week.monday.squat.set = fillDownSets(weeks[week-1].Week.monday.squat.set[4]*1.025, 5);
-			weeks[week].Week.monday.row.set = fillDownSets(weeks[week-1].Week.monday.row.set[4]*1.025, 5);
-			weeks[week].Week.monday.bench.set = fillDownSets(weeks[week-1].Week.monday.bench.set[4]*1.025, 5);
-
-		}
 
 		weeks[0].Week.wednesday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[2], 3);
 		weeks[0].Week.wednesday.squat.set[3] = weeks[0].Week.monday.squat.set[2];
@@ -108,6 +104,28 @@ $(document).ready(function() {
 		weeks[0].Week.friday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[4]*1.025, 5);
 		weeks[0].Week.friday.squat.set[5] = weeks[0].Week.monday.squat.set[2];
 
+		for (week=1; week<10; week++) {
+			weeks[week].Week.monday.squat.set = fillDownSets(weeks[week-1].Week.monday.squat.set[4]*1.02535, 5);
+			weeks[week].Week.monday.bench.set = fillDownSets(weeks[week-1].Week.monday.bench.set[4]*1.02535, 5);
+			weeks[week].Week.monday.row.set = fillDownSets(weeks[week-1].Week.monday.row.set[4]*1.02535, 5);
+			weeks[week].Week.monday.reps = [5,5,5,5,5];
+
+			weeks[week].Week.wednesday.squat.set = fillDownSets(weeks[week-1].Week.wednesday.squat.set[2]*1.02535, 3);
+			weeks[week].Week.wednesday.squat.set[3] = weeks[week].Week.wednesday.squat.set[2];
+			weeks[week].Week.wednesday.incline.set = fillDownSets(weeks[week-1].Week.wednesday.incline.set[3]*1.02535, 4);
+			weeks[week].Week.wednesday.dead.set = fillDownSets(weeks[week-1].Week.wednesday.dead.set[3]*1.02535, 4);
+			weeks[week].Week.wednesday.reps = [5,5,5,5];
+
+			weeks[week].Week.friday.squat.set = fillDownSets(weeks[week-1].Week.friday.squat.set[4]*1.02535, 5);
+			weeks[week].Week.friday.squat.set[5] = weeks[week].Week.wednesday.squat.set[3];
+			weeks[week].Week.friday.bench.set = fillDownSets(weeks[week-1].Week.friday.bench.set[4]*1.02535, 5);
+			weeks[week].Week.friday.bench.set[5] = weeks[week].Week.friday.bench.set[3];
+			weeks[week].Week.friday.row.set = fillDownSets(weeks[week-1].Week.friday.row.set[4]*1.02535, 5);
+			weeks[week].Week.friday.row.set[5] = weeks[week].Week.friday.row.set[3];
+			weeks[week].Week.friday.reps = [5,5,5,5,3,8];
+		}
+
+		console.log(weeks[7].Week.wednesday.incline.set + ' ' + weeks[7].Week.wednesday.reps);
 		console.log(weeks);
 		printMaxes(oneRM);
 		$('#results').fadeIn('slow');
