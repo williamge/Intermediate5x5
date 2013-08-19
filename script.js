@@ -1,7 +1,9 @@
 /--- GLOBAL VARIABLES ---/
 
 var rampingPercent = 0.125;
-var smalletIncrement = 2.5;
+var smallestIncrement = 5;
+var programLength = 10;
+var weeks = new Array();
 
 $(document).ready(function() {
 	console.log('Document Ready');
@@ -43,9 +45,9 @@ $(document).ready(function() {
 		inclineInput[2] = $('input:text[name=iReps]').val();
 		inclineInput[3] = $('input:text[name=iSets]').val();
 
-		smalletIncrement = $('input:text[name=sIncrease]').val();
-
+		smallestIncrement = $('input:text[name=sIncrease]').val();
 		rampingPercent = $('input:text[name=sRamp]').val()/100;
+		programLength = $('input:text[name=pLength]').val();
 		
 		console.log(rampingPercent);
 
@@ -54,7 +56,7 @@ $(document).ready(function() {
 		var inputIsClean = true;   // Flag that's tripped if user input isn't valid
 
 		// Validate all user input	
-		if (checkSmallVars(smalletIncrement, rampingPercent) == false || checkInput(squatInput[0], squatInput[1], squatInput[2], squatInput[3]) == false || checkInput(benchInput[0], benchInput[1], benchInput[2], benchInput[3]) == false || checkInput(deadInput[0], deadInput[1], deadInput[2], deadInput[3]) == false || checkInput(rowInput[0], rowInput[1], rowInput[2], rowInput[3]) == false ||	checkInput(inclineInput[0], inclineInput[1], inclineInput[2], inclineInput[3]) == false) {
+		if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0)) == false || checkInput(squatInput[0], squatInput[1], squatInput[2], squatInput[3]) == false || checkInput(benchInput[0], benchInput[1], benchInput[2], benchInput[3]) == false || checkInput(deadInput[0], deadInput[1], deadInput[2], deadInput[3]) == false || checkInput(rowInput[0], rowInput[1], rowInput[2], rowInput[3]) == false ||	checkInput(inclineInput[0], inclineInput[1], inclineInput[2], inclineInput[3]) == false) {
 			inputIsClean = false;
 		};
 
@@ -79,9 +81,7 @@ $(document).ready(function() {
 
 			var empty = [[1,1],[1,1],[1,1],[1,1],[1,1]];
 
-			var weeks = new Array();
-
-			for (week=0; week<10; week++) {
+			for (week=0; week<programLength; week++) {
 				weeks[week] = new Week(week);
 				weeks[week].Week = {
 					monday: new Day('Monday'),
@@ -111,11 +111,13 @@ $(document).ready(function() {
 			weeks[0].Week.monday.squat.set = fillDownSets(calcxRM(squatMax,5)*0.925, 5);
 			weeks[0].Week.monday.bench.set = fillDownSets(calcxRM(benchMax,5)*0.925, 5);
 			weeks[0].Week.monday.row.set = fillDownSets(calcxRM(rowMax,5)*0.925, 5);
+			weeks[0].Week.monday.reps = [5,5,5,5,5];
 
 			weeks[0].Week.wednesday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[2], 3);
 			weeks[0].Week.wednesday.squat.set[3] = weeks[0].Week.monday.squat.set[2];
 			weeks[0].Week.wednesday.incline.set = fillDownSets(calcxRM(incMax,5)*0.925, 4);
 			weeks[0].Week.wednesday.dead.set = fillDownSets(calcxRM(deadMax,5)*0.925, 4);
+			weeks[0].Week.wednesday.reps = [5,5,5,5];
 
 			weeks[0].Week.friday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[4]*1.025, 5);
 			weeks[0].Week.friday.squat.set[5] = weeks[0].Week.monday.squat.set[2];
@@ -123,8 +125,9 @@ $(document).ready(function() {
 			weeks[0].Week.friday.bench.set[5] = weeks[0].Week.monday.bench.set[2];
 			weeks[0].Week.friday.row.set = fillDownSets(weeks[0].Week.monday.row.set[4]*1.025, 5);
 			weeks[0].Week.friday.row.set[5] = weeks[0].Week.monday.row.set[2];
+			weeks[0].Week.friday.reps = [5,5,5,5,3,8];
 
-			for (week=1; week<10; week++) {
+			for (week=1; week<programLength; week++) {
 				weeks[week].Week.monday.squat.set = fillDownSets(weeks[week-1].Week.monday.squat.set[4]*1.02535, 5);
 				weeks[week].Week.monday.bench.set = fillDownSets(weeks[week-1].Week.monday.bench.set[4]*1.02535, 5);
 				weeks[week].Week.monday.row.set = fillDownSets(weeks[week-1].Week.monday.row.set[4]*1.02535, 5);
@@ -144,15 +147,19 @@ $(document).ready(function() {
 				weeks[week].Week.friday.row.set[5] = weeks[week].Week.friday.row.set[3];
 				weeks[week].Week.friday.reps = [5,5,5,5,3,8];
 			}
+			console.info(weeks);
+			console.log(weeks.length);
 
-			console.log(weeks);
+			$('#tables').html('<p>');
+			printAll();
+
 		} else {
 			console.log("BAD INPUT");
 		};
 	});
 });
 
-/------------------- CONSTRUCTORS ----------------------------/
+/*------------------- CONSTRUCTORS ----------------------------*/
 
 function Lift(liftName) {
 	this.liftName=liftName;
@@ -168,7 +175,7 @@ function Week(number) {
 	this.number=number;
 };
 
-/------------------- FUNCTIONS ----------------------------/
+/*------------------- FUNCTIONS ----------------------------*/
 
 function fillDownSets(topSet, sets) {
 	var setArray = new Array();
@@ -190,9 +197,13 @@ function calcxRM (weight, reps) {
 };
 
 function xRound (num, digit) {
+	return (num % digit) >= (digit/2) ? parseInt(num / digit) * digit + digit : parseInt(num / digit) * digit;
+};
+
+function digitRound(num, digit) {
 	digit = Math.pow(10, digit);
 	return Math.round(num / digit) * digit;
-};
+}
 
 function checkInput(name, weight, reps, sets) {
 	if (!isNaN(weight) == true) {
@@ -224,7 +235,7 @@ function checkInput(name, weight, reps, sets) {
 	};
 };
 
-function checkSmallVars(smallest, ramp) {
+function checkSmallVars(smallest, ramp, length) {
 	if (!isNaN(smallest) == true) {
 		console.info("Smallest weight is a number");
 	} else {
@@ -243,6 +254,15 @@ function checkSmallVars(smallest, ramp) {
 		$('#output').html("Ramping percent is not a number!");
 		return(false);
 	};
+	if (!isNaN(length) == true) {
+		console.info("Program length is a number");
+	} else {
+		console.warn("Program length is not a number");
+		$('#output').removeClass('output');
+		$('#output').addClass('error');
+		$('#output').html("Program length is not a number!");
+		return(false);
+	};
 
 	if (ramp > 0.20 || ramp < 0.001) {
 		$('#output').removeClass('output');
@@ -250,8 +270,56 @@ function checkSmallVars(smallest, ramp) {
 		$('#output').html("Using that value as a ramping percentage is highly unrecommended!");
 		return(false);
 	}
+
+	if (smallest > 25) {
+		$('#output').removeClass('output');
+		$('#output').addClass('error');
+		$('#output').html("The smallest plate you have is a " + smallest + "?");
+		return(false);
+	} else {
+		smallestIncrement = smallestIncrement*2;
+	}
+
+	if (length > 18) {
+		$('#output').removeClass('output');
+		$('#output').addClass('error');
+		$('#output').html("Running this program for more than 18 weeks without a reset is very ambitious.");
+		return(false);
+	}
 }
 
 function printMaxes(oneRM) {
-	$('#output').html('Squat 1RM = ' + xRound(oneRM[0], 0) + ' 5RM = ' + xRound(calcxRM(oneRM[0], 5), 0) + '<br>' +  'Bench 1RM = ' + xRound(oneRM[1], 0) + ' 5RM = ' + xRound(calcxRM(oneRM[1], 5), 0) + '<br>' + 'Deadlift 1RM = ' + xRound(oneRM[2], 0) + ' 5RM = ' + xRound(calcxRM(oneRM[2], 5), 0) + '<br>' + 'Row 1RM = ' + xRound(oneRM[3], 0) + ' 5RM = ' + xRound(calcxRM(oneRM[3], 5), 0) + '<br>' + 'Incline 1RM = ' + xRound(oneRM[4], 0) + ' 5RM = ' + xRound(calcxRM(oneRM[4], 5), 0) + '<br>');
+	$('#output').html('Squat 1RM = ' + digitRound(oneRM[0], 0) + ' 5RM = ' + digitRound(calcxRM(oneRM[0], 5), 0) + '<br>' +  'Bench 1RM = ' + digitRound(oneRM[1], 0) + ' 5RM = ' + digitRound(calcxRM(oneRM[1], 5), 0) + '<br>' + 'Deadlift 1RM = ' + digitRound(oneRM[2], 0) + ' 5RM = ' + digitRound(calcxRM(oneRM[2], 5), 0) + '<br>' + 'Row 1RM = ' + digitRound(oneRM[3], 0) + ' 5RM = ' + digitRound(calcxRM(oneRM[3], 5), 0) + '<br>' + 'Incline 1RM = ' + digitRound(oneRM[4], 0) + ' 5RM = ' + digitRound(calcxRM(oneRM[4], 5), 0) + '<br>');
+};
+
+function printExcerciseTables(week, day, exercise) {
+	var output = '<table class="excerciseTable"><tr><td class="liftType title" colspan="2">' + weeks[week].Week[day][exercise].liftName + "</td></tr><tr><td>Reps</td><td>Weight</td></tr>";
+	for (i=0; i<weeks[week].Week[day][exercise].set.length; i++) {
+		output = output + "<tr><td>" + weeks[week].Week[day].reps[i] + "</td><td>" + xRound(weeks[week].Week[day][exercise].set[i], smallestIncrement) + "</td></tr>";
+	};
+	output = output + "</table>";
+	return(output);
+};
+
+function printMonday(week) {
+	return('<table class="dayTable monday"><tr><td class="title" colspan="3">Monday</td></tr><tr><td>' + printExcerciseTables(week, "monday", "squat") + "</td><td>" + printExcerciseTables(week, "monday", "bench") + "</td><td>" + printExcerciseTables(week, "monday", "row") + "</td></tr></table>");
+};
+
+function printWednesday(week) {
+	return('<table class="dayTable wednesday"><tr><td class="title" colspan="3">Wednesday</td></tr><tr><td>' + printExcerciseTables(week, "wednesday", "squat") + "</td><td>" + printExcerciseTables(week, "wednesday", "incline") + "</td><td>" + printExcerciseTables(week, "wednesday", "dead") + "</td></tr></table>");
+};
+
+function printFriday(week) {
+	return('<table class="dayTable friday"><tr><td class="title" colspan="3">Friday</td></tr><tr><td>' + printExcerciseTables(week, "friday", "squat") + "</td><td>" + printExcerciseTables(week, "friday", "bench") + "</td><td>" + printExcerciseTables(week, "friday", "row") + "</td></tr></table>");
+};
+
+function printWeek(week) {
+	return('<table class="weekTable"><tr><td class="title" colspan="3">Week ' + (week+1) + '</td></tr><tr><td>' + printMonday(week) + '</td><td>' + printWednesday(week) + '</td><td>' + printFriday(week) + "</td></tr></table>");
+};
+
+function printAll() {
+	for (var i=0; i<programLength; i++) {
+		console.info(i);
+		$('#tables').append(printWeek(i));
+	};
 };

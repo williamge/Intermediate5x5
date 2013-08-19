@@ -1,3 +1,27 @@
+.excerciseTable td {
+	border: 1px solid black;
+}
+
+.title {
+	text-align: center;
+}
+
+.monday {
+	background-color: rgba(0,0,255,0.1);
+}
+
+.wednesday {
+	background-color: rgba(0,255,0,0.1);
+}
+
+.friday {
+	background-color: rgba(255,0,0,0.1);
+}
+
+.weekTable td {
+	vertical-align: top;
+}
+
 .topLabel {
 	text-align: center;
 }
