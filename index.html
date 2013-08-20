@@ -103,19 +103,19 @@
 			</div>
 
 			<div class="divider topLabel" id="advancedOptions">
-				Advanced Options
+				<a>Advanced Options</a>
 			</div>
 			<div id="advanced">
 				<div class="divider">
-					<div class="floatLeft ">
+					<div class="floatLeft sideLabel labelText ">
 						Smallest Plate
 					</div>
 					<div class="floatLeft">
 			  			<input class="setField field" type="text" name="sIncrease" value="2.5">
 					</div>
 
-					<div class="floatLeft ">
-						Ramping Percentage
+					<div class="floatLeft sideLabel labelText ">
+						Ramping %
 					</div>
 					<div class="floatLeft">
 		  				<input class="setField field" type="text" name="sRamp" value="12.5">
@@ -123,23 +123,26 @@
 				</div>
 
 				<div class="divider">
-					<div class="floatLeft ">
+					<div class="floatLeft sideLabel labelText ">
 						Program Length
 					</div>
 					<div class="floatLeft">
 			  			<input class="setField field" type="text" name="pLength" value="12">
 					</div>
-					<div class="floatLeft ">
+					<div class="floatLeft sideLabel labelText ">
 						Max Week
 					</div>
 					<div class="floatLeft">
-			  			<input class="setField field" type="text" name="mWeek" value="4">
+			  			<input class="setField field" type="text" name="mWeek" value="4" disabled="disabled">
 					</div>
 				</div>
 			</div>
 
-			<div class="divider">
-				<input type="button" class="button" value="Calculate One Rep Max" id="submit">
+			<div id="buttonDivider">
+				<div id="submit">
+					<div class="buttonHelper"></div>			
+					<a class="button">Calculate 5&times;5 Program</a>
+				</div>
 			</div>
 
 
@@ -151,7 +154,7 @@
 				One Rep Maxes
 			</div>
 
-			<div id="output">
+			<div class="divider" id="output">
 
 			</div>
 			<div id="footer">
