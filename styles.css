@@ -225,7 +225,7 @@ body {
 
 }
 
-#output {
+#output, #errorOutput {
 	padding: 24px 0 24px 0;
 	height: 170px;
 	font-size: 1em;

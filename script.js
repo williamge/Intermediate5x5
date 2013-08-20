@@ -9,6 +9,7 @@ $(document).ready(function() {
 	console.log('Document Ready');
 	$('#results').hide(); //Hide the results box
 	$("#advanced").hide();
+	$('#error').hide();
 
 	$('#advancedOptions').click(function() {
 		$("#advanced").toggle();
@@ -52,19 +53,23 @@ $(document).ready(function() {
 		smallestIncrement = $('input:text[name=sIncrease]').val();
 		rampingPercent = $('input:text[name=sRamp]').val()/100;
 		programLength = $('input:text[name=pLength]').val();
+		increasePercent = $('input:text[name=wIncrease]').val();
+
+		increasePercent = (increasePercent/100)+1;
 		
-		console.info("Ramping percentage = " + rampingPercent);
+		console.log(increasePercent);
 
 		var oneRM = new Array;   // Create array to hold 1 rep maxes once calculated
 
 		var inputIsClean = true;   // Flag that's tripped if user input isn't valid
 
 		// Validate all user input	
-		if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0)) == false || checkInput(squatInput[0], squatInput[1], squatInput[2], squatInput[3]) == false || checkInput(benchInput[0], benchInput[1], benchInput[2], benchInput[3]) == false || checkInput(deadInput[0], deadInput[1], deadInput[2], deadInput[3]) == false || checkInput(rowInput[0], rowInput[1], rowInput[2], rowInput[3]) == false ||	checkInput(inclineInput[0], inclineInput[1], inclineInput[2], inclineInput[3]) == false) {
+		if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0), increasePercent) == false || checkInput(squatInput[0], squatInput[1], squatInput[2], squatInput[3]) == false || checkInput(benchInput[0], benchInput[1], benchInput[2], benchInput[3]) == false || checkInput(deadInput[0], deadInput[1], deadInput[2], deadInput[3]) == false || checkInput(rowInput[0], rowInput[1], rowInput[2], rowInput[3]) == false ||	checkInput(inclineInput[0], inclineInput[1], inclineInput[2], inclineInput[3]) == false) {
 			inputIsClean = false;
 		};
 
 		if (inputIsClean == true) {
+			$('#error').hide();
 			oneRM[0] = calc1RM(squatInput[1], squatInput[2], squatInput[3]); //squat
 			oneRM[1] = calc1RM(benchInput[1], benchInput[2], benchInput[3]); //bench
 			oneRM[2] = calc1RM(deadInput[1], deadInput[2], deadInput[3]); //dead
@@ -123,31 +128,31 @@ $(document).ready(function() {
 			weeks[0].Week.wednesday.dead.set = fillDownSets(calcxRM(deadMax,5)*0.925, 4);
 			weeks[0].Week.wednesday.reps = [5,5,5,5];
 
-			weeks[0].Week.friday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[4]*1.025, 5);
+			weeks[0].Week.friday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[4]*increasePercent, 5);
 			weeks[0].Week.friday.squat.set[5] = weeks[0].Week.monday.squat.set[2];
-			weeks[0].Week.friday.bench.set = fillDownSets(weeks[0].Week.monday.bench.set[4]*1.025, 5);
+			weeks[0].Week.friday.bench.set = fillDownSets(weeks[0].Week.monday.bench.set[4]*increasePercent, 5);
 			weeks[0].Week.friday.bench.set[5] = weeks[0].Week.monday.bench.set[2];
-			weeks[0].Week.friday.row.set = fillDownSets(weeks[0].Week.monday.row.set[4]*1.025, 5);
+			weeks[0].Week.friday.row.set = fillDownSets(weeks[0].Week.monday.row.set[4]*increasePercent, 5);
 			weeks[0].Week.friday.row.set[5] = weeks[0].Week.monday.row.set[2];
 			weeks[0].Week.friday.reps = [5,5,5,5,3,8];
 
 			for (week=1; week<programLength; week++) {
-				weeks[week].Week.monday.squat.set = fillDownSets(weeks[week-1].Week.monday.squat.set[4]*1.02535, 5);
-				weeks[week].Week.monday.bench.set = fillDownSets(weeks[week-1].Week.monday.bench.set[4]*1.02535, 5);
-				weeks[week].Week.monday.row.set = fillDownSets(weeks[week-1].Week.monday.row.set[4]*1.02535, 5);
+				weeks[week].Week.monday.squat.set = fillDownSets(weeks[week-1].Week.monday.squat.set[4]*increasePercent, 5);
+				weeks[week].Week.monday.bench.set = fillDownSets(weeks[week-1].Week.monday.bench.set[4]*increasePercent, 5);
+				weeks[week].Week.monday.row.set = fillDownSets(weeks[week-1].Week.monday.row.set[4]*increasePercent, 5);
 				weeks[week].Week.monday.reps = [5,5,5,5,5];
 
-				weeks[week].Week.wednesday.squat.set = fillDownSets(weeks[week-1].Week.wednesday.squat.set[2]*1.02535, 3);
+				weeks[week].Week.wednesday.squat.set = fillDownSets(weeks[week-1].Week.wednesday.squat.set[2]*increasePercent, 3);
 				weeks[week].Week.wednesday.squat.set[3] = weeks[week].Week.wednesday.squat.set[2];
-				weeks[week].Week.wednesday.incline.set = fillDownSets(weeks[week-1].Week.wednesday.incline.set[3]*1.02535, 4);
-				weeks[week].Week.wednesday.dead.set = fillDownSets(weeks[week-1].Week.wednesday.dead.set[3]*1.02535, 4);
+				weeks[week].Week.wednesday.incline.set = fillDownSets(weeks[week-1].Week.wednesday.incline.set[3]*increasePercent, 4);
+				weeks[week].Week.wednesday.dead.set = fillDownSets(weeks[week-1].Week.wednesday.dead.set[3]*increasePercent, 4);
 				weeks[week].Week.wednesday.reps = [5,5,5,5];
 
-				weeks[week].Week.friday.squat.set = fillDownSets(weeks[week-1].Week.friday.squat.set[4]*1.02535, 5);
+				weeks[week].Week.friday.squat.set = fillDownSets(weeks[week-1].Week.friday.squat.set[4]*increasePercent, 5);
 				weeks[week].Week.friday.squat.set[5] = weeks[week].Week.wednesday.squat.set[3];
-				weeks[week].Week.friday.bench.set = fillDownSets(weeks[week-1].Week.friday.bench.set[4]*1.02535, 5);
+				weeks[week].Week.friday.bench.set = fillDownSets(weeks[week-1].Week.friday.bench.set[4]*increasePercent, 5);
 				weeks[week].Week.friday.bench.set[5] = weeks[week].Week.friday.bench.set[3];
-				weeks[week].Week.friday.row.set = fillDownSets(weeks[week-1].Week.friday.row.set[4]*1.02535, 5);
+				weeks[week].Week.friday.row.set = fillDownSets(weeks[week-1].Week.friday.row.set[4]*increasePercent, 5);
 				weeks[week].Week.friday.row.set[5] = weeks[week].Week.friday.row.set[3];
 				weeks[week].Week.friday.reps = [5,5,5,5,3,8];
 			}
@@ -239,55 +244,63 @@ function checkInput(name, weight, reps, sets) {
 	};
 };
 
-function checkSmallVars(smallest, ramp, length) {
+function checkSmallVars(smallest, ramp, length, increase) {
 	if (!isNaN(smallest) == true) {
 		console.info("Smallest weight is a number");
 	} else {
 		console.warn("Smallest weight is not a number");
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html("Smallest weight is not a number!");
+		$('#errorOutput').html("Smallest weight is not a number!");
+		$('#error').fadeIn('slow');
 		return(false);
 	};
 	if (!isNaN(ramp) == true) {
 		console.info("Ramping percent is a number");
 	} else {
 		console.warn("Ramping percent is not a number");
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html("Ramping percent is not a number!");
+		$('#errorOutput').html("Ramping percent is not a number!");
+		$('#error').fadeIn('slow');
 		return(false);
 	};
 	if (!isNaN(length) == true) {
 		console.info("Program length is a number");
 	} else {
 		console.warn("Program length is not a number");
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html("Program length is not a number!");
+		$('#errorOutput').html("Program length is not a number!");
+		$('#error').fadeIn('slow');
+		return(false);
+	};
+	if (!isNaN(increase) == true) {
+		console.info("Increase percent is a number");
+	} else {
+		console.warn("Increase percent is not a number");
+		$('#errorOutput').html("Increase percent is not a number!");
+		$('#error').fadeIn('slow');
 		return(false);
 	};
 
 	if (ramp > 0.20 || ramp < 0.001) {
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html("Using that value as a ramping percentage is highly unrecommended!");
+		$('#errorOutput').html("Using that value as a ramping percentage is highly unrecommended!");
+		$('#error').fadeIn('slow');
 		return(false);
 	}
 
 	if (smallest > 25) {
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html("The smallest plate you have is a " + smallest + "?");
+		$('#errorOutput').html("The smallest plate you have is a " + smallest + "?");
+		$('#error').fadeIn('slow');
 		return(false);
 	} else {
 		smallestIncrement = smallestIncrement*2;
 	}
 
 	if (length > 18) {
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html("Running this program for more than 18 weeks without a reset is very ambitious.");
+		$('#errorOutput').html("Running this program for more than 18 weeks without a reset is very ambitious.");
+		$('#error').fadeIn('slow');
+		return(false);
+	}
+
+	if (increase > 1.10) {
+		$('#errorOutput').html("Using that value as an increase percentage is highly unrecommended!");
+		$('#error').fadeIn('slow');
 		return(false);
 	}
 }
