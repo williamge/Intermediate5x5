@@ -8,194 +8,156 @@
 		<link rel="icon" type="image/png" href="favicons/icon.png">
 	</head>
 	<body>
-		<div>
-			<table>
-				<tr>
-					<td rowspan="50">
-						<img src="images/icon.gif">
-					</td>
-				</tr>
-				<tr>
-					<td>
-					</td>
-					<td>
-						<div class="topLabel">
-							Weight
-						</div>
-					</td>
-					<td>
-						<div class="topLabel">
-							Reps
-						</div>
-					</td>
-					<td>
-						<div class="topLabel">
-							Sets
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Squat
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="weightField" type="text" name="sWeight" value="315">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="repField" type="text" name="sReps" value="5">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="sSets" value="1">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Bench
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="weightField" type="text" name="bWeight" value="225">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="repField" type="text" name="bReps" value="5">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="bSets" value="1">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Deadlift
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="weightField" type="text" name="dWeight" value="405">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="repField" type="text" name="dReps" value="5">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="dSets" value="1">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Row
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="weightField" type="text" name="rWeight" value="225">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="repField" type="text" name="rReps" value="5">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="rSets" value="1">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Incline
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="weightField" type="text" name="iWeight" value="185">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="repField" type="text" name="iReps" value="5">&times;
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="iSets" value="1">
-						</div>
-					</td>
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<td>
-						<div class="label">
-							Smallest Plate
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="sIncrease" value="2.5">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Ramping Percentage
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="sRamp" value="12.5">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="label">
-							Program Length (in weeks)
-						</div>
-					</td>
-					<td>
-						<div class="textBox">
-				  			<input class="setField" type="text" name="pLength" value="12">
-						</div>
-					</td>
-				</tr>
-			</table>
-			<input type="button" class="button" value="Calculate One Rep Max" id="submit">
+		<div class="bubble">
+			<div id="header">LIFTBOT</div>
+			<div class="divider" id="programTitle">
+				Bill Starr Intermediate 5x5
+			</div>
+			<div class="divider" id="robot">
+				<img src="images/icon.gif">
+			</div>
+			<div class="divider" id="topLabelRow">
+				<div class="floatLeft topLabel labelText" id="liftsLabel">Lift</div>
+				<div class="floatLeft weightField topLabel labelText">Weight</div>
+				<div class="floatLeft multiSign topLabel">&#8291</div>
+				<div class="floatLeft repField topLabel labelText" id="repsLabel">Reps</div>
+				<div class="floatLeft multiSign topLabel">&#8291&#8291</div>
+				<div class="floatLeft setField topLabel labelText">Sets</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft sideLabel labelText">Squat</div>
+
+				<div class="floatLeft"> 
+					<input class="weightField field" type="text" name="sWeight" value="315">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft ">
+		  			<input class="repField field" type="text" name="sReps" value="5">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="sSets" value="1">
+				</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft sideLabel labelText">Bench Press</div>
+
+				<div class="floatLeft"> 
+					<input class="weightField field" type="text" name="bWeight" value="225">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft ">
+		  			<input class="repField field" type="text" name="bReps" value="5">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="bSets" value="1">
+				</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft sideLabel labelText">Deadlift</div>
+
+				<div class="floatLeft"> 
+					<input class="weightField field" type="text" name="dWeight" value="405">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft ">
+		  			<input class="repField field" type="text" name="dReps" value="5">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="dSets" value="1">
+				</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft sideLabel labelText">Barbell Row</div>
+
+				<div class="floatLeft"> 
+					<input class="weightField field" type="text" name="rWeight" value="225">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft ">
+		  			<input class="repField field" type="text" name="rReps" value="5">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="rSets" value="1">
+				</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft sideLabel labelText">Incline Bench</div>
+
+				<div class="floatLeft"> 
+					<input class="weightField field" type="text" name="iWeight" value="185">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft">
+		  			<input class="repField field" type="text" name="iReps" value="5">
+				</div>
+				<div class="floatLeft multiSign">&times;</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="iSets" value="1">
+				</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft ">
+					Smallest Plate
+				</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="sIncrease" value="2.5">
+				</div>
+
+				<div class="floatLeft ">
+					Ramping Percentage
+				</div>
+				<div class="floatLeft">
+	  				<input class="setField field" type="text" name="sRamp" value="12.5">
+				</div>
+			</div>
+
+			<div class="divider">
+				<div class="floatLeft ">
+					Program Length
+				</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="pLength" value="12">
+				</div>
+				<div class="floatLeft ">
+					Max Week
+				</div>
+				<div class="floatLeft">
+		  			<input class="setField field" type="text" name="mWeek" value="4">
+				</div>
+			</div>
+
+			<div class="divider">
+				<input type="button" class="button" value="Calculate One Rep Max" id="submit">
+			</div>
+
+			<div id="footer"></div>
 		</div>
 
-		<div id="results">
+		<div class="bubble" id="results">
 			<div id="header">
 				One Rep Maxes
 			</div>
+
 			<div id="output">
 
 			</div>
-			<div id="tables">
-
+			<div id="footer">
+				
 			</div>
+		</div>
+
+		<div id="tables">
+
 		</div>
 	</body>
 </html>

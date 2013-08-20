@@ -1,4 +1,4 @@
-/--- GLOBAL VARIABLES ---/
+/*--- GLOBAL VARIABLES ---*/
 
 var rampingPercent = 0.125;
 var smallestIncrement = 5;
@@ -12,8 +12,7 @@ $(document).ready(function() {
 	$("#submit").click(function(){
 		console.info('Submit button clicked'); // logging
 
-		/* Create Arrays to hold all the variables from the
-		   input boxes and pull the variables from the boxes */
+		/* Create Arrays to hold all the variables from the input boxes and pull the variables from the boxes */
 
 		var squatInput = new Array;
 		squatInput[0] = 'Squat';
@@ -49,7 +48,7 @@ $(document).ready(function() {
 		rampingPercent = $('input:text[name=sRamp]').val()/100;
 		programLength = $('input:text[name=pLength]').val();
 		
-		console.log(rampingPercent);
+		console.info("Ramping percentage = " + rampingPercent);
 
 		var oneRM = new Array;   // Create array to hold 1 rep maxes once calculated
 
@@ -149,7 +148,7 @@ $(document).ready(function() {
 			}
 			console.info(weeks);
 			console.log(weeks.length);
-
+			$('#results').fadeIn('slow');
 			$('#tables').html('<p>');
 			printAll();
 

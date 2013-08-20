@@ -1,9 +1,77 @@
-.excerciseTable td {
-	border: 1px solid black;
+@font-face {
+	font-family: knewave;
+	src: url('fonts/knewave/webfonts/knewave-webfont.eot') format('embedded-opentype'),
+		 url('fonts/knewave/webfonts/knewave-webfont.svg') format('svg'),
+		 url('fonts/knewave/webfonts/knewave-webfont.woff') format('woff'),
+		 url('fonts/knewave/webfonts/knewave-webfont.ttf') format('ttf');
 }
 
-.title {
+@font-face {
+	font-family: orbitron;
+	src: url('fonts/orbitron/Orbitron_Black.otf'),
+		 url('fonts/knewave/webfonts/knewave-webfont.eot'); /* IE9 */
+}
+
+body {
+	background-color: rgb(250,250,250);
+}
+
+.floatLeft {
+	float: left;
+}
+
+.multiSign {
+	font-size: 1.75em;
+	padding: 0;
+	margin: 0 12px;
+}
+
+.labelText {
+	font-size: 1em;
+	font-family: Arial;
+	font-weight: 500;
+	text-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+}
+
+.topLabel {
 	text-align: center;
+	margin: 2 auto 0 auto;
+	color: white;
+	font-size: 18px;
+	letter-spacing: 0.05em;
+	font-family: Arial;
+	font-weight: 500;
+	text-shadow: 0px 0px 5px rgba(0,0,0,1);
+}
+
+.sideLabel {
+	width: 150px;
+	height: 42px;
+	margin: 10 auto 10 auto;
+	vertical-align: center;
+	color: rgb(32,32,32);
+}
+
+/*---------------------------------------------FORM STYLES------------------------------------------*/
+
+.weightField {
+	width: 100px;
+	text-align: center;
+}
+
+.repField {
+	width: 60px;
+	text-align: center;
+}
+
+.setField {
+	width: 60px;
+	text-align: center;
+}
+/*---------------------------------------------OUTPUT TABLES------------------------------------------*/
+
+.excerciseTable td {
+	border: 1px solid black;
 }
 
 .monday {
@@ -22,21 +90,130 @@
 	vertical-align: top;
 }
 
-.topLabel {
+/*---------------------------------------------CALCULATOR STYLES------------------------------------------*/
+
+.bubble {
+	background: #f2f2f2; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f2f2f2 0%, #e6dcdc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#e6dcdc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f2f2f2 0%,#e6dcdc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f2f2f2 0%,#e6dcdc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f2f2f2 0%,#e6dcdc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f2f2f2 0%,#e6dcdc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#e6dcdc',GradientType=0 ); /* IE6-9 */
+	width: 480px;
+	border-radius: 8px;
+	box-shadow: 3px 3px 8px #888888;
 	text-align: center;
+	margin: 32px auto 0 auto;
 }
 
-.weightField {
-	width: 100px;
+.field {
+	height: 32px;
+	border-radius: 9px;
+	border: 1px solid rgba(0,0,0,0.25);
+	margin: 4 auto 0 auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	font-weight: 600;
+	text-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+	color: rgb(32,32,32);
+	box-shadow: inset 0px 0px 5px rgba(0,0,0,0.25);
 	text-align: center;
+	background-color: rgb(246,246,246);
 }
 
-.repField {
-	width: 40px;
-	text-align: center;
+.divider {
+	height: 42px;
+	margin: 0;
+	padding: 12px 0 12px 0;
+	border-top: 1px solid rgba(0,0,0,0.25);
+	border-left: 1px solid rgba(0,0,0,0.25);
+	border-right: 1px solid rgba(0,0,0,0.25);
+	/*border-bottom: 1px solid rgba(0,0,0,0.25);
+	font-family: Orbitron;*/
 }
 
-.setField {
-	width: 40px;
-	text-align: center;
+/*------------------------------------------------------------------------------------------*/
+/*---------------------------------------------IDS------------------------------------------*/
+/*------------------------------------------------------------------------------------------*/
+
+#robot {
+	height: 150px;
+	padding: 32 0 0 0;
+	margin: 0;
+}
+
+#footer {
+	background-color: rgb(240,15,90);
+	background-image: linear-gradient(bottom, rgb(240,17,91) 0%, rgb(240,17,17) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(240,17,91) 0%, rgb(240,17,17) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(240,17,91) 0%, rgb(240,17,17) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(240,17,91) 0%, rgb(240,17,17) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(240,17,91) 0%, rgb(240,17,17) 100%);
+	background-image: -webkit-gradient(linear, left bottom,	left top, color-stop(0, rgb(240,17,91)), color-stop(1, rgb(240,17,17)));
+	border-radius: 0px 0px 8px 8px;
+	color: white;
+	padding-top: 8px;
+	font-size: 0.95em;
+	height: 32px;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+	border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+#header {
+	background-color: rgb(240,15,90);
+	background-image: linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -webkit-gradient(linear, left bottom,	left top, color-stop(0, rgb(240,17,17)), color-stop(1, rgb(240,17,91)));
+	border-radius: 8px 8px 0px 0px;
+	color: white;
+	font-size: 2.5em;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	font-family: orbitron;
+	letter-spacing: 0.12em;
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+}
+
+#programTitle {
+	height: 36px;
+	font-size: 1.25em;
+	padding: 8px 0 0 0;
+	font-family: orbitron;
+	letter-spacing: 0.12em;
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+}
+
+#liftsLabel {
+	width: 150px;
+}
+
+#repsLabel {
+	width: 135px;
+}
+
+#topLabelRow {
+	height: 24px;
+	background-color: rgb(240,15,90);
+	background-image: linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(240,17,17) 0%, rgb(240,17,91) 100%);
+	background-image: -webkit-gradient(linear, left bottom,	left top, color-stop(0, rgb(240,17,17)), color-stop(1, rgb(240,17,91)));
+}
+
+#output {
+	padding: 24px 0 24px 0;
+	font-size: 1em;
+	font-family: Arial;
+	font-weight: 500;
+	text-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+	line-height: 2em;
 }
