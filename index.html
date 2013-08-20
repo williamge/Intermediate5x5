@@ -1,9 +1,6 @@
 <html>
 	<head>
 		<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="script.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="icon" type="image/png" href="favicons/icon.png">
 	</head>
@@ -105,40 +102,46 @@
 				</div>
 			</div>
 
-			<div class="divider">
-				<div class="floatLeft ">
-					Smallest Plate
-				</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="sIncrease" value="2.5">
-				</div>
-
-				<div class="floatLeft ">
-					Ramping Percentage
-				</div>
-				<div class="floatLeft">
-	  				<input class="setField field" type="text" name="sRamp" value="12.5">
-				</div>
+			<div class="divider topLabel" id="advancedOptions">
+				Advanced Options
 			</div>
+			<div id="advanced">
+				<div class="divider">
+					<div class="floatLeft ">
+						Smallest Plate
+					</div>
+					<div class="floatLeft">
+			  			<input class="setField field" type="text" name="sIncrease" value="2.5">
+					</div>
 
-			<div class="divider">
-				<div class="floatLeft ">
-					Program Length
+					<div class="floatLeft ">
+						Ramping Percentage
+					</div>
+					<div class="floatLeft">
+		  				<input class="setField field" type="text" name="sRamp" value="12.5">
+					</div>
 				</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="pLength" value="12">
-				</div>
-				<div class="floatLeft ">
-					Max Week
-				</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="mWeek" value="4">
+
+				<div class="divider">
+					<div class="floatLeft ">
+						Program Length
+					</div>
+					<div class="floatLeft">
+			  			<input class="setField field" type="text" name="pLength" value="12">
+					</div>
+					<div class="floatLeft ">
+						Max Week
+					</div>
+					<div class="floatLeft">
+			  			<input class="setField field" type="text" name="mWeek" value="4">
+					</div>
 				</div>
 			</div>
 
 			<div class="divider">
 				<input type="button" class="button" value="Calculate One Rep Max" id="submit">
 			</div>
+
 
 			<div id="footer"></div>
 		</div>
@@ -159,5 +162,9 @@
 		<div id="tables">
 
 		</div>
+
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
 	</body>
 </html>

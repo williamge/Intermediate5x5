@@ -8,6 +8,11 @@ var weeks = new Array();
 $(document).ready(function() {
 	console.log('Document Ready');
 	$('#results').hide(); //Hide the results box
+	$("#advanced").hide();
+
+	$('#advancedOptions').click(function() {
+		$("#advanced").toggle();
+	})
 
 	$("#submit").click(function(){
 		console.info('Submit button clicked'); // logging
