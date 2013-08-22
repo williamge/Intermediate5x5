@@ -1,8 +1,12 @@
 <html>
 	<head>
-		<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" type="text/css" href="reset.css">
+		
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
 		<link rel="icon" type="image/png" href="favicons/icon.png">
+		<link rel="stylesheet" type="text/css" href="styles.css">
 	</head>
 	<body>
 		<div class="bubble">
@@ -22,11 +26,11 @@
 				<div class="floatLeft setField topLabel labelText">Sets</div>
 			</div>
 
-			<div class="divider">
+			<div class="divider"> <!--SQUAT-->
 				<div class="floatLeft sideLabel labelText">Squat</div>
 
 				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="sWeight" value="315">
+					<input class="weightField field" type="text" name="sWeight" value="225">
 				</div>
 				<div class="floatLeft multiSign">&times;</div>
 				<div class="floatLeft ">
@@ -38,11 +42,11 @@
 				</div>
 			</div>
 
-			<div class="divider">
+			<div class="divider"> <!--BENCH PRESS-->
 				<div class="floatLeft sideLabel labelText">Bench Press</div>
 
 				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="bWeight" value="225">
+					<input class="weightField field" type="text" name="bWeight" value="185">
 				</div>
 				<div class="floatLeft multiSign">&times;</div>
 				<div class="floatLeft ">
@@ -54,11 +58,11 @@
 				</div>
 			</div>
 
-			<div class="divider">
+			<div class="divider"> <!--DEADLIFT-->
 				<div class="floatLeft sideLabel labelText">Deadlift</div>
 
 				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="dWeight" value="405">
+					<input class="weightField field" type="text" name="dWeight" value="315">
 				</div>
 				<div class="floatLeft multiSign">&times;</div>
 				<div class="floatLeft ">
@@ -70,11 +74,11 @@
 				</div>
 			</div>
 
-			<div class="divider">
+			<div class="divider"> <!--BARBELL ROW-->
 				<div class="floatLeft sideLabel labelText">Barbell Row</div>
 
 				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="rWeight" value="225">
+					<input class="weightField field" type="text" name="rWeight" value="135">
 				</div>
 				<div class="floatLeft multiSign">&times;</div>
 				<div class="floatLeft ">
@@ -86,11 +90,11 @@
 				</div>
 			</div>
 
-			<div class="divider">
+			<div class="divider"> <!--INCLINE BENCH-->
 				<div class="floatLeft sideLabel labelText">Incline Bench</div>
 
 				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="iWeight" value="185">
+					<input class="weightField field" type="text" name="iWeight" value="95">
 				</div>
 				<div class="floatLeft multiSign">&times;</div>
 				<div class="floatLeft">
@@ -105,37 +109,36 @@
 			<div class="divider topLabel" id="advancedOptions">
 				<a>Advanced Options</a>
 			</div>
-			<div id="advanced">
-				<div class="divider">
-					<div class="floatLeft sideLabel labelText ">
-						Smallest Plate
-					</div>
-					<div class="floatLeft">
-			  			<input class="setField field" type="text" name="sIncrease" value="2.5">
-					</div>
+			<div id="advanced"> <!--ADVANCED OPTIONS-->
+					<div class="divider">
+						<div class="floatLeft sideLabel labelText ">
+							Smallest Plate
+						</div>
+						<div class="floatLeft">
+							<input class="setField field" type="text" name="sIncrease" value="2.5">
+						</div>
 
-					<div class="floatLeft sideLabel labelText ">
-						Ramping %
+						<div class="floatLeft sideLabel labelText ">
+							Ramping %
+						</div>
+						<div class="floatLeft">
+							<input class="setField field" type="text" name="sRamp" value="12.5">
+						</div>
 					</div>
-					<div class="floatLeft">
-		  				<input class="setField field" type="text" name="sRamp" value="12.5">
+					<div class="divider">
+						<div class="floatLeft sideLabel labelText ">
+							Program Length
+						</div>
+						<div class="floatLeft">
+							<input class="setField field" type="text" name="pLength" value="12">
+						</div>
+						<div class="floatLeft sideLabel labelText ">
+							Increase %
+						</div>
+						<div class="floatLeft">
+							<input class="setField field" type="text" name="wIncrease" value="2.5">
+						</div>
 					</div>
-				</div>
-
-				<div class="divider">
-					<div class="floatLeft sideLabel labelText ">
-						Program Length
-					</div>
-					<div class="floatLeft">
-			  			<input class="setField field" type="text" name="pLength" value="12">
-					</div>
-					<div class="floatLeft sideLabel labelText ">
-						Increase %
-					</div>
-					<div class="floatLeft">
-			  			<input class="setField field" type="text" name="wIncrease" value="2.5">
-					</div>
-				</div>
 			</div>
 
 			<div id="buttonDivider">
@@ -178,9 +181,5 @@
 		<div id="tables">
 
 		</div>
-
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="script.js"></script>
 	</body>
 </html>
