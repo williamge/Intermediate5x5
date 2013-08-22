@@ -161,6 +161,8 @@ $(document).ready(function() {
 			$('#results').fadeIn('slow');
 			$('#tables').html('<p>');
 			printAll();
+			$('html, body').animate({scrollTop: $( $(this).attr('#jump') ).offset().top}, 5000);
+
 
 		} else {
 			console.log("BAD INPUT");
@@ -310,7 +312,8 @@ function printMaxes(oneRM) {
 };
 
 function printExcerciseTables(week, day, exercise) {
-	var output = '<table class="excerciseTable "><tr><td class="liftType title" colspan="2">' + weeks[week].Week[day][exercise].liftName + '</td></tr><tr><td class="repsCell">Reps</td><td class="weightCell">Weight</td></tr>';
+	var output = '<table class="excerciseTable "><tr><td class="liftType" colspan="2">' + weeks[week].Week[day][exercise].liftName + '</td></tr><tr><td class="repsCell">Reps</td><td class="weightCell">Weight</td></tr>';
+
 	for (i=0; i<weeks[week].Week[day][exercise].set.length; i++) {
 		output = output + '<tr><td class="repsCell">' + weeks[week].Week[day].reps[i] + '</td><td class="weightCell">' + xRound(weeks[week].Week[day][exercise].set[i], smallestIncrement) + "</td></tr>";
 	};
@@ -319,15 +322,15 @@ function printExcerciseTables(week, day, exercise) {
 };
 
 function printMonday(week) {
-	return('<div class="tableDivider"><table class="dayTable monday"><tr><td class="title labelText" colspan="3">Monday</td></tr><tr><td>' + printExcerciseTables(week, "monday", "squat") + "</td><td>" + printExcerciseTables(week, "monday", "bench") + "</td><td>" + printExcerciseTables(week, "monday", "row") + "</td></tr></table></div>");
+	return('<div class="tableDivider"><table class="dayTable monday"><tr><td class="title labelText" colspan="3">Monday</td></tr><tr><td>' + printExcerciseTables(week, "monday", "squat") + "</td><td>" + printExcerciseTables(week, "monday", "bench") + "</td><td>" + printExcerciseTables(week, "monday", "row") + '</td></tr><tr><td colspan="3" class="tableSpacer"></td></tr></table></div>');
 };
 
 function printWednesday(week) {
-	return('<div class="tableDivider"><table class="dayTable wednesday"><tr><td class="title labelText" colspan="3">Wednesday</td></tr><tr><td>' + printExcerciseTables(week, "wednesday", "squat") + "</td><td>" + printExcerciseTables(week, "wednesday", "incline") + "</td><td>" + printExcerciseTables(week, "wednesday", "dead") + "</td></tr></table></div>");
+	return('<div class="tableDivider"><table class="dayTable wednesday"><tr><td class="title labelText" colspan="3">Wednesday</td></tr><tr><td>' + printExcerciseTables(week, "wednesday", "squat") + "</td><td>" + printExcerciseTables(week, "wednesday", "incline") + "</td><td>" + printExcerciseTables(week, "wednesday", "dead") + '</td></tr><tr><td colspan="3" class="tableSpacer"></td></tr></table></div>');
 };
 
 function printFriday(week) {
-	return('<div class="tableDivider"><table class="dayTable friday"><tr><td class="title labelText" colspan="3">Friday</td></tr><tr><td>' + printExcerciseTables(week, "friday", "squat") + "</td><td>" + printExcerciseTables(week, "friday", "bench") + "</td><td>" + printExcerciseTables(week, "friday", "row") + "</td></tr></table></div>");
+	return('<div class="tableDivider"><table class="dayTable friday"><tr><td class="title labelText" colspan="3">Friday</td></tr><tr><td>' + printExcerciseTables(week, "friday", "squat") + "</td><td>" + printExcerciseTables(week, "friday", "bench") + "</td><td>" + printExcerciseTables(week, "friday", "row") + '</td></tr></table></div>');
 };
 
 function printWeek(week) {

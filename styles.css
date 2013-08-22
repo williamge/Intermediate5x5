@@ -16,7 +16,6 @@ body {
 	font-size: 1em;
 	font-family: Arial;
 	font-weight: 500;
-	text-shadow: 0px 0px 1px rgba(0,0,0,0.5);
 }
 
 .floatLeft {
@@ -76,11 +75,9 @@ body {
 .tableDivider {
 	margin: 0;
 	padding: 0px 0 0px 0;
-	border-top: 1px solid rgba(0,0,0,0.25);
+	/*border-top: 1px solid rgba(0,0,0,0.25);*/
 	border-left: 1px solid rgba(0,0,0,0.25);
 	border-right: 1px solid rgba(0,0,0,0.25);
-	/*border-bottom: 1px solid rgba(0,0,0,0.25);
-	font-family: Orbitron;*/
 }
 
 .monday {}
@@ -92,12 +89,12 @@ body {
 .weekTable td {vertical-align: top;}
 
 .title {
+	font-size: 1.2em;
 	text-align: center;
 	vertical-align: center;
 	border-bottom: 1px solid rgba(0,0,0,0.25);
 	padding: 10 0 10 0;
-	background-color: rgba(0,0,0,0.1);
-	border-right: 1px solid rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.05);
 }
 
 .dayTable {
@@ -118,11 +115,27 @@ tbody, tr, td {
 .repsCell, .weightCell {
 	padding: 4 0 4 0;
 	border-bottom: 1px solid rgba(0,0,0,0.25);
-	border-right: 1px solid rgba(0,0,0,0.1);
+	/*border-right: 1px solid rgba(0,0,0,0.1);*/
 }
 
-.weightCell {
-	border-right: 1px solid rgba(0,0,0,0.5);
+.liftType {
+	font-size: 1em;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	padding: 6 0 6 0;
+}
+
+.dayTable td:nth-child(3), .dayTable td:nth-child(2) {
+	border-left: 1px solid rgba(0,0,0,0.25);
+}
+
+.excerciseTable tr:nth-child(2n+3) {
+	background-color: rgba(0,0,0,0.05);
+}
+
+.tableSpacer {
+	height: 30px;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	border-right: 1px solid rgba(0,0,0,0.25);
 }
 
 /*---------------------------------------------CALCULATOR STYLES------------------------------------------*/
@@ -151,7 +164,7 @@ tbody, tr, td {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 700;
 	font-weight: 600;
-	text-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+	text-shadow: 0px 0px 1px rgba(0,0,0,0.15);
 	color: rgb(32,32,32);
 	box-shadow: inset 0px 0px 5px rgba(0,0,0,0.25);
 	text-align: center;
@@ -279,6 +292,7 @@ tbody, tr, td {
 }
 
 #submit {
+	cursor: pointer;
 	height: 100%;
 	width: 100%;
 	border: 0;
@@ -331,4 +345,8 @@ tbody, tr, td {
        -moz-transition: opacity 1s linear;
          -o-transition: opacity 1s linear;
             transition: opacity 1s linear;
+}
+
+#advancedOptions {
+	cursor: pointer;
 }
