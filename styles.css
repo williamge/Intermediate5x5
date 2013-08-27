@@ -18,13 +18,17 @@ body {
 	font-weight: 500;
 }
 
-.floatLeft {
-	float: left;
+p {
+	text-align: justify;
+	line-height: 1.4em;
 }
+
+.floatLeft {float: left;}
+.floatRight {float: right;}
 
 .multiSign {
 	font-size: 1.75em;
-	padding: 0;
+	padding: 5 0 0 0;
 	margin: 0 12px;
 }
 
@@ -71,6 +75,25 @@ body {
 	text-align: center;
 }
 /*---------------------------------------------OUTPUT TABLES------------------------------------------*/
+
+.outputHeaders {
+	padding: 4 0 4 0;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+
+.outputHeaders td {
+	border-right: 1px solid rgba(0,0,0,0.25);
+	border-left: 1px solid rgba(0,0,0,0.25);
+}
+
+.outputRow td {
+	border-right: 1px solid rgba(0,0,0,0.25);
+	border-left: 1px solid rgba(0,0,0,0.25);
+}
+
+.outputHeaders .wide {
+	width: 175px;
+}
 
 .tableDivider {
 	margin: 0;
@@ -134,7 +157,7 @@ tbody, tr, td {
 
 .tableSpacer {
 	height: 30px;
-	border-bottom: 1px solid rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.5);
 	border-right: 1px solid rgba(0,0,0,0.25);
 }
 
@@ -178,17 +201,27 @@ tbody, tr, td {
 	border-top: 1px solid rgba(0,0,0,0.25);
 	border-left: 1px solid rgba(0,0,0,0.25);
 	border-right: 1px solid rgba(0,0,0,0.25);
-	/*border-bottom: 1px solid rgba(0,0,0,0.25);
-	font-family: Orbitron;*/
+}
+
+.assistanceWork, .assistanceWorkHeader {
+	padding: 8 0 8 0;
+}
+
+.assistanceWork {
+	line-height: 1.5em;
+}
+
+/*.robotImage {
+	padding: 0 24 0 16;
 }
 
 /*------------------------------------------------------------------------------------------*/
 /*---------------------------------------------IDS------------------------------------------*/
 /*------------------------------------------------------------------------------------------*/
 
-#robot {
+#robotDiv {
 	height: 150px;
-	padding: 32 0 0 0;
+	padding: 12 0 0 0;
 	margin: 0;
 }
 
@@ -220,8 +253,8 @@ tbody, tr, td {
 	border-radius: 8px 8px 0px 0px;
 	color: white;
 	font-size: 2.5em;
-	padding-bottom: 5px;
-	padding-top: 5px;
+	padding-bottom: 12px;
+	padding-top: 6px;
 	font-family: orbitron;
 	letter-spacing: 0.12em;
 	text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
@@ -270,7 +303,7 @@ tbody, tr, td {
 }
 
 #output, #errorOutput {
-	padding: 24px 0 24px 0;
+	padding: 0 0 24px 0;
 	height: 170px;
 	font-size: 1em;
 	font-family: Arial;

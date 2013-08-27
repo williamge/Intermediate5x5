@@ -3,7 +3,7 @@
 		<title>SquatBot - Bill Starr 5x5 Calculator</title>
 		<link rel="stylesheet" type="text/css" href="reset.css">
 		
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 		<link rel="icon" type="image/png" href="favicons/icon.png">
@@ -15,15 +15,27 @@
 			<div class="divider" id="programTitle">
 				Bill Starr Intermediate 5x5
 			</div>
-			<div class="divider" id="robot">
-				<img src="images/icon.gif">
+			<div class="divider" id="robotDiv">
+				<div class="floatLeft">
+					<img src="images/icon.gif" class="robotImage">
+				</div>
+				<div class="floatLeft">
+					<p>
+						This calculator will help you set up a typical<br>
+						Intermediate level strength training program. Enter<br>
+						your highest weight, sets and reps achieved with a<br>
+						given lift.  For example if you're transitioning<br>
+						from Starting Strength and your final week you<br>
+						achieved 275x5x3 then you'd enter that.
+					</p>
+				</div>
 			</div>
 			<div class="divider" id="topLabelRow">
 				<div class="floatLeft topLabel labelText" id="liftsLabel">Lift</div>
 				<div class="floatLeft weightField topLabel labelText">Weight</div>
-				<div class="floatLeft multiSign topLabel">&#8291</div>
+				<div class="floatLeft multiSign topLabel"></div>
 				<div class="floatLeft repField topLabel labelText" id="repsLabel">Reps</div>
-				<div class="floatLeft multiSign topLabel">&#8291&#8291</div>
+				<div class="floatLeft multiSign topLabel"></div>
 				<div class="floatLeft setField topLabel labelText">Sets</div>
 			</div>
 
@@ -155,8 +167,7 @@
 			<div id="header">
 				One Rep Maxes
 			</div>
-
-			<div class="divider" id="output">
+			<div id="output">
 
 			</div>
 			<div id="footer">
