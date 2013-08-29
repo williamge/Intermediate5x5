@@ -340,9 +340,9 @@ function printExcerciseTables(week, day, exercise) {
 function printMonday(week) {
 	return	(
 				'<div class="tableDivider"><table class="dayTable monday">'
-				+ '<tr><td class="title labelText" colspan="3">Monday</td></tr><tr><td>' 
-				+ printExcerciseTables(week, "monday", "squat") + "</td><td>" 
-				+ printExcerciseTables(week, "monday", "bench") + "</td><td>" 
+				+ '<tr><td class="title labelText" colspan="3">Monday</td></tr><tr><td class="ex1">' 
+				+ printExcerciseTables(week, "monday", "squat") + '</td><td class="ex2">'
+				+ printExcerciseTables(week, "monday", "bench") + '</td><td class="ex3">'
 				+ printExcerciseTables(week, "monday", "row") + '</td></tr>'
 				+ '<tr><td colspan="3" class="assistanceWork tableSpacer">'
 				+ 'Weighted Hyperextensions - 2 sets of 8-12 reps<br>'
@@ -354,9 +354,9 @@ function printMonday(week) {
 function printWednesday(week) {
 	return	(
 				'<div class="tableDivider"><table class="dayTable wednesday">'
-				+ '<tr><td class="title labelText" colspan="3">Wednesday</td></tr><tr><td>' 
-				+ printExcerciseTables(week, "wednesday", "squat") + "</td><td>" 
-				+ printExcerciseTables(week, "wednesday", "incline") + "</td><td>" 
+				+ '<tr><td class="title labelText" colspan="3">Wednesday</td></tr><tr><td class="ex1">' 
+				+ printExcerciseTables(week, "wednesday", "squat") + '</td><td class="ex2">' 
+				+ printExcerciseTables(week, "wednesday", "incline") + '</td><td class="ex3">'
 				+ printExcerciseTables(week, "wednesday", "dead") + '</td></tr>'
 				+ '<tr><td colspan="3" class="assistanceWork tableSpacer">'
 				+ 'Situps - 3 sets of 8-15 reps</td></tr>'
@@ -367,9 +367,9 @@ function printWednesday(week) {
 function printFriday(week) {
 	return	(
 				'<div class="tableDivider"><table class="dayTable friday">'
-				+ '<tr><td class="title labelText" colspan="3">Friday</td></tr><tr><td>'
-				+ printExcerciseTables(week, "friday", "squat") + "</td><td>" 
-				+ printExcerciseTables(week, "friday", "bench") + "</td><td>" 
+				+ '<tr><td class="title labelText" colspan="3">Friday</td></tr><tr><td class="ex1">'
+				+ printExcerciseTables(week, "friday", "squat") + '</td><td class="ex2">' 
+				+ printExcerciseTables(week, "friday", "bench") + '</td><td class="ex3">'
 				+ printExcerciseTables(week, "friday", "row") + '</td></tr>'
 				+ '<tr><td colspan="3" class="assistanceWork tableSpacer">'
 				+ 'Weighted Dips - 3 sets of 5-8 reps<br>'
@@ -380,7 +380,7 @@ function printFriday(week) {
 };
 
 function printWeek(week) {
-	return('<div class="bubble"><div id="header">Week ' + (week+1) + '</div><div>' + printMonday(week) + printWednesday(week) + printFriday(week) + '</div><div id="footer"></div></div>');
+	return('<div class="bubble"><div id="header">Week ' + (week+1) + '</div><div class="dayContainer">' + printMonday(week) + printWednesday(week) + printFriday(week) + '</div><div id="footer"></div></div>');
 };
 
 function printAll() {
