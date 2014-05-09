@@ -75,15 +75,15 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				data : [
 					{
 						class : "ex1",
-						data : printExcerciseTables(week, "monday", "squat")
+						data : printExerciseTables(week, "monday", "squat")
 					},
 					{
 						class : "ex2",
-						data : printExcerciseTables(week, "monday", "bench")
+						data : printExerciseTables(week, "monday", "bench")
 					},
 					{
 						class : "ex3",
-						data : printExcerciseTables(week, "monday", "row")
+						data : printExerciseTables(week, "monday", "row")
 					}
 				],
 				assistanceWork : [
@@ -100,15 +100,15 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				data : [
 					{
 						class : "ex1",
-						data : printExcerciseTables(week, "wednesday", "squat")
+						data : printExerciseTables(week, "wednesday", "squat")
 					},
 					{
 						class : "ex2",
-						data : printExcerciseTables(week, "wednesday", "incline")
+						data : printExerciseTables(week, "wednesday", "incline")
 					},
 					{
 						class : "ex3",
-						data : printExcerciseTables(week, "wednesday", "dead")
+						data : printExerciseTables(week, "wednesday", "dead")
 					}
 				],
 				assistanceWork : [
@@ -124,15 +124,15 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				data : [
 					{
 						class : "ex1",
-						data : printExcerciseTables(week, "friday", "squat")
+						data : printExerciseTables(week, "friday", "squat")
 					},
 					{
 						class : "ex2",
-						data : printExcerciseTables(week, "friday", "bench")
+						data : printExerciseTables(week, "friday", "bench")
 					},
 					{
 						class : "ex3",
-						data : printExcerciseTables(week, "friday", "row")
+						data : printExerciseTables(week, "friday", "row")
 					}
 				],
 				assistanceWork : [

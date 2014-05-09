@@ -149,7 +149,7 @@ function checkSmallVars(smallest, ramp, length, increase) {
 	}
 }
 
-function printExcerciseTables(week, day, exercise) {
+function printExerciseTables(week, day, exercise) {
 	var output = '<table class="excerciseTable"><tr><td class="liftType" colspan="2">' 
 				 + weeks[week].Week[day][exercise].liftName 
 				 + '</td></tr><tr><td class="repsCell">Reps</td><td class="weightCell">' 
