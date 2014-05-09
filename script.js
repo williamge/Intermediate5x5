@@ -203,7 +203,3 @@ function printFriday(week) {
 				+ '</table></div>'
 			);
 };
-
-function printWeek(week) {
-	return('<div class="bubble"><div id="header">Week ' + (week+1) + '</div><div class="dayContainer">' + printMonday(week) + printWednesday(week) + printFriday(week) + '</div><div id="footer"></div></div>');
-};

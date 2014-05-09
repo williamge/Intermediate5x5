@@ -68,11 +68,19 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	};
 
+	$scope.printWeek = function( week ) {
+		var weekData = printMonday(week) + printWednesday(week) + printFriday(week);
+		return {
+			number : (week+1),
+			data : weekData
+		};
+	}
+
 	$scope.printAll = function() {
 		var tables = [];
 		for (var i=0; i<programLength; i++) {
 			console.info(i);
-			tables.push( printWeek(i) );
+			tables.push( $scope.printWeek(i) );
 		};
 
 		$scope.tables = tables;

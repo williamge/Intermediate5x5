@@ -171,13 +171,19 @@
 			<a href="#" id="jump"></a>
 			<div id="tables">
 				<div ng-repeat="week in tables">
-					{{week}}
+					<div class="bubble">
+						<div id="header">
+							Week {{week.number}}
+						</div>
+						<div class="dayContainer">
+							{{week.data}}
+						</div>
+						<div id="footer">
+						</div>
+					</div>
 				</div>
-
 			</div>
-		</div>
-
-		
+		</div>		
 
 
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
