@@ -176,7 +176,34 @@
 							Week {{week.number}}
 						</div>
 						<div class="dayContainer">
-							{{week.data}}
+							<div class="tableDivider" ng-repeat="day in week.data">
+								<table class="dayTable {{day.name}}">
+									<tr>
+										<td 
+											class="title labelText" 
+											colspan="3"
+										>
+											{{day.name}}
+										</td>
+									</tr>
+									<tr>
+										<td 
+											ng-repeat="dayExercise in day.data" 
+											class="{{dayExercise.class}}"
+										>
+											{{dayExercise.data}}
+										</td>
+									</tr>
+									<tr ng-repeat="work in day.assistanceWork">
+										<td 
+											colspan="3" 
+											class="assistanceWork tableSpacer"
+										>
+											{{work}}
+										</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 						<div id="footer">
 						</div>

@@ -68,8 +68,84 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	};
 
-	$scope.printWeek = function( week ) {
-		var weekData = printMonday(week) + printWednesday(week) + printFriday(week);
+	$scope.returnWeek = function( week ) {
+		function printMonday(week) {
+			var output = {
+				name : "Monday",
+				data : [
+					{
+						class : "ex1",
+						data : printExcerciseTables(week, "monday", "squat")
+					},
+					{
+						class : "ex2",
+						data : printExcerciseTables(week, "monday", "bench")
+					},
+					{
+						class : "ex3",
+						data : printExcerciseTables(week, "monday", "row")
+					}
+				],
+				assistanceWork : [
+					"Weighted Hyperextensions - 2 sets of 8-12 reps",
+					"Weighted Decline Situps - 4 sets of 8-15 reps"
+				]
+			};
+			return output;
+		};
+
+		function printWednesday(week) {
+			var output = {
+				name : "Wednesday",
+				data : [
+					{
+						class : "ex1",
+						data : printExcerciseTables(week, "wednesday", "squat")
+					},
+					{
+						class : "ex2",
+						data : printExcerciseTables(week, "wednesday", "incline")
+					},
+					{
+						class : "ex3",
+						data : printExcerciseTables(week, "wednesday", "dead")
+					}
+				],
+				assistanceWork : [
+					"Situps - 3 sets of 8-15 reps"
+				]
+			};
+			return output;
+		};
+
+		function printFriday(week) {
+			var output = {
+				name : "Friday",
+				data : [
+					{
+						class : "ex1",
+						data : printExcerciseTables(week, "friday", "squat")
+					},
+					{
+						class : "ex2",
+						data : printExcerciseTables(week, "friday", "bench")
+					},
+					{
+						class : "ex3",
+						data : printExcerciseTables(week, "friday", "row")
+					}
+				],
+				assistanceWork : [
+					"Weighted Dips - 3 sets of 5-8 reps",
+					"Barbell curls - 3 sets of 8-12 reps",
+					"Triceps Extensions - 3 sets of 8-12 reps"
+				]
+			};
+			return output;
+		};
+
+
+		var weekData = [ printMonday(week), printWednesday(week), printFriday(week) ];
 		return {
 			number : (week+1),
 			data : weekData
@@ -80,7 +156,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		var tables = [];
 		for (var i=0; i<programLength; i++) {
 			console.info(i);
-			tables.push( $scope.printWeek(i) );
+			tables.push( $scope.returnWeek(i) );
 		};
 
 		$scope.tables = tables;
