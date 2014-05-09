@@ -133,7 +133,23 @@
 					One Rep Maxes
 				</div>
 				<div id="output">
-					{{resultsTable}}
+						<table class="excerciseTable">
+						<tbody>
+							<tr class="outputHeaders">
+								<td class="wide">Lift</td>
+								<td class="">One Rep Max</td>
+								<td class="">Five Rep Max</td>
+							</tr>
+							<tr 
+								class="outputRow" 
+								ng-repeat="outputRow in resultsRows"
+							>
+								<td>{{outputRow.lift}}</td>
+								<td class="">{{outputRow.oneRep}}</td>
+								<td>{{outputRow.fiveRep}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div id="footer">
 					

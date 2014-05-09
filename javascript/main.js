@@ -50,6 +50,23 @@ squatApp.controller( "options", function( $scope, $http ) {
 } );
 
 squatApp.controller( "mainCtrl", function( $scope, $http ) {
+	$scope.resultsRows = [];
+
+	$scope.printMaxes = function(oneRM) {
+
+		var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
+
+		for (var i=0; i < exercises.length; i++){
+			$scope.resultsRows.push(
+				{
+					lift : exercises[i],
+					oneRep : digitRound(oneRM[i], 0),
+					fiveRep : digitRound(calcxRM(oneRM[i], 5), 0)
+				}
+			);			
+		}
+
+	};
 
 	$scope.submit = function() {
 		console.info('Submit button clicked'); // logging
@@ -119,7 +136,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			var rowMax = oneRM[3];
 			var incMax = oneRM[4];
 
-			printMaxes(oneRM);
+			$scope.printMaxes(oneRM);
 			$('#results').fadeIn('slow');
 
 
