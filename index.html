@@ -1,10 +1,11 @@
-<html>
+<html ng-app="squatApp">
 	<head>
 		<title>SquatBot - Bill Starr 5x5 Calculator</title>
 		<link rel="stylesheet" type="text/css" href="reset.css">
 		
 		<script type="text/javascript" src="jquery.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
 		<script type="text/javascript" src="script.js"></script>
 		<link rel="icon" type="image/png" href="favicons/icon.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
@@ -39,84 +40,40 @@
 				<div class="floatLeft setField topLabel labelText">Sets</div>
 			</div>
 
-			<div class="divider"> <!--SQUAT-->
-				<div class="floatLeft sideLabel labelText">Squat</div>
-
-				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="sWeight" value="225">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft ">
-		  			<input class="repField field" type="text" name="sReps" value="5">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="sSets" value="1">
-				</div>
-			</div>
-
-			<div class="divider"> <!--BENCH PRESS-->
-				<div class="floatLeft sideLabel labelText">Bench Press</div>
-
-				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="bWeight" value="185">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft ">
-		  			<input class="repField field" type="text" name="bReps" value="5">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="bSets" value="1">
-				</div>
-			</div>
-
-			<div class="divider"> <!--DEADLIFT-->
-				<div class="floatLeft sideLabel labelText">Deadlift</div>
-
-				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="dWeight" value="315">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft ">
-		  			<input class="repField field" type="text" name="dReps" value="5">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="dSets" value="1">
-				</div>
-			</div>
-
-			<div class="divider"> <!--BARBELL ROW-->
-				<div class="floatLeft sideLabel labelText">Barbell Row</div>
-
-				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="rWeight" value="135">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft ">
-		  			<input class="repField field" type="text" name="rReps" value="5">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="rSets" value="1">
-				</div>
-			</div>
-
-			<div class="divider"> <!--INCLINE BENCH-->
-				<div class="floatLeft sideLabel labelText">Incline Bench</div>
-
-				<div class="floatLeft"> 
-					<input class="weightField field" type="text" name="iWeight" value="95">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft">
-		  			<input class="repField field" type="text" name="iReps" value="5">
-				</div>
-				<div class="floatLeft multiSign">&times;</div>
-				<div class="floatLeft">
-		  			<input class="setField field" type="text" name="iSets" value="1">
-				</div>
+			<div ng-controller="exercises">
+				<ul>
+					<li ng-repeat="exercise in exercisesList">
+						<ul class="exerciseRow divider">
+							<li class=" sideLabel labelText">{{exercise.type}}</li>
+							<li>
+								<input 
+									class="weightField field" 
+									type="text" 
+									name="{{exercise.prefix}}Weight" 
+									value="{{exercise.defaultWeight}}"
+								>
+							</li>
+							<li class="multiSign">&times;</li>
+							<li>
+								<input 
+									class="repField field" 
+									type="text" 
+									name="{{exercise.prefix}}Reps" 
+									value="{{exercise.defaultReps}}"
+								>
+							</li>
+							<li class="multiSign">&times;</li>
+							<li>
+								<input 
+									class="setField field" 
+									type="text" 
+									name="{{exercise.prefix}}Sets" 
+									value="{{exercise.defaultSets}}"
+								>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 
 			<div class="divider topLabel" id="advancedOptions">
@@ -130,7 +87,7 @@
 						<div class="floatLeft">
 							<input class="setField field" type="text" name="sIncrease" value="2.5">
 						</div>
-
+ 
 						<div class="floatLeft sideLabel labelText ">
 							Ramping %
 						</div>
@@ -191,5 +148,9 @@
 		<div id="tables">
 
 		</div>
+
+
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
+		<script src="/javascript/main.js"></script>
 	</body>
 </html>

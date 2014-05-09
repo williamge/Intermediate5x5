@@ -77,6 +77,14 @@
 		text-align: center;
 	}
 
+	.exerciseRow {
+		list-style: none;
+	}
+
+	.exerciseRow > li {
+		display: inline;
+	}
+
 	/*---------------------------------------------OUTPUT TABLES------------------------------------------*/
 
 	.outputHeaders {
