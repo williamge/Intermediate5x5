@@ -207,10 +207,3 @@ function printFriday(week) {
 function printWeek(week) {
 	return('<div class="bubble"><div id="header">Week ' + (week+1) + '</div><div class="dayContainer">' + printMonday(week) + printWednesday(week) + printFriday(week) + '</div><div id="footer"></div></div>');
 };
-
-function printAll() {
-	for (var i=0; i<programLength; i++) {
-		console.info(i);
-		$('#tables').append(printWeek(i));
-	};
-};

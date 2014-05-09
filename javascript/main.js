@@ -51,9 +51,9 @@ squatApp.controller( "options", function( $scope, $http ) {
 
 squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	$scope.resultsRows = [];
+	$scope.tables = [];
 
 	$scope.printMaxes = function(oneRM) {
-
 		var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
 
 		for (var i=0; i < exercises.length; i++){
@@ -66,6 +66,16 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			);			
 		}
 
+	};
+
+	$scope.printAll = function() {
+		var tables = [];
+		for (var i=0; i<programLength; i++) {
+			console.info(i);
+			tables.push( printWeek(i) );
+		};
+
+		$scope.tables = tables;
 	};
 
 	$scope.submit = function() {
@@ -210,8 +220,8 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				weeks[week].Week.friday.reps = [5,5,5,5,3,8];
 			}
 
-			$('#tables').html('<p>');
-			printAll();
+			$scope.printAll();
+
 			$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);
 			$('#results').fadeIn('2000');
 
