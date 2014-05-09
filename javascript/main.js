@@ -39,3 +39,13 @@ squatApp.controller( "exercises", function( $scope, $http ) {
 		},
 	];
 } );
+
+squatApp.controller( "options", function( $scope, $http ) {
+	$scope.showOptions = false;
+
+	$scope.toggleOptions = function() {
+		$scope.showOptions = !$scope.showOptions;
+	};
+
+} );
+

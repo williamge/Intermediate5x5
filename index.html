@@ -76,10 +76,15 @@
 				</ul>
 			</div>
 
-			<div class="divider topLabel" id="advancedOptions">
-				<a>Advanced Options</a>
-			</div>
-			<div id="advanced"> <!--ADVANCED OPTIONS-->
+			<div ng-controller="options">
+				<div 
+					class="divider topLabel" 
+					id="advancedOptions" 
+					ng-click="toggleOptions();"
+				>
+					<span>Advanced Options</span>
+				</div>
+				<div ng-show="showOptions" id="advanced">
 					<div class="divider">
 						<div class="floatLeft sideLabel labelText ">
 							Smallest Plate
@@ -109,6 +114,8 @@
 							<input class="setField field" type="text" name="wIncrease" value="2.5">
 						</div>
 					</div>
+
+				</div>
 			</div>
 
 			<div id="buttonDivider">
