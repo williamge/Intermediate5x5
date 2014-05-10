@@ -2,7 +2,7 @@ var squatApp = angular.module( "squatApp", [] );
 
 squatApp.controller( "exercises", function( $scope, $http ) {
 
-	$http.get('/json/exercises.json').success( function( data ) {
+	$http.get('json/exercises.json').success( function( data ) {
 		$scope.exercisesList = data;
 	});
 
@@ -24,7 +24,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	$scope.days = [];
 
-	var daysPromise = $http.get('/json/days.json')
+	var daysPromise = $http.get('json/days.json')
 
 	$scope.printMaxes = function(oneRM) {
 		var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
