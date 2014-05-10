@@ -41,7 +41,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	};
 
-	$scope.returnWeek = function( week, days ) {
+	$scope.getWeek = function( week, days ) {
 
 		var getDayExercise = function( week, dayInfo) {
 			var exercisesList = [];
@@ -100,7 +100,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		var tables = [];
 		for (var i=0; i<programLength; i++) {
 			console.info(i);
-			tables.push( $scope.returnWeek( i, days ) );
+			tables.push( $scope.getWeek( i, days ) );
 		};
 
 		return tables;
