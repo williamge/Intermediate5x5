@@ -1,46 +1,15 @@
 var squatApp = angular.module( "squatApp", [] );
 
 squatApp.controller( "exercises", function( $scope, $http ) {
-	$scope.exercisesList = [
-		{
-			type : "Squat",
-			prefix : "s",
-			defaultWeight : 225,
-			defaultReps: 5,
-			defaultSets: 1
-		},
-		{
-			type : "Bench Press",
-			prefix : "b",
-			defaultWeight : 185,
-			defaultReps: 5,
-			defaultSets: 1
-		},
-		{
-			type : "Deadlift",
-			prefix : "d",
-			defaultWeight : 315,
-			defaultReps: 5,
-			defaultSets: 1
-		},		
-		{
-			type : "Barbell Row",
-			prefix : "r",
-			defaultWeight : 135,
-			defaultReps: 5,
-			defaultSets: 1
-		},
-		{
-			type : "Incline Bench",
-			prefix : "i",
-			defaultWeight : 95,
-			defaultReps: 5,
-			defaultSets: 1
-		},
-	];
+
+	$http.get('/json/exercises.json').success( function( data ) {
+		$scope.exercisesList = data;
+	});
+
 } );
 
 squatApp.controller( "options", function( $scope, $http ) {
+
 	$scope.showOptions = false;
 
 	$scope.toggleOptions = function() {
@@ -52,6 +21,10 @@ squatApp.controller( "options", function( $scope, $http ) {
 squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	$scope.resultsRows = [];
 	$scope.tables = [];
+
+	$scope.days = [];
+
+	var daysPromise = $http.get('/json/days.json')
 
 	$scope.printMaxes = function(oneRM) {
 		var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
@@ -68,7 +41,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	};
 
-	$scope.returnWeek = function( week ) {
+	$scope.returnWeek = function( week, days ) {
 
 		var getDayExercise = function( week, dayInfo) {
 			var exercisesList = [];
@@ -89,38 +62,14 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			}
 		};
 
-		var mondayJSON = {
-			name: "Monday",
-			exercises: [ "squat", "bench", "row" ],
-			assistanceWork: [
-				"Weighted Hyperextensions - 2 sets of 8-12 reps",
-				"Weighted Decline Situps - 4 sets of 8-15 reps"
-			]
-		};
+		var weekData = [];
 
-		var wednesdayJSON = {
-			name: "Wednesday",
-			exercises: [  "squat", "incline", "dead" ],
-			assistanceWork: [
-				"Situps - 3 sets of 8-15 reps"
-			]
-		};
+		for (var i = 0; i < days.length; i++) {
+			weekData.push( 
+				getDayExercise(	week, days[i] )
+			);
+		}
 
-		var fridayJSON = {
-			name: "Friday",
-			exercises: [ "squat", "bench", "row" ],
-			assistanceWork: [
-				"Weighted Dips - 3 sets of 5-8 reps",
-				"Barbell curls - 3 sets of 8-12 reps",
-				"Triceps Extensions - 3 sets of 8-12 reps"
-			]
-		};
-
-		var weekData = [
-			getDayExercise(	week, mondayJSON ), 
-			getDayExercise(	week, wednesdayJSON ),
-			getDayExercise(	week, fridayJSON ) 
-		];
 		return {
 			number : (week+1),
 			exerciseDays : weekData
@@ -147,14 +96,14 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		return output;
 	};
 
-	$scope.printAll = function() {
+	$scope.getTables = function( days ) {
 		var tables = [];
 		for (var i=0; i<programLength; i++) {
 			console.info(i);
-			tables.push( $scope.returnWeek(i) );
+			tables.push( $scope.returnWeek( i, days ) );
 		};
 
-		$scope.tables = tables;
+		return tables;
 	};
 
 	$scope.submit = function() {
@@ -299,7 +248,10 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				weeks[week].Week.Friday.reps = [5,5,5,5,3,8];
 			}
 
-			$scope.printAll();
+			daysPromise.success( function( data ) {
+				$scope.tables = $scope.getTables( data );
+			});
+
 
 			//TODO: Re-implement this functionality
 			//$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);

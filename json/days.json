@@ -1,0 +1,26 @@
+[ 
+	{
+		"name": "Monday",
+		"exercises": [ "squat", "bench", "row" ],
+		"assistanceWork": [
+			"Weighted Hyperextensions - 2 sets of 8-12 reps",
+			"Weighted Decline Situps - 4 sets of 8-15 reps"
+		]
+	},
+	{
+		"name": "Wednesday",
+		"exercises": [  "squat", "incline", "dead" ],
+		"assistanceWork": [
+			"Situps - 3 sets of 8-15 reps"
+		]
+	},
+	{
+		"name": "Friday",
+		"exercises": [ "squat", "bench", "row" ],
+		"assistanceWork": [
+			"Weighted Dips - 3 sets of 5-8 reps",
+			"Barbell curls - 3 sets of 8-12 reps",
+			"Triceps Extensions - 3 sets of 8-12 reps"
+		]
+	}
+]
