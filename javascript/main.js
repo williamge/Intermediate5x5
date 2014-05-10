@@ -156,12 +156,10 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			)
 		};
 
-		var output = {
+		return {
 			liftName : weeks[week].Week[day][exercise].liftName,
 			sets : sets
 		};
-
-		return output;
 	};
 
 	/*	Returns list of weeks of exercise and their associated data to be rendered.
