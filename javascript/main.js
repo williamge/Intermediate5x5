@@ -128,18 +128,20 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	}
 
 	$scope.exerciseData = function( week, day, exercise ) {
-		var output = {
-			liftName : weeks[week].Week[day][exercise].liftName,
-			sets : []
-		};
+		var sets = [];
 
 		for (i=0; i<weeks[week].Week[day][exercise].set.length; i++) {
-			output.sets.push( 
+			sets.push( 
 				{
 					reps: weeks[week].Week[day].reps[i],
 					weight: xRound(weeks[week].Week[day][exercise].set[i], smallestIncrement)
 				}
 			)
+		};
+
+		var output = {
+			liftName : weeks[week].Week[day][exercise].liftName,
+			sets : sets
 		};
 
 		return output;
