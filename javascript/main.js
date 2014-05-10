@@ -42,8 +42,61 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	};
 
+	//TODO: this is ridiculous, the output for this needs to be simplified
+	/*	Calculates the exercise data for a given week
+		Arguments: 	(int) week: numbered week to calculate
+					(List of [Object]) days: data for given week's exercises, in form:
+						{
+							name : [name of the day]
+							exercises : [list of names of exercises]
+							assistanceWork: [list of additional exercises not to be calculated]
+						}
+		Returns: Object of form {
+			number: [number of the calculated week],
+			exerciseDays: [
+				{
+					name: [name of exercise],
+					exercises: [
+						class: [name of CSS class],
+						exercise: {
+							liftName: [exercise name],
+							sets: [
+								reps: [number of reps for this exercise],
+								weight: [weight to use for this exercise]
+							]
+						}
+					],
+					assistanceWork: [list of exercises in addition to the calculated ones]
+				}
+			]
+		} 
+	 */ 
 	$scope.getWeek = function( week, days ) {
 
+		//TODO: this is ridiculous, the output for this needs to be simplified
+		/* 	Private helper function to form a final list of exercises for a day.
+
+			Arguments: 	(int) week: numbered week to calculate
+						(string) dayName: name of the day to calculate
+						(list of [string]) exercises: list of name of exercises for that day
+						(list of [string]) assistanceWork: list of additional work for that
+						 day, no calculations will be made for these workouts
+			
+			Returns: Object of form {
+				name: [name of exercise],
+				exercises: [
+					class: [name of CSS class],
+					exercise: {
+						liftName: [exercise name],
+						sets: [
+							reps: [number of reps for this exercise],
+							weight: [weight to use for this exercise]
+						]
+					}
+				],
+				assistanceWork: [list of exercises in addition to the calculated ones]
+			}
+		 */
 		var getDayExercise = function( week, dayName, exercises, assistanceWork) {
 			var exercisesList = [];
 
@@ -77,6 +130,20 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		};
 	}
 
+	/*	Calculates sets (reps and weight) for an exercise.
+		Arguments: 	(int) week: numbered week to calculate
+					(string) day: name of day to calculate
+					(string) exercise: name of exercise to calculate
+		Returns: Object of form {
+			liftName: [name of exercise],
+			sets: [
+				{
+					reps: [number of reps for the exercise]
+					weight: [weight for the exercise]
+				}
+			]
+		} 
+	 */
 	$scope.exerciseData = function( week, day, exercise ) {
 		var sets = [];
 
@@ -97,6 +164,33 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		return output;
 	};
 
+	/*	Returns list of weeks of exercise and their associated data to be rendered.
+		Arguments: 	(List of [Object]) days: data for given week's exercises, in form:
+						{
+							name : [name of the day]
+							exercises : [list of names of exercises]
+							assistanceWork: [list of additional exercises not to be calculated]
+						}
+		Returns: List of Objects of form {
+				number: [number of the calculated week],
+				exerciseDays: [
+					{
+						name: [name of exercise],
+						exercises: [
+							class: [name of CSS class],
+							exercise: {
+								liftName: [exercise name],
+								sets: [
+									reps: [number of reps for this exercise],
+									weight: [weight to use for this exercise]
+								]
+							}
+						],
+						assistanceWork: [list of exercises in addition to the calculated ones]
+					}
+				]
+			} 
+	 */
 	$scope.getTables = function( days ) {
 		var tables = [];
 		for (var i=0; i<programLength; i++) {
@@ -107,6 +201,12 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		return tables;
 	};
 
+	//TODO: it takes no arguments and returns nothing, this should probably be refactored
+	//		to be more clear of what it's doing
+	/* 	Performs calculations of workout schedule based off of user input and stores data in "$scope.tables"
+		Arguments: None
+		Returns: None
+	*/
 	$scope.submit = function() {
 		console.info('Submit button clicked'); // logging
 
@@ -162,6 +262,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 		if (inputIsClean == true) {
 			$('#error').hide();
+			//TODO: use a hash map instead, this way is weird
 			oneRM[0] = calc1RM(squatInput[1], squatInput[2], squatInput[3]); //squat
 			oneRM[1] = calc1RM(benchInput[1], benchInput[2], benchInput[3]); //bench
 			oneRM[2] = calc1RM(deadInput[1], deadInput[2], deadInput[3]); //dead
