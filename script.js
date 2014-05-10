@@ -148,16 +148,3 @@ function checkSmallVars(smallest, ramp, length, increase) {
 		return(false);
 	}
 }
-
-function printExerciseTables(week, day, exercise) {
-	var output = '<table class="excerciseTable"><tr><td class="liftType" colspan="2">' 
-				 + weeks[week].Week[day][exercise].liftName 
-				 + '</td></tr><tr><td class="repsCell">Reps</td><td class="weightCell">' 
-				 + 'Weight</td></tr>';
-
-	for (i=0; i<weeks[week].Week[day][exercise].set.length; i++) {
-		output = output + '<tr><td class="repsCell">' + weeks[week].Week[day].reps[i] + '</td><td class="weightCell">' + xRound(weeks[week].Week[day][exercise].set[i], smallestIncrement) + "</td></tr>";
-	};
-	output = output + "</table>";
-	return(output);
-};

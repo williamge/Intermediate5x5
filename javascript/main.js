@@ -75,15 +75,15 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				data : [
 					{
 						class : "ex1",
-						data : printExerciseTables(week, "monday", "squat")
+						data : $scope.exerciseData(week, "monday", "squat")
 					},
 					{
 						class : "ex2",
-						data : printExerciseTables(week, "monday", "bench")
+						data : $scope.exerciseData(week, "monday", "bench")
 					},
 					{
 						class : "ex3",
-						data : printExerciseTables(week, "monday", "row")
+						data : $scope.exerciseData(week, "monday", "row")
 					}
 				],
 				assistanceWork : [
@@ -100,15 +100,15 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				data : [
 					{
 						class : "ex1",
-						data : printExerciseTables(week, "wednesday", "squat")
+						data : $scope.exerciseData(week, "wednesday", "squat")
 					},
 					{
 						class : "ex2",
-						data : printExerciseTables(week, "wednesday", "incline")
+						data : $scope.exerciseData(week, "wednesday", "incline")
 					},
 					{
 						class : "ex3",
-						data : printExerciseTables(week, "wednesday", "dead")
+						data : $scope.exerciseData(week, "wednesday", "dead")
 					}
 				],
 				assistanceWork : [
@@ -124,15 +124,15 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				data : [
 					{
 						class : "ex1",
-						data : printExerciseTables(week, "friday", "squat")
+						data : $scope.exerciseData(week, "friday", "squat")
 					},
 					{
 						class : "ex2",
-						data : printExerciseTables(week, "friday", "bench")
+						data : $scope.exerciseData(week, "friday", "bench")
 					},
 					{
 						class : "ex3",
-						data : printExerciseTables(week, "friday", "row")
+						data : $scope.exerciseData(week, "friday", "row")
 					}
 				],
 				assistanceWork : [
@@ -151,6 +151,24 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			data : weekData
 		};
 	}
+
+	$scope.exerciseData = function( week, day, exercise ) {
+		var output = {
+			liftName : weeks[week].Week[day][exercise].liftName,
+			sets : []
+		};
+
+		for (i=0; i<weeks[week].Week[day][exercise].set.length; i++) {
+			output.sets.push( 
+				{
+					reps: weeks[week].Week[day].reps[i],
+					weight: xRound(weeks[week].Week[day][exercise].set[i], smallestIncrement)
+				}
+			)
+		};
+
+		return output;
+	};
 
 	$scope.printAll = function() {
 		var tables = [];
