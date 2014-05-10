@@ -27,6 +27,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	var daysPromise = $http.get('json/days.json')
 
 	$scope.printMaxes = function(oneRM) {
+		//TODO: use the values loaded from exercises.json instead
 		var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
 
 		for (var i=0; i < exercises.length; i++){
@@ -43,22 +44,22 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 	$scope.getWeek = function( week, days ) {
 
-		var getDayExercise = function( week, dayInfo) {
+		var getDayExercise = function( week, dayName, exercises, assistanceWork) {
 			var exercisesList = [];
 
-			for (var i = 0; i < dayInfo.exercises.length; i++) {
+			for (var i = 0; i < exercises.length; i++) {
 				exercisesList.push( 
 					{
 						class : "ex" + i,
-						exercise : $scope.exerciseData(week, dayInfo.name, dayInfo.exercises[i])
+						exercise : $scope.exerciseData(week, dayName, exercises[i])
 					}
 				);
 			}
 
 			return {
-				name : dayInfo.name,
+				name : dayName,
 				exercises : exercisesList,
-				assistanceWork : dayInfo.assistanceWork
+				assistanceWork : assistanceWork
 			}
 		};
 
@@ -66,7 +67,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 		for (var i = 0; i < days.length; i++) {
 			weekData.push( 
-				getDayExercise(	week, days[i] )
+				getDayExercise(	week, days[i].name, days[i].exercises, days[i].assistanceWork )
 			);
 		}
 
