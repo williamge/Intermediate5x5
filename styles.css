@@ -121,7 +121,7 @@
 		margin: 0;
 	}
 
-	.excerciseTable {
+	.exerciseTable {
 		width: 100%;
 	}
 
@@ -312,7 +312,7 @@
 		background-color: rgba(0,0,0,0.05);
 	}
 
-	.excerciseTable {
+	.exerciseTable {
 		width: 100%;
 	}
 
@@ -328,7 +328,7 @@
 		border-left: 1px solid rgba(0,0,0,0.25);
 	}
 
-	.excerciseTable tr:nth-child(2n+3) {
+	.exerciseTable tr:nth-child(2n+3) {
 		background-color: rgba(0,0,0,0.05);
 	}
 
