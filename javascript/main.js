@@ -69,83 +69,58 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	};
 
 	$scope.returnWeek = function( week ) {
-		function printMonday(week) {
-			var output = {
-				name : "Monday",
-				exercises : [
+
+		var getDayExercise = function( week, dayInfo) {
+			var exercisesList = [];
+
+			for (var i = 0; i < dayInfo.exercises.length; i++) {
+				exercisesList.push( 
 					{
-						class : "ex1",
-						exercise : $scope.exerciseData(week, "monday", "squat")
-					},
-					{
-						class : "ex2",
-						exercise : $scope.exerciseData(week, "monday", "bench")
-					},
-					{
-						class : "ex3",
-						exercise : $scope.exerciseData(week, "monday", "row")
+						class : "ex" + i,
+						exercise : $scope.exerciseData(week, dayInfo.name, dayInfo.exercises[i])
 					}
-				],
-				assistanceWork : [
-					"Weighted Hyperextensions - 2 sets of 8-12 reps",
-					"Weighted Decline Situps - 4 sets of 8-15 reps"
-				]
-			};
-			return output;
+				);
+			}
+
+			return {
+				name : dayInfo.name,
+				exercises : exercisesList,
+				assistanceWork : dayInfo.assistanceWork
+			}
 		};
 
-		function printWednesday(week) {
-			var output = {
-				name : "Wednesday",
-				exercises : [
-					{
-						class : "ex1",
-						exercise : $scope.exerciseData(week, "wednesday", "squat")
-					},
-					{
-						class : "ex2",
-						exercise : $scope.exerciseData(week, "wednesday", "incline")
-					},
-					{
-						class : "ex3",
-						exercise : $scope.exerciseData(week, "wednesday", "dead")
-					}
-				],
-				assistanceWork : [
-					"Situps - 3 sets of 8-15 reps"
-				]
-			};
-			return output;
+		var mondayJSON = {
+			name: "Monday",
+			exercises: [ "squat", "bench", "row" ],
+			assistanceWork: [
+				"Weighted Hyperextensions - 2 sets of 8-12 reps",
+				"Weighted Decline Situps - 4 sets of 8-15 reps"
+			]
 		};
 
-		function printFriday(week) {
-			var output = {
-				name : "Friday",
-				exercises : [
-					{
-						class : "ex1",
-						exercise : $scope.exerciseData(week, "friday", "squat")
-					},
-					{
-						class : "ex2",
-						exercise : $scope.exerciseData(week, "friday", "bench")
-					},
-					{
-						class : "ex3",
-						exercise : $scope.exerciseData(week, "friday", "row")
-					}
-				],
-				assistanceWork : [
-					"Weighted Dips - 3 sets of 5-8 reps",
-					"Barbell curls - 3 sets of 8-12 reps",
-					"Triceps Extensions - 3 sets of 8-12 reps"
-				]
-			};
-			return output;
+		var wednesdayJSON = {
+			name: "Wednesday",
+			exercises: [  "squat", "incline", "dead" ],
+			assistanceWork: [
+				"Situps - 3 sets of 8-15 reps"
+			]
 		};
 
+		var fridayJSON = {
+			name: "Friday",
+			exercises: [ "squat", "bench", "row" ],
+			assistanceWork: [
+				"Weighted Dips - 3 sets of 5-8 reps",
+				"Barbell curls - 3 sets of 8-12 reps",
+				"Triceps Extensions - 3 sets of 8-12 reps"
+			]
+		};
 
-		var weekData = [ printMonday(week), printWednesday(week), printFriday(week) ];
+		var weekData = [
+			getDayExercise(	week, mondayJSON ), 
+			getDayExercise(	week, wednesdayJSON ),
+			getDayExercise(	week, fridayJSON ) 
+		];
 		return {
 			number : (week+1),
 			exerciseDays : weekData
@@ -258,23 +233,23 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			for (var i=0; i<programLength; i++) {
 				weeks[i] = new Week(i);
 				weeks[i].Week = {
-					monday: new Day('Monday'),
-					wednesday: new Day('Wednesday'),
-					friday: new Day('Friday')
+					Monday: new Day('Monday'),
+					Wednesday: new Day('Wednesday'),
+					Friday: new Day('Friday')
 				};
-				weeks[i].Week.monday = {
+				weeks[i].Week.Monday = {
 					squat: new Lift('Squat'),
 					bench: new Lift('Bench'),
 					row: new Lift('Row'),
 					reps: new Array()
 				};
-				weeks[i].Week.wednesday = {
+				weeks[i].Week.Wednesday = {
 					squat: new Lift('Squat'),
 					incline: new Lift('Incline'),
 					dead: new Lift('Deadlift'),
 					reps: new Array()
 				};
-				weeks[i].Week.friday = {
+				weeks[i].Week.Friday = {
 					squat: new Lift('Squat'),
 					bench: new Lift('Bench'),
 					row: new Lift('Row'),
@@ -282,44 +257,44 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 				};
 			};
 
-			weeks[0].Week.monday.squat.set = fillDownSets(calcxRM(squatMax,5)*0.925, 5);
-			weeks[0].Week.monday.bench.set = fillDownSets(calcxRM(benchMax,5)*0.925, 5);
-			weeks[0].Week.monday.row.set = fillDownSets(calcxRM(rowMax,5)*0.925, 5);
-			weeks[0].Week.monday.reps = [5,5,5,5,5];
+			weeks[0].Week.Monday.squat.set = fillDownSets(calcxRM(squatMax,5)*0.925, 5);
+			weeks[0].Week.Monday.bench.set = fillDownSets(calcxRM(benchMax,5)*0.925, 5);
+			weeks[0].Week.Monday.row.set = fillDownSets(calcxRM(rowMax,5)*0.925, 5);
+			weeks[0].Week.Monday.reps = [5,5,5,5,5];
 
-			weeks[0].Week.wednesday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[2], 3);
-			weeks[0].Week.wednesday.squat.set[3] = weeks[0].Week.monday.squat.set[2];
-			weeks[0].Week.wednesday.incline.set = fillDownSets(calcxRM(incMax,5)*0.925, 4);
-			weeks[0].Week.wednesday.dead.set = fillDownSets(calcxRM(deadMax,5)*0.925, 4);
-			weeks[0].Week.wednesday.reps = [5,5,5,5];
+			weeks[0].Week.Wednesday.squat.set = fillDownSets(weeks[0].Week.Monday.squat.set[2], 3);
+			weeks[0].Week.Wednesday.squat.set[3] = weeks[0].Week.Monday.squat.set[2];
+			weeks[0].Week.Wednesday.incline.set = fillDownSets(calcxRM(incMax,5)*0.925, 4);
+			weeks[0].Week.Wednesday.dead.set = fillDownSets(calcxRM(deadMax,5)*0.925, 4);
+			weeks[0].Week.Wednesday.reps = [5,5,5,5];
 
-			weeks[0].Week.friday.squat.set = fillDownSets(weeks[0].Week.monday.squat.set[4]*increasePercent, 5);
-			weeks[0].Week.friday.squat.set[5] = weeks[0].Week.monday.squat.set[2];
-			weeks[0].Week.friday.bench.set = fillDownSets(weeks[0].Week.monday.bench.set[4]*increasePercent, 5);
-			weeks[0].Week.friday.bench.set[5] = weeks[0].Week.monday.bench.set[2];
-			weeks[0].Week.friday.row.set = fillDownSets(weeks[0].Week.monday.row.set[4]*increasePercent, 5);
-			weeks[0].Week.friday.row.set[5] = weeks[0].Week.monday.row.set[2];
-			weeks[0].Week.friday.reps = [5,5,5,5,3,8];
+			weeks[0].Week.Friday.squat.set = fillDownSets(weeks[0].Week.Monday.squat.set[4]*increasePercent, 5);
+			weeks[0].Week.Friday.squat.set[5] = weeks[0].Week.Monday.squat.set[2];
+			weeks[0].Week.Friday.bench.set = fillDownSets(weeks[0].Week.Monday.bench.set[4]*increasePercent, 5);
+			weeks[0].Week.Friday.bench.set[5] = weeks[0].Week.Monday.bench.set[2];
+			weeks[0].Week.Friday.row.set = fillDownSets(weeks[0].Week.Monday.row.set[4]*increasePercent, 5);
+			weeks[0].Week.Friday.row.set[5] = weeks[0].Week.Monday.row.set[2];
+			weeks[0].Week.Friday.reps = [5,5,5,5,3,8];
 
 			for (week=1; week<programLength; week++) {
-				weeks[week].Week.monday.squat.set = fillDownSets(weeks[week-1].Week.monday.squat.set[4]*increasePercent, 5);
-				weeks[week].Week.monday.bench.set = fillDownSets(weeks[week-1].Week.monday.bench.set[4]*increasePercent, 5);
-				weeks[week].Week.monday.row.set = fillDownSets(weeks[week-1].Week.monday.row.set[4]*increasePercent, 5);
-				weeks[week].Week.monday.reps = [5,5,5,5,5];
+				weeks[week].Week.Monday.squat.set = fillDownSets(weeks[week-1].Week.Monday.squat.set[4]*increasePercent, 5);
+				weeks[week].Week.Monday.bench.set = fillDownSets(weeks[week-1].Week.Monday.bench.set[4]*increasePercent, 5);
+				weeks[week].Week.Monday.row.set = fillDownSets(weeks[week-1].Week.Monday.row.set[4]*increasePercent, 5);
+				weeks[week].Week.Monday.reps = [5,5,5,5,5];
 
-				weeks[week].Week.wednesday.squat.set = fillDownSets(weeks[week-1].Week.wednesday.squat.set[2]*increasePercent, 3);
-				weeks[week].Week.wednesday.squat.set[3] = weeks[week].Week.wednesday.squat.set[2];
-				weeks[week].Week.wednesday.incline.set = fillDownSets(weeks[week-1].Week.wednesday.incline.set[3]*increasePercent, 4);
-				weeks[week].Week.wednesday.dead.set = fillDownSets(weeks[week-1].Week.wednesday.dead.set[3]*increasePercent, 4);
-				weeks[week].Week.wednesday.reps = [5,5,5,5];
+				weeks[week].Week.Wednesday.squat.set = fillDownSets(weeks[week-1].Week.Wednesday.squat.set[2]*increasePercent, 3);
+				weeks[week].Week.Wednesday.squat.set[3] = weeks[week].Week.Wednesday.squat.set[2];
+				weeks[week].Week.Wednesday.incline.set = fillDownSets(weeks[week-1].Week.Wednesday.incline.set[3]*increasePercent, 4);
+				weeks[week].Week.Wednesday.dead.set = fillDownSets(weeks[week-1].Week.Wednesday.dead.set[3]*increasePercent, 4);
+				weeks[week].Week.Wednesday.reps = [5,5,5,5];
 
-				weeks[week].Week.friday.squat.set = fillDownSets(weeks[week-1].Week.friday.squat.set[4]*increasePercent, 5);
-				weeks[week].Week.friday.squat.set[5] = weeks[week].Week.wednesday.squat.set[3];
-				weeks[week].Week.friday.bench.set = fillDownSets(weeks[week-1].Week.friday.bench.set[4]*increasePercent, 5);
-				weeks[week].Week.friday.bench.set[5] = weeks[week].Week.friday.bench.set[3];
-				weeks[week].Week.friday.row.set = fillDownSets(weeks[week-1].Week.friday.row.set[4]*increasePercent, 5);
-				weeks[week].Week.friday.row.set[5] = weeks[week].Week.friday.row.set[3];
-				weeks[week].Week.friday.reps = [5,5,5,5,3,8];
+				weeks[week].Week.Friday.squat.set = fillDownSets(weeks[week-1].Week.Friday.squat.set[4]*increasePercent, 5);
+				weeks[week].Week.Friday.squat.set[5] = weeks[week].Week.Wednesday.squat.set[3];
+				weeks[week].Week.Friday.bench.set = fillDownSets(weeks[week-1].Week.Friday.bench.set[4]*increasePercent, 5);
+				weeks[week].Week.Friday.bench.set[5] = weeks[week].Week.Friday.bench.set[3];
+				weeks[week].Week.Friday.row.set = fillDownSets(weeks[week-1].Week.Friday.row.set[4]*increasePercent, 5);
+				weeks[week].Week.Friday.row.set[5] = weeks[week].Week.Friday.row.set[3];
+				weeks[week].Week.Friday.reps = [5,5,5,5,3,8];
 			}
 
 			$scope.printAll();
