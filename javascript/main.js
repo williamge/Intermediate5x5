@@ -2,6 +2,7 @@ var squatApp = angular.module( "squatApp", [] );
 
 squatApp.controller( "exercises", function( $scope, $http ) {
 
+	//TODO: replace this with a $resource call
 	$http.get('json/exercises.json').success( function( data ) {
 		$scope.exercisesList = data;
 	});
@@ -22,8 +23,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	$scope.resultsRows = [];
 	$scope.tables = [];
 
-	$scope.days = [];
-
+	//TODO: replace this with a $resource call
 	var daysPromise = $http.get('json/days.json')
 
 	$scope.printMaxes = function(oneRM) {
@@ -178,7 +178,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			$('#results').fadeIn('slow');
 
 
-
+			//TODO: find out what this even does or why you would want this
 			var empty = [[1,1],[1,1],[1,1],[1,1],[1,1]];
 
 			for (var i=0; i<programLength; i++) {
@@ -253,7 +253,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 			});
 
 
-			//TODO: Re-implement this functionality
+			//TODO: Re-implement this functionality but angularized
 			//$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);
 			//$('#results').fadeIn('2000');
 
