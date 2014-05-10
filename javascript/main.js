@@ -301,8 +301,9 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 
 			$scope.printAll();
 
-			$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);
-			$('#results').fadeIn('2000');
+			//TODO: Re-implement this functionality
+			//$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);
+			//$('#results').fadeIn('2000');
 
 
 		} else {

@@ -7,7 +7,6 @@ var weeks = new Array();
 
 $(document).ready(function() {
 	console.log('Document Ready');
-	$('#results').hide(); //Hide the results box
 	$('#error').hide();
 
 });
