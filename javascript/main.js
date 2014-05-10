@@ -72,18 +72,18 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		function printMonday(week) {
 			var output = {
 				name : "Monday",
-				data : [
+				exercises : [
 					{
 						class : "ex1",
-						data : $scope.exerciseData(week, "monday", "squat")
+						exercise : $scope.exerciseData(week, "monday", "squat")
 					},
 					{
 						class : "ex2",
-						data : $scope.exerciseData(week, "monday", "bench")
+						exercise : $scope.exerciseData(week, "monday", "bench")
 					},
 					{
 						class : "ex3",
-						data : $scope.exerciseData(week, "monday", "row")
+						exercise : $scope.exerciseData(week, "monday", "row")
 					}
 				],
 				assistanceWork : [
@@ -97,18 +97,18 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		function printWednesday(week) {
 			var output = {
 				name : "Wednesday",
-				data : [
+				exercises : [
 					{
 						class : "ex1",
-						data : $scope.exerciseData(week, "wednesday", "squat")
+						exercise : $scope.exerciseData(week, "wednesday", "squat")
 					},
 					{
 						class : "ex2",
-						data : $scope.exerciseData(week, "wednesday", "incline")
+						exercise : $scope.exerciseData(week, "wednesday", "incline")
 					},
 					{
 						class : "ex3",
-						data : $scope.exerciseData(week, "wednesday", "dead")
+						exercise : $scope.exerciseData(week, "wednesday", "dead")
 					}
 				],
 				assistanceWork : [
@@ -121,18 +121,18 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		function printFriday(week) {
 			var output = {
 				name : "Friday",
-				data : [
+				exercises : [
 					{
 						class : "ex1",
-						data : $scope.exerciseData(week, "friday", "squat")
+						exercise : $scope.exerciseData(week, "friday", "squat")
 					},
 					{
 						class : "ex2",
-						data : $scope.exerciseData(week, "friday", "bench")
+						exercise : $scope.exerciseData(week, "friday", "bench")
 					},
 					{
 						class : "ex3",
-						data : $scope.exerciseData(week, "friday", "row")
+						exercise : $scope.exerciseData(week, "friday", "row")
 					}
 				],
 				assistanceWork : [
@@ -148,7 +148,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 		var weekData = [ printMonday(week), printWednesday(week), printFriday(week) ];
 		return {
 			number : (week+1),
-			data : weekData
+			exerciseDays : weekData
 		};
 	}
 

@@ -176,7 +176,7 @@
 							Week {{week.number}}
 						</div>
 						<div class="dayContainer">
-							<div class="tableDivider" ng-repeat="day in week.data">
+							<div class="tableDivider" ng-repeat="day in week.exerciseDays">
 								<table class="dayTable {{day.name}}">
 									<tr>
 										<td 
@@ -188,18 +188,18 @@
 									</tr>
 									<tr>
 										<td 
-											ng-repeat="dayExercise in day.data" 
+											ng-repeat="dayExercise in day.exercises" 
 											class="{{dayExercise.class}}"
 										>
 											<table class="excerciseTable">
 												<tr>
-													<td class="liftType" colspan="2">{{dayExercise.data.liftName}}</td>
+													<td class="liftType" colspan="2">{{dayExercise.exercise.liftName}}</td>
 												</tr>
 												<tr>
 													<td class="repsCell">Reps</td>
 													<td class="weightCell">Weight</td>
 												</tr>
-												<tr ng-repeat="sets in dayExercise.data.sets">
+												<tr ng-repeat="sets in dayExercise.exercise.sets">
 													<td class="repsCell">
 														{{sets.reps}}
 													</td>
