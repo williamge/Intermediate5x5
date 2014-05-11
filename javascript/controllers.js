@@ -6,16 +6,18 @@ squatApp.controller( "exercises", [ "$scope", "$http", "exercisesService",
 	}
 ]);
 
-squatApp.controller( "options", 
-	function( $scope, $http ) {
+squatApp.controller( "options", [ "$scope", "$http", "exercisesService", 
+	function( $scope, $http, exercisesService ) {
 
 		$scope.showOptions = false;
+
+		$scope.options = exercisesService.options;
 
 		$scope.toggleOptions = function() {
 			$scope.showOptions = !$scope.showOptions;
 		};
 	}
-);
+]);
 
 squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService", 
 	function( $scope, $http, exercisesService ) {
@@ -224,10 +226,10 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			exerciseInputs["Incline Bench"] = exercisesService.getExercise( "Incline Bench" );
 
-			smallestIncrement = $('input:text[name=sIncrease]').val();
-			rampingPercent = $('input:text[name=sRamp]').val()/100;
-			programLength = $('input:text[name=pLength]').val();
-			increasePercent = $('input:text[name=wIncrease]').val();
+			smallestIncrement = exercisesService.options["Smallest Plate"];
+			rampingPercent = exercisesService.options["Ramping %"]/100;
+			programLength = exercisesService.options["Program Length"];
+			increasePercent = exercisesService.options["Increase %"];
 
 			increasePercent = (increasePercent/100)+1;
 			

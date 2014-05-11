@@ -86,36 +86,17 @@
 						<span>Advanced Options</span>
 					</div>
 					<div ng-show="showOptions" id="advanced">
-						<div class="divider">
-							<div class="floatLeft sideLabel labelText ">
-								Smallest Plate
-							</div>
-							<div class="floatLeft">
-								<input class="setField field" type="text" name="sIncrease" value="2.5">
-							</div>
-	 
-							<div class="floatLeft sideLabel labelText ">
-								Ramping %
-							</div>
-							<div class="floatLeft">
-								<input class="setField field" type="text" name="sRamp" value="12.5">
-							</div>
-						</div>
-						<div class="divider">
-							<div class="floatLeft sideLabel labelText ">
-								Program Length
-							</div>
-							<div class="floatLeft">
-								<input class="setField field" type="text" name="pLength" value="12">
-							</div>
-							<div class="floatLeft sideLabel labelText ">
-								Increase %
-							</div>
-							<div class="floatLeft">
-								<input class="setField field" type="text" name="wIncrease" value="2.5">
-							</div>
-						</div>
-
+						<ul>
+							<li class="divider" ng-repeat="(key, value) in options">
+								<span class="sideLabel labelText">
+									{{key}}
+								</span>
+								<input 
+									class="setField field" 
+									type="text"
+									ng-model="options[key]"
+								>
+						</ul>
 					</div>
 				</div>
 
@@ -235,6 +216,7 @@
 		</div>		
 
 		<script src="json/exercises.js"></script>
+		<script src="json/options.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
 		<script src="javascript/app.js"></script>
 		<script src="javascript/exercisesService.js"></script>

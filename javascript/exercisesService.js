@@ -2,6 +2,7 @@ squatApp.factory( "exercisesService", function() {
 
 	//Data needs to be loaded in the page for this service to function
 	var exerciseData = window._squatData.exercise;
+	var optionsData = window._squatData.options;
 
 	var exerciseTypes = [];
 	var exercises = {};
@@ -14,6 +15,7 @@ squatApp.factory( "exercisesService", function() {
 	return {
 		exercises: exerciseData,
 		exerciseTypes: exerciseTypes,
+		options: optionsData,
 		getExercise: function( name ) {
 			if ( !exercises[ name ] ) {
 				throw new Error("Exercise \"" + name + "\" not found");
