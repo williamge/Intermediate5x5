@@ -253,7 +253,9 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				var incMax = repMaxes[ "Incline Bench" ].oneRep;
 
 				$scope.printMaxes( repMaxes );
-				$('#results').fadeIn('slow');
+
+				//TODO: bring this back but angularized
+				//$('#results').fadeIn('slow');
 
 
 				//TODO: find out what this even does or why you would want this
