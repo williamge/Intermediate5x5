@@ -25,17 +25,19 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 		//TODO: replace this with a $resource call
 		var daysPromise = $http.get('json/days.json')
 
-		$scope.printMaxes = function(oneRM) {
+		$scope.printMaxes = function( repMaxes ) {
 			$scope.resultsRows = [];
 
 			var exercises = exercisesService.exerciseTypes;
 
-			for (var exRep in oneRM) {
+			for (var exRepKey in repMaxes) {
+				var exRep = repMaxes[ exRepKey ];
+
 				$scope.resultsRows.push(
 					{
-						lift : exRep,
-						oneRep : digitRound( oneRM[ exRep ], 0 ),
-						fiveRep : digitRound( calcxRM( oneRM[ exRep ], 5 ), 0 )
+						lift : exRepKey,
+						oneRep : digitRound(  exRep.oneRep , 0 ),
+						fiveRep : digitRound( exRep.fiveRep , 0 )
 					}
 				);		
 			}
@@ -231,8 +233,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			
 			console.log(increasePercent);
 
-			var oneRM = new Array;   // Create array to hold 1 rep maxes once calculated
-
 			var inputIsClean = true;   // Flag that's tripped if user input isn't valid
 
 			$scope.errors = exercisesService.checkInputs();
@@ -246,19 +246,15 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			if (inputIsClean == true) {
 				$('#error').hide();
 
-				oneRM = {};
-				for (var i = 0; i < exerciseTypes.length; i++) {
-					oneRM[ exerciseTypes[ i ] ] = calc1RM( exerciseInputs[ exerciseTypes[ i ] ] );
-				}
+				repMaxes = exercisesService.calcRepMaxes();
 
-				console.info("Maxes = " + oneRM);
-				var squatMax = oneRM[ "Squat" ];
-				var benchMax = oneRM[ "Bench Press" ];
-				var deadMax = oneRM[ "Deadlift" ];
-				var rowMax = oneRM[ "Barbell Row" ];
-				var incMax = oneRM[ "Incline Bench" ];
+				var squatMax = repMaxes[ "Squat" ].oneRep;
+				var benchMax = repMaxes[ "Bench Press" ].oneRep;
+				var deadMax = repMaxes[ "Deadlift" ].oneRep;
+				var rowMax = repMaxes[ "Barbell Row" ].oneRep;
+				var incMax = repMaxes[ "Incline Bench" ].oneRep;
 
-				$scope.printMaxes(oneRM);
+				$scope.printMaxes( repMaxes );
 				$('#results').fadeIn('slow');
 
 

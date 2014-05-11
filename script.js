@@ -35,13 +35,6 @@ function fillDownSets(topSet, sets) {
 	return setArray;
 };
 
-function calc1RM ( exercise ) {
-	var max = exercise.weight/(1.0278-(0.0278*exercise.reps));
-	max = max*(1+((exercise.sets-1)*0.0235));
-	max = max.toFixed(1);
-	return max;
-};
-
 function calcxRM (weight, reps) {
 	return weight*(1.0278-(0.0278*reps));
 };
