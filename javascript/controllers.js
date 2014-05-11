@@ -1,14 +1,10 @@
 
-squatApp.controller( "exercises", 
-	function( $scope, $http ) {
+squatApp.controller( "exercises", [ "$scope", "$http", "exercisesService",
+	function( $scope, $http, exercisesService ) {
 
-		//TODO: replace this with a $resource call
-		$http.get('json/exercises.json').success( function( data ) {
-			$scope.exercisesList = data;
-		});
-
+		$scope.exercisesList = exercisesService.exercises;
 	}
-);
+]);
 
 squatApp.controller( "options", 
 	function( $scope, $http ) {

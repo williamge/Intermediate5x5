@@ -1,4 +1,6 @@
-[
+var _squatData = {
+
+	"exercise" : [
 		{
 			"type" : "Squat",
 			"prefix" : "s",
@@ -34,4 +36,5 @@
 			"defaultReps": 5,
 			"defaultSets": 1
 		}
-]
+	]
+};
