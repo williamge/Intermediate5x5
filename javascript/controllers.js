@@ -30,14 +30,14 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			var exercises = exercisesService.exerciseTypes;
 
-			for (var i=0; i < exercises.length; i++){
+			for (var exRep in oneRM) {
 				$scope.resultsRows.push(
 					{
-						lift : exercises[i],
-						oneRep : digitRound(oneRM[i], 0),
-						fiveRep : digitRound(calcxRM(oneRM[i], 5), 0)
+						lift : exRep,
+						oneRep : digitRound( oneRM[ exRep ], 0 ),
+						fiveRep : digitRound( calcxRM( oneRM[ exRep ], 5 ), 0 )
 					}
-				);			
+				);		
 			}
 
 		};
@@ -208,7 +208,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 		$scope.submit = function() {
 			console.info('Submit button clicked'); // logging
 
-			/* Create Arrays to hold all the variables from the input boxes and pull the variables from the boxes */
+			var exerciseTypes = exercisesService.exerciseTypes;
 
 			var exerciseInputs = {};
 
@@ -248,18 +248,17 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			if (inputIsClean == true) {
 				$('#error').hide();
 
-				oneRM[0] = calc1RM( exerciseInputs["Squat"] ); //squat
-				oneRM[1] = calc1RM( exerciseInputs["Bench Press"] ); //squat
-				oneRM[2] = calc1RM( exerciseInputs["Deadlift"] ); //squat
-				oneRM[3] = calc1RM( exerciseInputs["Barbell Row"] ); //squat
-				oneRM[4] = calc1RM( exerciseInputs["Incline Bench"] ); //squat
+				oneRM = {};
+				for (var i = 0; i < exerciseTypes.length; i++) {
+					oneRM[ exerciseTypes[ i ] ] = calc1RM( exerciseInputs[ exerciseTypes[ i ] ] );
+				}
 
 				console.info("Maxes = " + oneRM);
-				var squatMax = oneRM[0];
-				var benchMax = oneRM[1];
-				var deadMax = oneRM[2];
-				var rowMax = oneRM[3];
-				var incMax = oneRM[4];
+				var squatMax = oneRM[ "Squat" ];
+				var benchMax = oneRM[ "Bench Press" ];
+				var deadMax = oneRM[ "Deadlift" ];
+				var rowMax = oneRM[ "Barbell Row" ];
+				var incMax = oneRM[ "Incline Bench" ];
 
 				$scope.printMaxes(oneRM);
 				$('#results').fadeIn('slow');
