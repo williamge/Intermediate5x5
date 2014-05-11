@@ -37,9 +37,9 @@ function fillDownSets(topSet, sets) {
 	return setArray;
 };
 
-function calc1RM (weight, reps, sets) {
-	var max = weight/(1.0278-(0.0278*reps));
-	max = max*(1+((sets-1)*0.0235));
+function calc1RM ( exercise ) {
+	var max = exercise.weight/(1.0278-(0.0278*exercise.reps));
+	max = max*(1+((exercise.sets-1)*0.0235));
 	max = max.toFixed(1);
 	return max;
 };
@@ -57,32 +57,32 @@ function digitRound(num, digit) {
 	return Math.round(num / digit) * digit;
 }
 
-function checkInput(name, weight, reps, sets) {
-	if (!isNaN(weight) == true) {
-		console.info(name + " weight is a number");
+function checkInput( exercise ) {
+	if (!isNaN(exercise.weight) == true) {
+		console.info(exercise.type + " weight is a number");
 	} else {
-		console.warn(name + " weight is not a number");
+		console.warn(exercise.type + " weight is not a number");
 		$('#output').removeClass('output');
 		$('#output').addClass('error');
-		$('#output').html(name + " weight is not a number!");
+		$('#output').html(exercise.type + " weight is not a number!");
 		return(false);
 	};
-	if (!isNaN(reps) == true) {
-		console.info(name + " reps is a number");
+	if (!isNaN(exercise.reps) == true) {
+		console.info(exercise.type + " reps is a number");
 	} else {
-		console.warn(name + " reps is not a number");
+		console.warn(exercise.type + " reps is not a number");
 		$('#output').removeClass('output');
 		$('#output').addClass('error');
-		$('#output').html(name + " reps is not a number!");
+		$('#output').html(exercise.type + " reps is not a number!");
 		return(false);
 	};
-	if (!isNaN(sets) == true) {
-		console.info(name + " sets is a number");
+	if (!isNaN(exercise.sets) == true) {
+		console.info(exercise.type + " sets is a number");
 	} else {
-		console.warn(name + " sets is not a number");
+		console.warn(exercise.type + " sets is not a number");
 		$('#output').removeClass('output');
 		$('#output').addClass('error');
-		$('#output').html(name + " sets is not a number!");
+		$('#output').html(exercise.type + " sets is not a number!");
 		return(false);
 	};
 };

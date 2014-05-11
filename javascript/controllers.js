@@ -212,35 +212,15 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			var exerciseInputs = {};
 
-			exerciseInputs["Squat"] = {
-				weight: $('input:text[name=sWeight]').val(),
-				reps: $('input:text[name=sReps]').val(),
-				sets: $('input:text[name=sSets]').val()
-			}
+			exerciseInputs["Squat"] = exercisesService.getExercise( "Squat" );
 
-			exerciseInputs["Bench Press"] = {
-				weight: $('input:text[name=bWeight]').val(),
-				reps: $('input:text[name=bReps]').val(),
-				sets: $('input:text[name=bSets]').val()
-			}
+			exerciseInputs["Bench Press"] = exercisesService.getExercise( "Bench Press" );
 
-			exerciseInputs["Deadlift"] = {
-				weight: $('input:text[name=dWeight]').val(),
-				reps: $('input:text[name=dReps]').val(),
-				sets: $('input:text[name=dSets]').val()
-			}
+			exerciseInputs["Deadlift"] = exercisesService.getExercise( "Deadlift" );
 
-			exerciseInputs["Barbell Row"] = {
-				weight: $('input:text[name=rWeight]').val(),
-				reps: $('input:text[name=rReps]').val(),
-				sets: $('input:text[name=rSets]').val()
-			}
+			exerciseInputs["Barbell Row"] = exercisesService.getExercise( "Barbell Row" );
 
-			exerciseInputs["Incline Bench"] = {
-				weight: $('input:text[name=iWeight]').val(),
-				reps: $('input:text[name=iReps]').val(),
-				sets: $('input:text[name=iSets]').val()
-			}
+			exerciseInputs["Incline Bench"] = exercisesService.getExercise( "Incline Bench" );
 
 			smallestIncrement = $('input:text[name=sIncrease]').val();
 			rampingPercent = $('input:text[name=sRamp]').val()/100;
@@ -257,47 +237,22 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			// Validate all user input	
 			if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0), increasePercent) == false 
-				|| checkInput(	"Squat", 
-								exerciseInputs["Squat"].weight, 
-								exerciseInputs["Squat"].reps, 
-								exerciseInputs["Squat"].sets) == false 
-				|| checkInput(	"Bench Press", 
-								exerciseInputs["Bench Press"].weight, 
-								exerciseInputs["Bench Press"].reps, 
-								exerciseInputs["Bench Press"].sets) == false 
-				|| checkInput(	"Deadlift", 
-								exerciseInputs["Deadlift"].weight, 
-								exerciseInputs["Deadlift"].reps, 
-								exerciseInputs["Deadlift"].sets) == false 
-				|| checkInput(	"Barbell Row", 
-								exerciseInputs["Barbell Row"].weight, 
-								exerciseInputs["Barbell Row"].reps, 
-								exerciseInputs["Barbell Row"].sets) == false 
-				||	checkInput(	"Incline Bench", 
-								exerciseInputs["Incline Bench"].weight, 
-								exerciseInputs["Incline Bench"].reps, 
-								exerciseInputs["Incline Bench"].sets) == false) {
+				|| checkInput( exerciseInputs["Squat"] ) == false 
+				|| checkInput( exerciseInputs["Bench Press"] ) == false 
+				|| checkInput( exerciseInputs["Deadlift"] ) == false 
+				|| checkInput( exerciseInputs["Barbell Row"] ) == false 
+				|| checkInput( exerciseInputs["Incline Bench"] ) == false) {
 				inputIsClean = false;
 			};
 
 			if (inputIsClean == true) {
 				$('#error').hide();
-				//TODO: use a hash map instead, this way is weird
-				oneRM[0] = calc1RM( exerciseInputs["Squat"].weight, 
-									exerciseInputs["Squat"].reps, 
-									exerciseInputs["Squat"].sets); //squat
-				oneRM[1] = calc1RM( exerciseInputs["Bench Press"].weight, 
-									exerciseInputs["Bench Press"].reps, 
-									exerciseInputs["Bench Press"].sets); //squat
-				oneRM[2] = calc1RM( exerciseInputs["Deadlift"].weight, 
-									exerciseInputs["Deadlift"].reps, 
-									exerciseInputs["Deadlift"].sets); //squat
-				oneRM[3] = calc1RM( exerciseInputs["Barbell Row"].weight, 
-									exerciseInputs["Barbell Row"].reps, 
-									exerciseInputs["Barbell Row"].sets); //squat
-				oneRM[4] = calc1RM( exerciseInputs["Incline Bench"].weight, 
-									exerciseInputs["Incline Bench"].reps, 
-									exerciseInputs["Incline Bench"].sets); //squat
+
+				oneRM[0] = calc1RM( exerciseInputs["Squat"] ); //squat
+				oneRM[1] = calc1RM( exerciseInputs["Bench Press"] ); //squat
+				oneRM[2] = calc1RM( exerciseInputs["Deadlift"] ); //squat
+				oneRM[3] = calc1RM( exerciseInputs["Barbell Row"] ); //squat
+				oneRM[4] = calc1RM( exerciseInputs["Incline Bench"] ); //squat
 
 				console.info("Maxes = " + oneRM);
 				var squatMax = oneRM[0];
