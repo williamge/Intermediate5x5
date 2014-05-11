@@ -54,7 +54,8 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 								name : [name of the day]
 								exercises : [list of names of exercises]
 								assistanceWork: [list of additional exercises not to be calculated]
-							}
+							},
+						(Program) weeks_: program to list the weeks of exercise for
 			Returns: Object of form {
 				number: [number of the calculated week],
 				exerciseDays: [
@@ -75,7 +76,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				]
 			} 
 		 */ 
-		$scope.getWeek = function( week, days ) {
+		$scope.getWeek = function( week, days, weeks_ ) {
 
 			//TODO: this is ridiculous, the output for this needs to be simplified
 			/* 	Private helper function to form a final list of exercises for a day.
@@ -85,6 +86,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 							(list of [string]) exercises: list of name of exercises for that day
 							(list of [string]) assistanceWork: list of additional work for that
 							 day, no calculations will be made for these workouts
+							(Program) weeks_: program to list the weeks of exercise for
 				
 				Returns: Object of form {
 					name: [name of exercise],
@@ -101,14 +103,14 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 					assistanceWork: [list of exercises in addition to the calculated ones]
 				}
 			 */
-			var getDayExercise = function( week, dayName, exercises, assistanceWork) {
+			var getDayExercise = function( week, dayName, exercises, assistanceWork, weeks_) {
 				var exercisesList = [];
 
 				for (var i = 0; i < exercises.length; i++) {
 					exercisesList.push( 
 						{
 							class : "ex" + i,
-							exercise : $scope.exerciseData(week, dayName, exercises[i])
+							exercise : $scope.exerciseData(week, dayName, exercises[i], weeks_)
 						}
 					);
 				}
@@ -124,7 +126,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			for (var i = 0; i < days.length; i++) {
 				weekData.push( 
-					getDayExercise(	week, days[i].name, days[i].exercises, days[i].assistanceWork )
+					getDayExercise(	week, days[i].name, days[i].exercises, days[i].assistanceWork, weeks_ )
 				);
 			}
 
@@ -138,6 +140,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			Arguments: 	(int) week: numbered week to calculate
 						(string) day: name of day to calculate
 						(string) exercise: name of exercise to calculate
+						(Program) weeks_: program to list the weeks of exercise for
 			Returns: Object of form {
 				liftName: [name of exercise],
 				sets: [
@@ -148,20 +151,20 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				]
 			} 
 		 */
-		$scope.exerciseData = function( week, day, exercise ) {
+		$scope.exerciseData = function( week, day, exercise, weeks_ ) {
 			var sets = [];
 
-			for (i=0; i<weeks[week].Week[day][exercise].set.length; i++) {
+			for (i=0; i<weeks_[week].Week[day][exercise].set.length; i++) {
 				sets.push( 
 					{
-						reps: weeks[week].Week[day].reps[i],
+						reps: weeks_[week].Week[day].reps[i],
 						weight: xRound(weeks[week].Week[day][exercise].set[i], smallestIncrement)
 					}
 				)
 			};
 
 			return {
-				liftName : weeks[week].Week[day][exercise].liftName,
+				liftName : weeks_[week].Week[day][exercise].liftName,
 				sets : sets
 			};
 		};
@@ -173,6 +176,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 								exercises : [list of names of exercises]
 								assistanceWork: [list of additional exercises not to be calculated]
 							}
+						(Program) weeks_: program to list the weeks of exercise for
 			Returns: List of Objects of form {
 					number: [number of the calculated week],
 					exerciseDays: [
@@ -193,11 +197,11 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 					]
 				} 
 		 */
-		$scope.getTables = function( days ) {
+		$scope.getTables = function( days, weeks_ ) {
 			var tables = [];
 			for (var i=0; i<programLength; i++) {
 				console.info(i);
-				tables.push( $scope.getWeek( i, days ) );
+				tables.push( $scope.getWeek( i, days, weeks_ ) );
 			};
 
 			return tables;
@@ -329,7 +333,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				}
 
 				daysPromise.success( function( data ) {
-					$scope.tables = $scope.getTables( data );
+					$scope.tables = $scope.getTables( data, weeks );
 				});
 
 
