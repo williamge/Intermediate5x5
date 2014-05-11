@@ -212,20 +212,21 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 		$scope.submit = function() {
 			console.info('Submit button clicked'); // logging
 
+			$scope.tables = [];
+			$scope.resultsRows = [];
+
 			var exerciseTypes = exercisesService.exerciseTypes;
 
 			var exerciseInputs = {};
 
 			exerciseInputs["Squat"] = exercisesService.getExercise( "Squat" );
-
 			exerciseInputs["Bench Press"] = exercisesService.getExercise( "Bench Press" );
-
 			exerciseInputs["Deadlift"] = exercisesService.getExercise( "Deadlift" );
-
 			exerciseInputs["Barbell Row"] = exercisesService.getExercise( "Barbell Row" );
-
 			exerciseInputs["Incline Bench"] = exercisesService.getExercise( "Incline Bench" );
 
+
+			//TODO: turns out these are globals, gotta fix that
 			smallestIncrement = exercisesService.options["Smallest Plate"];
 			rampingPercent = exercisesService.options["Ramping %"]/100;
 			programLength = exercisesService.options["Program Length"];
@@ -235,18 +236,13 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			
 			console.log(increasePercent);
 
-			var inputIsClean = true;   // Flag that's tripped if user input isn't valid
-
 			$scope.errors = exercisesService.checkInputs();
+			$scope.errors = $scope.errors.concat( exercisesService.checkOptions() );
 
 			// Validate all user input	
-			if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0), increasePercent) == false 
-				|| $scope.errors.length ) {
-					inputIsClean = false;
-			};
-
-			if (inputIsClean == true) {
-				$('#error').hide();
+			if ( $scope.errors.length ) {
+				console.log("BAD INPUT");
+			} else {
 
 				repMaxes = exercisesService.calcRepMaxes();
 
@@ -340,8 +336,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				//$('#results').fadeIn('2000');
 
 
-			} else {
-				console.log("BAD INPUT");
 			};
 		};
 	}

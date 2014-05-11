@@ -12,6 +12,25 @@ squatApp.factory( "exercisesService", function() {
 		exercises[ exerciseData[i].type ] = exerciseData[i];
 	}
 
+	var checkForNaN = function( number, name, warn ) {
+		var output;
+
+		if ( isNaN( number )  ) {
+			output = name + " is not a number!";
+			if ( warn ) {
+				console.warn( name + " is not a number!" );
+			}
+		}
+
+		return output;
+	}
+
+	var pushValue = function( value, array ) {
+		if ( value ) {
+			array.push( value );
+		}
+	}
+
 	return {
 		exercises: exerciseData,
 		exerciseTypes: exerciseTypes,
@@ -28,19 +47,60 @@ squatApp.factory( "exercisesService", function() {
 
 			for ( var exerciseKey in exercises ) {
 				var exercise = exercises[ exerciseKey ];
+				var lookupType = [ "weight", "reps", "sets" ];
 
-				if ( isNaN( exercise.weight ) ) {
-					errors.push( exercise.type + " weight is not a number!" );
-					console.warn( exercise.type + " weight is not a number" );
+				for ( var i in lookupType ) {
+					pushValue( 
+						checkForNaN( 
+							exercise[ lookupType[ i ] ], 
+							"[" + exercise.type + "] " + lookupType[ i ],
+							true 
+						),
+						errors 
+					);
 				}
-				if ( isNaN( exercise.reps ) ) {
-					errors.push( exercise.type + " reps is not a number!" );
-					console.warn( exercise.type + " reps is not a number" );
-				}
-				if ( isNaN( exercise.sets ) ) {
-					errors.push( exercise.type + " sets is not a number!" );
-					console.warn( exercise.type + " sets is not a number" );
-				}
+			}
+
+			return errors;
+		},
+		checkOptions: function() {
+			var errors = [];
+
+			for ( var optionKey in optionsData ) {
+				pushValue( 
+					checkForNaN( 
+						optionsData[ optionKey ],
+						optionKey,
+						true
+					),
+					errors
+				);
+			}
+
+			if ( errors.length ) {
+				return errors;
+			}		
+
+			if ( optionsData["Ramping %"] /100 > 0.20 || optionsData["Ramping %"] /100 < 0.001) {
+				errors.push( "Using that value as a ramping percentage is highly unrecommended!" );
+				return errors;
+			}
+
+			if ( optionsData["Smallest Plate"] > 25 ) {
+				$('#errorOutput').html("The smallest plate you have is a " + optionsData["Smallest Plate"] + "?");
+				return errors;
+			} else {
+				optionsData["Smallest Plate"] *= 2 ;
+			}
+
+			if (digitRound( optionsData["Program Length"] , 0) > 18) {
+				$('#errorOutput').html("Running this program for more than 18 weeks without a reset is very ambitious.");
+				return errors;
+			}
+
+			if ( optionsData["Increase %"] > 1.10) {
+				$('#errorOutput').html("Using that value as an increase percentage is highly unrecommended!");
+				return errors;
 			}
 
 			return errors;
