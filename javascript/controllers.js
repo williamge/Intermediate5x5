@@ -1,4 +1,3 @@
-var squatApp = angular.module( "squatApp", [] );
 
 squatApp.controller( "exercises", function( $scope, $http ) {
 
