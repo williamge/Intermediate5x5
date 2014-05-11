@@ -17,8 +17,8 @@ squatApp.controller( "options",
 	}
 );
 
-squatApp.controller( "mainCtrl", 
-	function( $scope, $http ) {
+squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService", 
+	function( $scope, $http, exercisesService ) {
 		$scope.resultsRows = [];
 		$scope.tables = [];
 
@@ -27,8 +27,8 @@ squatApp.controller( "mainCtrl",
 
 		$scope.printMaxes = function(oneRM) {
 			$scope.resultsRows = [];
-			//TODO: use the values loaded from exercises.json instead
-			var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
+
+			var exercises = exercisesService.exerciseTypes;
 
 			for (var i=0; i < exercises.length; i++){
 				$scope.resultsRows.push(
@@ -363,5 +363,5 @@ squatApp.controller( "mainCtrl",
 			};
 		};
 	}
-);
+]);
 
