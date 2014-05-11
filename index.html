@@ -51,7 +51,7 @@
 										class="weightField field" 
 										type="text" 
 										name="{{exercise.prefix}}Weight" 
-										value="{{exercise.defaultWeight}}"
+										ng-model="exercise.defaultWeight"
 									>
 								</li>
 								<li class="multiSign">&times;</li>
@@ -60,7 +60,7 @@
 										class="repField field" 
 										type="text" 
 										name="{{exercise.prefix}}Reps" 
-										value="{{exercise.defaultReps}}"
+										ng-model="exercise.defaultReps"
 									>
 								</li>
 								<li class="multiSign">&times;</li>
@@ -69,7 +69,7 @@
 										class="setField field" 
 										type="text" 
 										name="{{exercise.prefix}}Sets" 
-										value="{{exercise.defaultSets}}"
+										ng-model="exercise.defaultSets"
 									>
 								</li>
 							</ul>
