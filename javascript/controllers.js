@@ -210,35 +210,37 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			/* Create Arrays to hold all the variables from the input boxes and pull the variables from the boxes */
 
-			var squatInput = new Array;
-			squatInput[0] = 'Squat';
-			squatInput[1] = $('input:text[name=sWeight]').val();
-			squatInput[2] = $('input:text[name=sReps]').val();
-			squatInput[3] = $('input:text[name=sSets]').val();
+			var exerciseInputs = {};
 
-			var benchInput = new Array;
-			benchInput[0] = 'Bench';
-			benchInput[1] = $('input:text[name=bWeight]').val();
-			benchInput[2] = $('input:text[name=bReps]').val();
-			benchInput[3] = $('input:text[name=bSets]').val();
+			exerciseInputs["Squat"] = {
+				weight: $('input:text[name=sWeight]').val(),
+				reps: $('input:text[name=sReps]').val(),
+				sets: $('input:text[name=sSets]').val()
+			}
 
-			var deadInput = new Array;
-			deadInput[0] = 'Deadlift';
-			deadInput[1] = $('input:text[name=dWeight]').val();
-			deadInput[2] = $('input:text[name=dReps]').val();
-			deadInput[3] = $('input:text[name=dSets]').val();
+			exerciseInputs["Bench Press"] = {
+				weight: $('input:text[name=bWeight]').val(),
+				reps: $('input:text[name=bReps]').val(),
+				sets: $('input:text[name=bSets]').val()
+			}
 
-			var rowInput = new Array;
-			rowInput[0] = 'Row';
-			rowInput[1] = $('input:text[name=rWeight]').val();
-			rowInput[2] = $('input:text[name=rReps]').val();
-			rowInput[3] = $('input:text[name=rSets]').val();
+			exerciseInputs["Deadlift"] = {
+				weight: $('input:text[name=dWeight]').val(),
+				reps: $('input:text[name=dReps]').val(),
+				sets: $('input:text[name=dSets]').val()
+			}
 
-			var inclineInput = new Array;
-			inclineInput[0] = 'Incline';
-			inclineInput[1] = $('input:text[name=iWeight]').val();
-			inclineInput[2] = $('input:text[name=iReps]').val();
-			inclineInput[3] = $('input:text[name=iSets]').val();
+			exerciseInputs["Barbell Row"] = {
+				weight: $('input:text[name=rWeight]').val(),
+				reps: $('input:text[name=rReps]').val(),
+				sets: $('input:text[name=rSets]').val()
+			}
+
+			exerciseInputs["Incline Bench"] = {
+				weight: $('input:text[name=iWeight]').val(),
+				reps: $('input:text[name=iReps]').val(),
+				sets: $('input:text[name=iSets]').val()
+			}
 
 			smallestIncrement = $('input:text[name=sIncrease]').val();
 			rampingPercent = $('input:text[name=sRamp]').val()/100;
@@ -254,18 +256,48 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			var inputIsClean = true;   // Flag that's tripped if user input isn't valid
 
 			// Validate all user input	
-			if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0), increasePercent) == false || checkInput(squatInput[0], squatInput[1], squatInput[2], squatInput[3]) == false || checkInput(benchInput[0], benchInput[1], benchInput[2], benchInput[3]) == false || checkInput(deadInput[0], deadInput[1], deadInput[2], deadInput[3]) == false || checkInput(rowInput[0], rowInput[1], rowInput[2], rowInput[3]) == false ||	checkInput(inclineInput[0], inclineInput[1], inclineInput[2], inclineInput[3]) == false) {
+			if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0), increasePercent) == false 
+				|| checkInput(	"Squat", 
+								exerciseInputs["Squat"].weight, 
+								exerciseInputs["Squat"].reps, 
+								exerciseInputs["Squat"].sets) == false 
+				|| checkInput(	"Bench Press", 
+								exerciseInputs["Bench Press"].weight, 
+								exerciseInputs["Bench Press"].reps, 
+								exerciseInputs["Bench Press"].sets) == false 
+				|| checkInput(	"Deadlift", 
+								exerciseInputs["Deadlift"].weight, 
+								exerciseInputs["Deadlift"].reps, 
+								exerciseInputs["Deadlift"].sets) == false 
+				|| checkInput(	"Barbell Row", 
+								exerciseInputs["Barbell Row"].weight, 
+								exerciseInputs["Barbell Row"].reps, 
+								exerciseInputs["Barbell Row"].sets) == false 
+				||	checkInput(	"Incline Bench", 
+								exerciseInputs["Incline Bench"].weight, 
+								exerciseInputs["Incline Bench"].reps, 
+								exerciseInputs["Incline Bench"].sets) == false) {
 				inputIsClean = false;
 			};
 
 			if (inputIsClean == true) {
 				$('#error').hide();
 				//TODO: use a hash map instead, this way is weird
-				oneRM[0] = calc1RM(squatInput[1], squatInput[2], squatInput[3]); //squat
-				oneRM[1] = calc1RM(benchInput[1], benchInput[2], benchInput[3]); //bench
-				oneRM[2] = calc1RM(deadInput[1], deadInput[2], deadInput[3]); //dead
-				oneRM[3] = calc1RM(rowInput[1], rowInput[2], rowInput[3]); //row
-				oneRM[4] = calc1RM(inclineInput[1], inclineInput[2], inclineInput[3]); //incline
+				oneRM[0] = calc1RM( exerciseInputs["Squat"].weight, 
+									exerciseInputs["Squat"].reps, 
+									exerciseInputs["Squat"].sets); //squat
+				oneRM[1] = calc1RM( exerciseInputs["Bench Press"].weight, 
+									exerciseInputs["Bench Press"].reps, 
+									exerciseInputs["Bench Press"].sets); //squat
+				oneRM[2] = calc1RM( exerciseInputs["Deadlift"].weight, 
+									exerciseInputs["Deadlift"].reps, 
+									exerciseInputs["Deadlift"].sets); //squat
+				oneRM[3] = calc1RM( exerciseInputs["Barbell Row"].weight, 
+									exerciseInputs["Barbell Row"].reps, 
+									exerciseInputs["Barbell Row"].sets); //squat
+				oneRM[4] = calc1RM( exerciseInputs["Incline Bench"].weight, 
+									exerciseInputs["Incline Bench"].reps, 
+									exerciseInputs["Incline Bench"].sets); //squat
 
 				console.info("Maxes = " + oneRM);
 				var squatMax = oneRM[0];
