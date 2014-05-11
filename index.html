@@ -156,14 +156,20 @@
 				</div>
 			</div>
 
-			<div class="bubble" id="error">
+			<div class="bubble" id="error" ng-show="errors.length">
 				<div id="header">
 					Warning
 				</div>
 
-				<div class="divider" id="errorOutput">
+				<ul class="divider" id="errorOutput">
+					<li 
+						class="divider"
+						ng-repeat="error in errors"
+					>
+						{{error}}
+					</li>
 
-				</div>
+				</ul>
 				<div id="footer">
 					
 				</div>

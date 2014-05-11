@@ -235,14 +235,12 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 			var inputIsClean = true;   // Flag that's tripped if user input isn't valid
 
+			$scope.errors = exercisesService.checkInputs();
+
 			// Validate all user input	
 			if (checkSmallVars(smallestIncrement, rampingPercent, digitRound(programLength, 0), increasePercent) == false 
-				|| checkInput( exerciseInputs["Squat"] ) == false 
-				|| checkInput( exerciseInputs["Bench Press"] ) == false 
-				|| checkInput( exerciseInputs["Deadlift"] ) == false 
-				|| checkInput( exerciseInputs["Barbell Row"] ) == false 
-				|| checkInput( exerciseInputs["Incline Bench"] ) == false) {
-				inputIsClean = false;
+				|| $scope.errors.length ) {
+					inputIsClean = false;
 			};
 
 			if (inputIsClean == true) {

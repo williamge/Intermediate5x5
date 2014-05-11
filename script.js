@@ -7,8 +7,6 @@ var weeks = new Array();
 
 $(document).ready(function() {
 	console.log('Document Ready');
-	$('#error').hide();
-
 });
 
 /*------------------- CONSTRUCTORS ----------------------------*/
@@ -56,36 +54,6 @@ function digitRound(num, digit) {
 	digit = Math.pow(10, digit);
 	return Math.round(num / digit) * digit;
 }
-
-function checkInput( exercise ) {
-	if (!isNaN(exercise.weight) == true) {
-		console.info(exercise.type + " weight is a number");
-	} else {
-		console.warn(exercise.type + " weight is not a number");
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html(exercise.type + " weight is not a number!");
-		return(false);
-	};
-	if (!isNaN(exercise.reps) == true) {
-		console.info(exercise.type + " reps is a number");
-	} else {
-		console.warn(exercise.type + " reps is not a number");
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html(exercise.type + " reps is not a number!");
-		return(false);
-	};
-	if (!isNaN(exercise.sets) == true) {
-		console.info(exercise.type + " sets is a number");
-	} else {
-		console.warn(exercise.type + " sets is not a number");
-		$('#output').removeClass('output');
-		$('#output').addClass('error');
-		$('#output').html(exercise.type + " sets is not a number!");
-		return(false);
-	};
-};
 
 function checkSmallVars(smallest, ramp, length, increase) {
 	if (!isNaN(smallest) == true) {

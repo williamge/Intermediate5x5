@@ -19,6 +19,29 @@ squatApp.factory( "exercisesService", function() {
 				throw new Error("Exercise \"" + name + "\" not found");
 			}
 			return exercises[ name ];
+		},
+		checkInputs: function() {
+
+			var errors = [];
+
+			for ( var exerciseKey in exercises ) {
+				var exercise = exercises[ exerciseKey ];
+
+				if ( isNaN( exercise.weight ) ) {
+					errors.push( exercise.type + " weight is not a number!" );
+					console.warn( exercise.type + " weight is not a number" );
+				}
+				if ( isNaN( exercise.reps ) ) {
+					errors.push( exercise.type + " reps is not a number!" );
+					console.warn( exercise.type + " reps is not a number" );
+				}
+				if ( isNaN( exercise.sets ) ) {
+					errors.push( exercise.type + " sets is not a number!" );
+					console.warn( exercise.type + " sets is not a number" );
+				}
+			}
+
+			return errors;
 		}
 	}
 });
