@@ -26,6 +26,7 @@ squatApp.controller( "mainCtrl", function( $scope, $http ) {
 	var daysPromise = $http.get('json/days.json')
 
 	$scope.printMaxes = function(oneRM) {
+		$scope.resultsRows = [];
 		//TODO: use the values loaded from exercises.json instead
 		var exercises = [ "Squat", "Bench", "Deadlift", "Row", "Incline" ];
 
