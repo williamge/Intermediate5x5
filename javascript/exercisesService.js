@@ -118,7 +118,7 @@ squatApp.factory( "exercisesService", function() {
 				return errors;
 			}
 
-			if ( optionsData["Increase %"] > 1.10) {
+			if ( optionsData["Increase %"] /100 > 1.10) {
 				errors.push( "Using that value as an increase percentage is highly unrecommended!" );
 				return errors;
 			}
