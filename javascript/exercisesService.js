@@ -107,19 +107,19 @@ squatApp.factory( "exercisesService", function() {
 			}
 
 			if ( optionsData["Smallest Plate"] > 25 ) {
-				$('#errorOutput').html("The smallest plate you have is a " + optionsData["Smallest Plate"] + "?");
+				errors.push( "The smallest plate you have is a " + optionsData["Smallest Plate"] + "?" );
 				return errors;
 			} else {
 				optionsData["Smallest Plate"] *= 2 ;
 			}
 
 			if (digitRound( optionsData["Program Length"] , 0) > 18) {
-				$('#errorOutput').html("Running this program for more than 18 weeks without a reset is very ambitious.");
+				errors.push( "Running this program for more than 18 weeks without a reset is very ambitious." );
 				return errors;
 			}
 
 			if ( optionsData["Increase %"] > 1.10) {
-				$('#errorOutput').html("Using that value as an increase percentage is highly unrecommended!");
+				errors.push( "Using that value as an increase percentage is highly unrecommended!" );
 				return errors;
 			}
 
