@@ -91,7 +91,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				Returns: Object of form {
 					name: [name of exercise],
 					exercises: [
-						class: [name of CSS class],
 						exercise: {
 							liftName: [exercise name],
 							sets: [
@@ -109,7 +108,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				for (var i = 0; i < exercises.length; i++) {
 					exercisesList.push( 
 						{
-							class : "ex" + i,
 							exercise : $scope.exerciseData(week, dayName, exercises[i], weeks)
 						}
 					);
@@ -183,7 +181,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 						{
 							name: [name of exercise],
 							exercises: [
-								class: [name of CSS class],
 								exercise: {
 									liftName: [exercise name],
 									sets: [
