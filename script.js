@@ -1,39 +1,26 @@
-/*--- GLOBAL VARIABLES ---*/
-
-var rampingPercent = 0.125;
-var smallestIncrement = 5;
-var programLength = 10;
-var weeks = new Array();
-
-$(document).ready(function() {
-	console.log('Document Ready');
-});
-
 /*------------------- CONSTRUCTORS ----------------------------*/
 
-function Lift(liftName) {
-	this.liftName=liftName;
+function Lift( liftName ) {
+	this.liftName = liftName;
 	this.set = new Array();
 	this.set = [0,0,0,0];
 };
 
-function Day(dayName) {
-	this.dayName=dayName;
+function Day( dayName, lifts ) {
+	this.dayName = dayName;
+	this.lift = lifts;
 };
 
-function Week(number) {
-	this.number=number;
+function Week( number, days ) {
+	this.number = number;
+	this.days = days;
 };
+
+function Program( weeks ) {
+	this.weeks = weeks;
+}
 
 /*------------------- FUNCTIONS ----------------------------*/
-
-function fillDownSets(topSet, sets) {
-	var setArray = new Array();
-	for (i=sets-1; i>-1; i--) {
-		setArray[i] = topSet * (1 - (rampingPercent*(sets-i-1)));
-	};
-	return setArray;
-};
 
 function calcxRM (weight, reps) {
 	return weight*(1.0278-(0.0278*reps));
@@ -46,65 +33,4 @@ function xRound (num, digit) {
 function digitRound(num, digit) {
 	digit = Math.pow(10, digit);
 	return Math.round(num / digit) * digit;
-}
-
-function checkSmallVars(smallest, ramp, length, increase) {
-	if (!isNaN(smallest) == true) {
-		console.info("Smallest weight is a number");
-	} else {
-		console.warn("Smallest weight is not a number");
-		$('#errorOutput').html("Smallest weight is not a number!");
-		$('#error').fadeIn('slow');
-		return(false);
-	};
-	if (!isNaN(ramp) == true) {
-		console.info("Ramping percent is a number");
-	} else {
-		console.warn("Ramping percent is not a number");
-		$('#errorOutput').html("Ramping percent is not a number!");
-		$('#error').fadeIn('slow');
-		return(false);
-	};
-	if (!isNaN(length) == true) {
-		console.info("Program length is a number");
-	} else {
-		console.warn("Program length is not a number");
-		$('#errorOutput').html("Program length is not a number!");
-		$('#error').fadeIn('slow');
-		return(false);
-	};
-	if (!isNaN(increase) == true) {
-		console.info("Increase percent is a number");
-	} else {
-		console.warn("Increase percent is not a number");
-		$('#errorOutput').html("Increase percent is not a number!");
-		$('#error').fadeIn('slow');
-		return(false);
-	};
-
-	if (ramp > 0.20 || ramp < 0.001) {
-		$('#errorOutput').html("Using that value as a ramping percentage is highly unrecommended!");
-		$('#error').fadeIn('slow');
-		return(false);
-	}
-
-	if (smallest > 25) {
-		$('#errorOutput').html("The smallest plate you have is a " + smallest + "?");
-		$('#error').fadeIn('slow');
-		return(false);
-	} else {
-		smallestIncrement = smallestIncrement*2;
-	}
-
-	if (length > 18) {
-		$('#errorOutput').html("Running this program for more than 18 weeks without a reset is very ambitious.");
-		$('#error').fadeIn('slow');
-		return(false);
-	}
-
-	if (increase > 1.10) {
-		$('#errorOutput').html("Using that value as an increase percentage is highly unrecommended!");
-		$('#error').fadeIn('slow');
-		return(false);
-	}
 }
