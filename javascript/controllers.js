@@ -204,8 +204,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 			return tables;
 		};
 
-		//TODO: it takes no arguments and returns nothing, this should probably be refactored
-		//		to be more clear of what it's doing
 		/* 	Performs calculations of workout schedule based off of user input and stores data in "$scope.tables"
 			Arguments: None
 			Returns: None
