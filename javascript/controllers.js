@@ -27,7 +27,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 		//TODO: replace this with a $resource call
 		var daysPromise = $http.get('json/days.json')
 
-		$scope.printMaxes = function( repMaxes ) {
+		$scope.setMaxes = function( repMaxes ) {
 			$scope.resultsRows = [];
 
 			var exercises = exercisesService.exerciseTypes;
@@ -224,7 +224,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 				var repMaxes = exercisesService.calcRepMaxes();
 
-				$scope.printMaxes( repMaxes );
+				$scope.setMaxes( repMaxes );
 
 				//TODO: bring this back but angularized
 				//$('#results').fadeIn('slow');
