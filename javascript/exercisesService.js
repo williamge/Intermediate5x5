@@ -2,7 +2,14 @@ squatApp.factory( "exercisesService", function() {
 
 	//Data needs to be loaded in the page for this service to function
 	var exerciseData = window._squatData.exercise;
+	if ( !exerciseData ) {
+		throw new Error( "Could not find [exerciseData] from [window._squatData.exercise] " );
+	}
+
 	var optionsData = window._squatData.options;
+	if ( !optionsData ) {
+		throw new Error( "Could not find [optionsData] from [window._squatData.options] " );
+	}
 
 	var exerciseTypes = [];
 	var exerciseKeyToType = {};
