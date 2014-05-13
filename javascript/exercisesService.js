@@ -167,7 +167,7 @@ squatApp.factory( "exercisesService", function() {
 			var incMax = repMaxes[ "Incline Bench" ].oneRep;
 
 			var rampingPercent = optionsData["Ramping %"] / 100;
-			var increasePercent = optionsData["Increase %"];
+			var increasePercent = optionsData["Increase %"] /100 + 1;
 			var programLength = optionsData["Program Length"];
 
 			for (var i = 0; i < programLength; i++) {
@@ -178,62 +178,80 @@ squatApp.factory( "exercisesService", function() {
 					Friday: new Day('Friday')
 				};
 				weeks[i].Week.Monday = {
-					squat: new Lift('Squat'),
-					bench: new Lift('Bench'),
-					row: new Lift('Row'),
-					reps: new Array()
+					exercises: {
+						squat: new Lift('Squat'),
+						bench: new Lift('Bench'),
+						row: new Lift('Row'),
+					},
+					reps: new Array(),
+					asstWork: [
+						"Weighted Hyperextensions - 2 sets of 8-12 reps",
+						"Weighted Decline Situps - 4 sets of 8-15 reps"
+					]
 				};
 				weeks[i].Week.Wednesday = {
-					squat: new Lift('Squat'),
-					incline: new Lift('Incline'),
-					dead: new Lift('Deadlift'),
-					reps: new Array()
+					exercises: {
+						squat: new Lift('Squat'),
+						incline: new Lift('Incline'),
+						dead: new Lift('Deadlift'),
+					},
+					reps: new Array(),
+					asstWork: [
+						"Situps - 3 sets of 8-15 reps"
+					]
 				};
 				weeks[i].Week.Friday = {
-					squat: new Lift('Squat'),
-					bench: new Lift('Bench'),
-					row: new Lift('Row'),
-					reps: new Array()
+					exercises: {
+						squat: new Lift('Squat'),
+						bench: new Lift('Bench'),
+						row: new Lift('Row'),
+					},
+					reps: new Array(),
+					asstWork: [
+						"Weighted Dips - 3 sets of 5-8 reps",
+						"Barbell curls - 3 sets of 8-12 reps",
+						"Triceps Extensions - 3 sets of 8-12 reps"
+					]
 				};
 			};
 
-			weeks[0].Week.Monday.squat.set = fillDownSets( calcxRM( squatMax , 5) * 0.925, 5, rampingPercent );
-			weeks[0].Week.Monday.bench.set = fillDownSets( calcxRM( benchMax , 5) * 0.925, 5, rampingPercent );
-			weeks[0].Week.Monday.row.set = fillDownSets( calcxRM( rowMax, 5) * 0.925, 5, rampingPercent );
+			weeks[0].Week.Monday.exercises.squat.set = fillDownSets( calcxRM( squatMax , 5) * 0.925, 5, rampingPercent );
+			weeks[0].Week.Monday.exercises.bench.set = fillDownSets( calcxRM( benchMax , 5) * 0.925, 5, rampingPercent );
+			weeks[0].Week.Monday.exercises.row.set = fillDownSets( calcxRM( rowMax, 5) * 0.925, 5, rampingPercent );
 			weeks[0].Week.Monday.reps = [5,5,5,5,5];
 
-			weeks[0].Week.Wednesday.squat.set = fillDownSets( weeks[0].Week.Monday.squat.set[2], 3, rampingPercent );
-			weeks[0].Week.Wednesday.squat.set[3] = weeks[0].Week.Monday.squat.set[2];
-			weeks[0].Week.Wednesday.incline.set = fillDownSets( calcxRM( incMax, 5 ) * 0.925, 4, rampingPercent );
-			weeks[0].Week.Wednesday.dead.set = fillDownSets( calcxRM( deadMax, 5) * 0.925, 4, rampingPercent );
+			weeks[0].Week.Wednesday.exercises.squat.set = fillDownSets( weeks[0].Week.Monday.exercises.squat.set[2], 3, rampingPercent );
+			weeks[0].Week.Wednesday.exercises.squat.set[3] = weeks[0].Week.Monday.exercises.squat.set[2];
+			weeks[0].Week.Wednesday.exercises.incline.set = fillDownSets( calcxRM( incMax, 5 ) * 0.925, 4, rampingPercent );
+			weeks[0].Week.Wednesday.exercises.dead.set = fillDownSets( calcxRM( deadMax, 5) * 0.925, 4, rampingPercent );
 			weeks[0].Week.Wednesday.reps = [5,5,5,5];
 
-			weeks[0].Week.Friday.squat.set = fillDownSets( weeks[0].Week.Monday.squat.set[4] * increasePercent, 5, rampingPercent );
-			weeks[0].Week.Friday.squat.set[5] = weeks[0].Week.Monday.squat.set[2];
-			weeks[0].Week.Friday.bench.set = fillDownSets( weeks[0].Week.Monday.bench.set[4] * increasePercent, 5, rampingPercent );
-			weeks[0].Week.Friday.bench.set[5] = weeks[0].Week.Monday.bench.set[2];
-			weeks[0].Week.Friday.row.set = fillDownSets( weeks[0].Week.Monday.row.set[4] * increasePercent, 5, rampingPercent );
-			weeks[0].Week.Friday.row.set[5] = weeks[0].Week.Monday.row.set[2];
+			weeks[0].Week.Friday.exercises.squat.set = fillDownSets( weeks[0].Week.Monday.exercises.squat.set[4] * increasePercent, 5, rampingPercent );
+			weeks[0].Week.Friday.exercises.squat.set[5] = weeks[0].Week.Monday.exercises.squat.set[2];
+			weeks[0].Week.Friday.exercises.bench.set = fillDownSets( weeks[0].Week.Monday.exercises.bench.set[4] * increasePercent, 5, rampingPercent );
+			weeks[0].Week.Friday.exercises.bench.set[5] = weeks[0].Week.Monday.exercises.bench.set[2];
+			weeks[0].Week.Friday.exercises.row.set = fillDownSets( weeks[0].Week.Monday.exercises.row.set[4] * increasePercent, 5, rampingPercent );
+			weeks[0].Week.Friday.exercises.row.set[5] = weeks[0].Week.Monday.exercises.row.set[2];
 			weeks[0].Week.Friday.reps = [5,5,5,5,3,8];
 
 			for ( week = 1; week < programLength; week++) {
-				weeks[week].Week.Monday.squat.set = fillDownSets( weeks[week-1].Week.Monday.squat.set[4] * increasePercent, 5, rampingPercent );
-				weeks[week].Week.Monday.bench.set = fillDownSets( weeks[week-1].Week.Monday.bench.set[4] * increasePercent, 5, rampingPercent );
-				weeks[week].Week.Monday.row.set = fillDownSets( weeks[week-1].Week.Monday.row.set[4] * increasePercent, 5, rampingPercent);
+				weeks[week].Week.Monday.exercises.squat.set = fillDownSets( weeks[week-1].Week.Monday.exercises.squat.set[4] * increasePercent, 5, rampingPercent );
+				weeks[week].Week.Monday.exercises.bench.set = fillDownSets( weeks[week-1].Week.Monday.exercises.bench.set[4] * increasePercent, 5, rampingPercent );
+				weeks[week].Week.Monday.exercises.row.set = fillDownSets( weeks[week-1].Week.Monday.exercises.row.set[4] * increasePercent, 5, rampingPercent);
 				weeks[week].Week.Monday.reps = [5,5,5,5,5];
 
-				weeks[week].Week.Wednesday.squat.set = fillDownSets( weeks[week-1].Week.Wednesday.squat.set[2] * increasePercent, 3, rampingPercent );
-				weeks[week].Week.Wednesday.squat.set[3] = weeks[week].Week.Wednesday.squat.set[2];
-				weeks[week].Week.Wednesday.incline.set = fillDownSets( weeks[week-1].Week.Wednesday.incline.set[3] * increasePercent, 4, rampingPercent );
-				weeks[week].Week.Wednesday.dead.set = fillDownSets( weeks[week-1].Week.Wednesday.dead.set[3]*increasePercent, 4, rampingPercent );
+				weeks[week].Week.Wednesday.exercises.squat.set = fillDownSets( weeks[week-1].Week.Wednesday.exercises.squat.set[2] * increasePercent, 3, rampingPercent );
+				weeks[week].Week.Wednesday.exercises.squat.set[3] = weeks[week].Week.Wednesday.exercises.squat.set[2];
+				weeks[week].Week.Wednesday.exercises.incline.set = fillDownSets( weeks[week-1].Week.Wednesday.exercises.incline.set[3] * increasePercent, 4, rampingPercent );
+				weeks[week].Week.Wednesday.exercises.dead.set = fillDownSets( weeks[week-1].Week.Wednesday.exercises.dead.set[3]*increasePercent, 4, rampingPercent );
 				weeks[week].Week.Wednesday.reps = [5,5,5,5];
 
-				weeks[week].Week.Friday.squat.set = fillDownSets( weeks[week-1].Week.Friday.squat.set[4] * increasePercent, 5, rampingPercent );
-				weeks[week].Week.Friday.squat.set[5] = weeks[week].Week.Wednesday.squat.set[3];
-				weeks[week].Week.Friday.bench.set = fillDownSets( weeks[week-1].Week.Friday.bench.set[4] * increasePercent, 5, rampingPercent );
-				weeks[week].Week.Friday.bench.set[5] = weeks[week].Week.Friday.bench.set[3];
-				weeks[week].Week.Friday.row.set = fillDownSets( weeks[week-1].Week.Friday.row.set[4] * increasePercent, 5, rampingPercent );
-				weeks[week].Week.Friday.row.set[5] = weeks[week].Week.Friday.row.set[3];
+				weeks[week].Week.Friday.exercises.squat.set = fillDownSets( weeks[week-1].Week.Friday.exercises.squat.set[4] * increasePercent, 5, rampingPercent );
+				weeks[week].Week.Friday.exercises.squat.set[5] = weeks[week].Week.Wednesday.exercises.squat.set[3];
+				weeks[week].Week.Friday.exercises.bench.set = fillDownSets( weeks[week-1].Week.Friday.exercises.bench.set[4] * increasePercent, 5, rampingPercent );
+				weeks[week].Week.Friday.exercises.bench.set[5] = weeks[week].Week.Friday.exercises.bench.set[3];
+				weeks[week].Week.Friday.exercises.row.set = fillDownSets( weeks[week-1].Week.Friday.exercises.row.set[4] * increasePercent, 5, rampingPercent );
+				weeks[week].Week.Friday.exercises.row.set[5] = weeks[week].Week.Friday.exercises.row.set[3];
 				weeks[week].Week.Friday.reps = [5,5,5,5,3,8];
 			}
 
