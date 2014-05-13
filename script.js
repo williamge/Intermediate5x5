@@ -34,3 +34,35 @@ function digitRound(num, digit) {
 	digit = Math.pow(10, digit);
 	return Math.round(num / digit) * digit;
 }
+
+
+/*  Helper class to check if a given number is NaN
+	Arguments:  (Number) number: the number to check against NaN
+				(string) name: name of the number being checked, for output formatting
+				(boolean) warn: optional flag for printing warning info in the console
+	Returns: A string describing the error if there is one, or null/undefined otherwise
+ */
+var checkForNaN = function( number, name, warn ) {
+	var output;
+
+	if ( isNaN( number )  ) {
+		output = name + " is not a number!";
+		if ( warn ) {
+			console.warn( name + " is not a number!" );
+		}
+	}
+
+	return output;
+}
+
+/*  Helper class to push a value in to an array only if the value is not null/undefined
+	Arguments:  (anything) value: the value to be pushed in to the array
+				(Array) array: the array for 'value' to be pushed
+	Returns: The value given
+ */
+var pushValue = function( value, array ) {
+	if ( value ) {
+		array.push( value );
+	}
+	return value;
+}
