@@ -36,7 +36,7 @@ function digitRound(num, digit) {
 }
 
 
-/*  Helper class to check if a given number is NaN
+/*  Helper function to check if a given number is NaN
 	Arguments:  (Number) number: the number to check against NaN
 				(string) name: name of the number being checked, for output formatting
 				(boolean) warn: optional flag for printing warning info in the console
@@ -55,7 +55,7 @@ var checkForNaN = function( number, name, warn ) {
 	return output;
 }
 
-/*  Helper class to push a value in to an array only if the value is not null/undefined
+/*  Helper function to push a value in to an array only if the value is not null/undefined
 	Arguments:  (anything) value: the value to be pushed in to the array
 				(Array) array: the array for 'value' to be pushed
 	Returns: The value given
