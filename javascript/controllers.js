@@ -160,7 +160,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 							var ex_ = exercises[ exKey_ ];
 
 							var exercise$ = {
-								name: exKey_,
+								name: exercisesService.getExerciseName( exKey_ ),
 								sets: []
 							};
 
@@ -191,11 +191,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 				}
 
 				$scope.tables = formatWeeks( weeks );
-
-				/*daysPromise.success( function( data ) {
-					$scope.tables = $scope.getTables( data, weeks );
-				});
-*/
 
 				//TODO: Re-implement this functionality but angularized
 				//$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);

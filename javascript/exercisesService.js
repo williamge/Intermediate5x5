@@ -5,11 +5,13 @@ squatApp.factory( "exercisesService", function() {
 	var optionsData = window._squatData.options;
 
 	var exerciseTypes = [];
+	var exerciseKeyToType = {};
 	var exercises = {};
 
 	for ( var i = 0; i < exerciseData.length; i++ ) {
 		exerciseTypes.push( exerciseData[i].type );
 		exercises[ exerciseData[i].type ] = exerciseData[i];
+		exerciseKeyToType[ exerciseData[i].key ] = exerciseData[i].type;
 	}
 
 	/*  Helper class to check if a given number is NaN
@@ -60,6 +62,12 @@ squatApp.factory( "exercisesService", function() {
 				throw new Error("Exercise \"" + name + "\" not found");
 			}
 			return exercises[ name ];
+		},
+		getExerciseName: function( exerciseKey ) {
+			if ( !exerciseKeyToType[ exerciseKey ] ) {
+				throw new Error("Exercise key \"" + exerciseKey + "\" not found");
+			}
+			return exerciseKeyToType[ exerciseKey ];
 		},
 		checkInputs: function() {
 
