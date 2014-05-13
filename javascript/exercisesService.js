@@ -14,6 +14,14 @@ squatApp.factory( "exercisesService", function() {
 		exerciseKeyToType[ exerciseData[i].key ] = exerciseData[i].type;
 	}
 
+	/* 	Performs calculations of set weights based off of a previous set and the ramping percentage.
+		
+		Arguments: 	(Array) topSet: previous set full of weights
+					(Number) sets: number of sets to fill out from topSet
+					(Number) rampingPercent: the ramping percentage to use
+		
+		Returns: 	(Array) of filled out sets calculated from topSet and rampingPercent
+	*/
 	var fillDownSets = function( topSet, sets, rampingPercent ) {
 		var setArray = new Array();
 		for (i=sets-1; i>-1; i--) {
@@ -26,18 +34,43 @@ squatApp.factory( "exercisesService", function() {
 		exercises: exerciseData,
 		exerciseTypes: exerciseTypes,
 		options: optionsData,
+
+		/* 	Returns the exercise object given the name of the exercise
+			
+			Arguments: 	(String) name: name of the exercise to return
+			
+			Returns: 	(Object) of the exercise taken from window._squatData.exercise
+
+			Throws: 	(Error) when name is not found in the loaded exercises
+		*/
 		getExercise: function( name ) {
 			if ( !exercises[ name ] ) {
 				throw new Error("Exercise \"" + name + "\" not found");
 			}
 			return exercises[ name ];
 		},
+
+		/* 	Returns the exercise name for an object based off of its key
+			
+			Arguments: 	(String) exerciseKey: key of the exercise to return
+			
+			Returns: 	(String) name of the exercise with key 'exerciseKey'
+
+			Throws: 	(Error) when exerciseKey is not found in the loaded exercises
+		*/
 		getExerciseName: function( exerciseKey ) {
 			if ( !exerciseKeyToType[ exerciseKey ] ) {
 				throw new Error("Exercise key \"" + exerciseKey + "\" not found");
 			}
 			return exerciseKeyToType[ exerciseKey ];
 		},
+
+		/* 	Returns an Array of any errors in the inputs given to the service
+			 
+			Arguments: 	None (given implicitly in the service object)
+			
+			Returns: 	(Array) of strings for any errors in the inputs that are found
+		*/
 		checkInputs: function() {
 
 			var errors = [];
@@ -60,6 +93,13 @@ squatApp.factory( "exercisesService", function() {
 
 			return errors;
 		},
+
+		/* 	Returns an Array of any errors in the options given to the service
+			
+			Arguments: 	None (given implicitly in the service object)
+			
+			Returns: 	(Array) of strings for any errors in the options that are found
+		*/
 		checkOptions: function() {
 			var errors = [];
 
@@ -102,6 +142,19 @@ squatApp.factory( "exercisesService", function() {
 
 			return errors;
 		},
+
+		/* 	Returns an Object of the max reps for the given inputs and options in the service.
+			
+			Arguments: 	None (given implicitly in the service object)
+			
+			Returns: 	(Object) of form: 
+			{
+				[exerciseKey]: {
+					oneRep: (Number) max weight for one rep,
+					fiveRep: (Number) max weight for five reps
+				}
+			}
+		*/
 		calcRepMaxes: function() {
 			function calcOneRM ( exercise ) {
 				var max = exercise.weight/(1.0278-(0.0278*exercise.reps));
@@ -131,7 +184,17 @@ squatApp.factory( "exercisesService", function() {
 
 			return repMaxes;
 		},
+
+		/* 	Returns an Object corresponding to a complete program based off of the given inputs and 
+			options to the service.
+			
+			Arguments: 	None (given implicitly in the service object)
+			
+			Returns: 	(Object) of form: [Nope I'm not describing it, too big of a mess, sorry]
+		*/
 		getProgram: function() {
+
+			//TODO: clean this out, this is way too complicated of everything
 
 			var weeks = [];
 

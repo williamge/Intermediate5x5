@@ -24,9 +24,9 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 		$scope.resultsRows = [];
 		$scope.tables = [];
 
-		//TODO: replace this with a $resource call
-		var daysPromise = $http.get('json/days.json')
-
+		/*	Sets the $scope.resultsRow object for max reps given the object 
+			returned by exercisesService.calcRepMaxes().
+		 */
 		$scope.setMaxes = function( repMaxes ) {
 			$scope.resultsRows = [];
 
@@ -44,11 +44,9 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
 		};
 
-		/* 	Performs calculations of workout schedule based off of user input and stores data in "$scope.tables"
-			
-			Arguments: None
-			
-			Returns: None
+		/* 	Performs calculations of workout schedule based off of user input from exercisesService,
+			gets the complete program through exercisesService.getProgram() and formats the data to 
+			a more usable state for the view, storing the data in "$scope.tables".
 		*/
 		$scope.submit = function() {
 			console.info('Submit button clicked'); // logging
