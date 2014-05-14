@@ -1,222 +1,222 @@
 <html ng-app="squatApp">
-	<head>
-		<title>SquatBot - Bill Starr 5x5 Calculator</title>
-		<link rel="stylesheet" type="text/css" href="reset.css">
-		
-		<script type="text/javascript" src="jquery.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <head>
+        <title>SquatBot - Bill Starr 5x5 Calculator</title>
+        <link rel="stylesheet" type="text/css" href="reset.css">
+        
+        <script type="text/javascript" src="jquery.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-		<script type="text/javascript" src="script.js"></script>
-		<link rel="icon" type="image/png" href="favicons/icon.png">
-		<link rel="stylesheet" type="text/css" href="styles.css">
-	</head>
-	<body>
-		<div ng-controller="mainCtrl">
-			<div class="bubble" id="calc">
-				<div id="header">SQUATBOT</div>
-				<div class="divider" id="programTitle">
-					Bill Starr Intermediate 5x5
-				</div>
-				<div class="divider" id="robotDiv">
-					<div class="floatLeft">
-						<img src="images/icon.gif" class="robotImage">
-					</div>
-					<div class="floatLeft">
-						<p>
-							This calculator will help you set up a typical<br>
-							Intermediate level strength training program. Enter<br>
-							your highest weight, sets and reps achieved with a<br>
-							given lift.  For example if you're transitioning<br>
-							from Starting Strength and your final week you<br>
-							achieved 275x5x3 then you'd enter that.
-						</p>
-					</div>
-				</div>
-				<div class="divider" id="topLabelRow">
-					<div class="floatLeft topLabel labelText" id="liftsLabel">Lift</div>
-					<div class="floatLeft weightField topLabel labelText">Weight</div>
-					<div class="floatLeft multiSign topLabel"></div>
-					<div class="floatLeft repField topLabel labelText" id="repsLabel">Reps</div>
-					<div class="floatLeft multiSign topLabel"></div>
-					<div class="floatLeft setField topLabel labelText">Sets</div>
-				</div>
+        <script type="text/javascript" src="script.js"></script>
+        <link rel="icon" type="image/png" href="favicons/icon.png">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <div ng-controller="mainCtrl">
+            <div class="bubble" id="calc">
+                <div id="header">SQUATBOT</div>
+                <div class="divider" id="programTitle">
+                    Bill Starr Intermediate 5x5
+                </div>
+                <div class="divider" id="robotDiv">
+                    <div class="floatLeft">
+                        <img src="images/icon.gif" class="robotImage">
+                    </div>
+                    <div class="floatLeft">
+                        <p>
+                            This calculator will help you set up a typical<br>
+                            Intermediate level strength training program. Enter<br>
+                            your highest weight, sets and reps achieved with a<br>
+                            given lift.  For example if you're transitioning<br>
+                            from Starting Strength and your final week you<br>
+                            achieved 275x5x3 then you'd enter that.
+                        </p>
+                    </div>
+                </div>
+                <div class="divider" id="topLabelRow">
+                    <div class="floatLeft topLabel labelText" id="liftsLabel">Lift</div>
+                    <div class="floatLeft weightField topLabel labelText">Weight</div>
+                    <div class="floatLeft multiSign topLabel"></div>
+                    <div class="floatLeft repField topLabel labelText" id="repsLabel">Reps</div>
+                    <div class="floatLeft multiSign topLabel"></div>
+                    <div class="floatLeft setField topLabel labelText">Sets</div>
+                </div>
 
-				<div ng-controller="exercises">
-					<ul>
-						<li ng-repeat="exercise in exercisesList">
-							<ul class="exerciseRow divider">
-								<li class=" sideLabel labelText">{{exercise.type}}</li>
-								<li>
-									<input 
-										class="weightField field" 
-										type="text" 
-										name="{{exercise.prefix}}Weight" 
-										ng-model="exercise.weight"
-									>
-								</li>
-								<li class="multiSign">&times;</li>
-								<li>
-									<input 
-										class="repField field" 
-										type="text" 
-										name="{{exercise.prefix}}Reps" 
-										ng-model="exercise.reps"
-									>
-								</li>
-								<li class="multiSign">&times;</li>
-								<li>
-									<input 
-										class="setField field" 
-										type="text" 
-										name="{{exercise.prefix}}Sets" 
-										ng-model="exercise.sets"
-									>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+                <div ng-controller="exercises">
+                    <ul>
+                        <li ng-repeat="exercise in exercisesList">
+                            <ul class="exerciseRow divider">
+                                <li class=" sideLabel labelText">{{exercise.type}}</li>
+                                <li>
+                                    <input 
+                                        class="weightField field" 
+                                        type="text" 
+                                        name="{{exercise.prefix}}Weight" 
+                                        ng-model="exercise.weight"
+                                    >
+                                </li>
+                                <li class="multiSign">&times;</li>
+                                <li>
+                                    <input 
+                                        class="repField field" 
+                                        type="text" 
+                                        name="{{exercise.prefix}}Reps" 
+                                        ng-model="exercise.reps"
+                                    >
+                                </li>
+                                <li class="multiSign">&times;</li>
+                                <li>
+                                    <input 
+                                        class="setField field" 
+                                        type="text" 
+                                        name="{{exercise.prefix}}Sets" 
+                                        ng-model="exercise.sets"
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
-				<div ng-controller="options">
-					<div 
-						class="divider topLabel" 
-						id="advancedOptions" 
-						ng-click="toggleOptions();"
-					>
-						<span>Advanced Options</span>
-					</div>
-					<div ng-show="showOptions" id="advanced">
-						<ul>
-							<li class="divider" ng-repeat="(key, value) in options">
-								<span class="sideLabel labelText">
-									{{key}}
-								</span>
-								<input 
-									class="setField field" 
-									type="text"
-									ng-model="options[key]"
-								>
-						</ul>
-					</div>
-				</div>
+                <div ng-controller="options">
+                    <div 
+                        class="divider topLabel" 
+                        id="advancedOptions" 
+                        ng-click="toggleOptions();"
+                    >
+                        <span>Advanced Options</span>
+                    </div>
+                    <div ng-show="showOptions" id="advanced">
+                        <ul>
+                            <li class="divider" ng-repeat="(key, value) in options">
+                                <span class="sideLabel labelText">
+                                    {{key}}
+                                </span>
+                                <input 
+                                    class="setField field" 
+                                    type="text"
+                                    ng-model="options[key]"
+                                >
+                        </ul>
+                    </div>
+                </div>
 
-				<div id="buttonDivider">
-					<div id="submit">
-						<div class="buttonHelper"></div>			
-						<a class="button" ng-click="submit();">Calculate 5&times;5 Program</a>
-					</div>
-				</div>
-				<div id="footer"></div>
-			</div>
+                <div id="buttonDivider">
+                    <div id="submit">
+                        <div class="buttonHelper"></div>            
+                        <a class="button" ng-click="submit();">Calculate 5&times;5 Program</a>
+                    </div>
+                </div>
+                <div id="footer"></div>
+            </div>
 
-			<div class="bubble" id="results" ng-show="resultsRows.length">
-				<div id="header">
-					One Rep Maxes
-				</div>
-				<div id="output">
-						<table class="exerciseTable">
-						<tbody>
-							<tr class="outputHeaders">
-								<td class="wide">Lift</td>
-								<td class="">One Rep Max</td>
-								<td class="">Five Rep Max</td>
-							</tr>
-							<tr 
-								class="outputRow" 
-								ng-repeat="outputRow in resultsRows"
-							>
-								<td>{{outputRow.lift}}</td>
-								<td class="">{{outputRow.oneRep}}</td>
-								<td>{{outputRow.fiveRep}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div id="footer">
-					
-				</div>
-			</div>
+            <div class="bubble" id="results" ng-show="resultsRows.length">
+                <div id="header">
+                    One Rep Maxes
+                </div>
+                <div id="output">
+                        <table class="exerciseTable">
+                        <tbody>
+                            <tr class="outputHeaders">
+                                <td class="wide">Lift</td>
+                                <td class="">One Rep Max</td>
+                                <td class="">Five Rep Max</td>
+                            </tr>
+                            <tr 
+                                class="outputRow" 
+                                ng-repeat="outputRow in resultsRows"
+                            >
+                                <td>{{outputRow.lift}}</td>
+                                <td class="">{{outputRow.oneRep}}</td>
+                                <td>{{outputRow.fiveRep}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="footer">
+                    
+                </div>
+            </div>
 
-			<div class="bubble" id="error" ng-show="errors.length">
-				<div id="header">
-					Warning
-				</div>
+            <div class="bubble" id="error" ng-show="errors.length">
+                <div id="header">
+                    Warning
+                </div>
 
-				<ul class="divider" id="errorOutput">
-					<li 
-						class="divider"
-						ng-repeat="error in errors"
-					>
-						{{error}}
-					</li>
+                <ul class="divider" id="errorOutput">
+                    <li 
+                        class="divider"
+                        ng-repeat="error in errors"
+                    >
+                        {{error}}
+                    </li>
 
-				</ul>
-				<div id="footer">
-					
-				</div>
-			</div>
-			<a href="#" id="jump"></a>
-			<div id="tables">
-				<div ng-repeat="week in tables">
-					<div class="bubble">
-						<div id="header">
-							Week {{week.number}}
-						</div>
-						<div class="dayContainer">
-							<div class="tableDivider" ng-repeat="day in week.days">
-								<table class="dayTable {{day.name}}">
-									<tr>
-										<td 
-											class="title labelText" 
-											colspan="3"
-										>
-											{{day.name}}
-										</td>
-									</tr>
-									<tr>
-										<td ng-repeat="exercise in day.exercises">
-											<table class="exerciseTable">
-												<tr>
-													<td class="liftType" colspan="2">{{exercise.name}}</td>
-												</tr>
-												<tr>
-													<td class="repsCell">Reps</td>
-													<td class="weightCell">Weight</td>
-												</tr>
-												<tr ng-repeat="set in exercise.sets">
-													<td class="repsCell">
-														{{ set.reps }}
-													</td>
-													<td class="weightCell">
-														{{ set.weight }}
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-									<tr ng-repeat="work in day.assistanceWork">
-										<td 
-											colspan="3" 
-											class="assistanceWork tableSpacer"
-										>
-											{{work}}
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-						<div id="footer">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>		
+                </ul>
+                <div id="footer">
+                    
+                </div>
+            </div>
+            <a href="#" id="jump"></a>
+            <div id="tables">
+                <div ng-repeat="week in tables">
+                    <div class="bubble">
+                        <div id="header">
+                            Week {{week.number}}
+                        </div>
+                        <div class="dayContainer">
+                            <div class="tableDivider" ng-repeat="day in week.days">
+                                <table class="dayTable {{day.name}}">
+                                    <tr>
+                                        <td 
+                                            class="title labelText" 
+                                            colspan="3"
+                                        >
+                                            {{day.name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td ng-repeat="exercise in day.exercises">
+                                            <table class="exerciseTable">
+                                                <tr>
+                                                    <td class="liftType" colspan="2">{{exercise.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="repsCell">Reps</td>
+                                                    <td class="weightCell">Weight</td>
+                                                </tr>
+                                                <tr ng-repeat="set in exercise.sets">
+                                                    <td class="repsCell">
+                                                        {{ set.reps }}
+                                                    </td>
+                                                    <td class="weightCell">
+                                                        {{ set.weight }}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="work in day.assistanceWork">
+                                        <td 
+                                            colspan="3" 
+                                            class="assistanceWork tableSpacer"
+                                        >
+                                            {{work}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
 
-		<script src="json/exercises.js"></script>
-		<script src="json/options.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
-		<script src="javascript/app.js"></script>
-		<script src="javascript/exercisesService.js"></script>
-		<script src="javascript/controllers.js"></script>
-	</body>
+        <script src="json/exercises.js"></script>
+        <script src="json/options.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
+        <script src="javascript/app.js"></script>
+        <script src="javascript/exercisesService.js"></script>
+        <script src="javascript/controllers.js"></script>
+    </body>
 </html>
