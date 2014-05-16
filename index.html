@@ -109,7 +109,9 @@
                 <div id="footer"></div>
             </div>
 
-            <div class="bubble" id="results" ng-show="resultsRows.length">
+            <div class="bubble" id="results"  
+                sa-fade-in="resultsRows.length"
+            >
                 <div id="header">
                     One Rep Maxes
                 </div>
@@ -137,7 +139,7 @@
                 </div>
             </div>
 
-            <div class="bubble" id="error" ng-show="errors.length">
+            <div class="bubble" id="error" sa-fade-in="errors.length">
                 <div id="header">
                     Warning
                 </div>
@@ -216,5 +218,6 @@
         <script src="javascript/app.js"></script>
         <script src="javascript/exercisesService.js"></script>
         <script src="javascript/controllers.js"></script>
+        <script src="javascript/directives.js"></script>
     </body>
 </html>

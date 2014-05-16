@@ -21,6 +21,7 @@ squatApp.controller( "options", [ "$scope", "$http", "exercisesService",
 
 squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService", 
     function( $scope, $http, exercisesService ) {
+
         $scope.resultsRows = [];
         $scope.tables = [];
 
@@ -65,9 +66,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
                 var repMaxes = exercisesService.calcRepMaxes();
 
                 $scope.setMaxes( repMaxes );
-
-                //TODO: bring this back but angularized
-                //$('#results').fadeIn('slow');
 
 
                 //TODO: find out what this even does or why you would want this
@@ -189,11 +187,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
                 }
 
                 $scope.tables = formatWeeks( weeks );
-
-                //TODO: Re-implement this functionality but angularized
-                //$('html, body').animate({scrollTop: $('#results').offset().top}, 1000);
-                //$('#results').fadeIn('2000');
-
 
             };
         };
