@@ -67,10 +67,6 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
                 $scope.setMaxes( repMaxes );
 
-
-                //TODO: find out what this even does or why you would want this
-                var empty = [[1,1],[1,1],[1,1],[1,1],[1,1]];
-
                 var weeks = exercisesService.getProgram();
 
                 /*  Helper functions to bring the 'weeks' object returned by exercisesService.getProgram()
