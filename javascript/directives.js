@@ -14,7 +14,9 @@ define( [
 							$(element).fadeIn(1000);
 							$('html, body').animate( {
 								scrollTop: $(element).offset().top 
-							}, 1000 );
+							}, 1000 ); 
+						} else { 
+							$(element).hide();
 						}
 					});
 				}
