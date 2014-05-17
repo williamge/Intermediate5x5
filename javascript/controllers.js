@@ -1,7 +1,8 @@
 define( [
     "app",
+    "helpers",
     "exercisesService"
-],  function( squatApp ) {
+],  function( squatApp, helpers ) {
 
         squatApp.controller( "exercises", [ "$scope", "$http", "exercisesService",
             function( $scope, $http, exercisesService ) {
@@ -41,8 +42,8 @@ define( [
                         $scope.resultsRows.push(
                             {
                                 lift : exRepKey,
-                                oneRep : digitRound(  exRep.oneRep , 0 ),
-                                fiveRep : digitRound( exRep.fiveRep , 0 )
+                                oneRep : helpers.digitRound(  exRep.oneRep , 0 ),
+                                fiveRep : helpers.digitRound( exRep.fiveRep , 0 )
                             }
                         );      
                     }
@@ -163,7 +164,7 @@ define( [
 
                                     for ( var setNum in ex_.set ) {
                                         var set$ = {
-                                            weight: xRound( ex_.set[setNum], exercisesService.options["Smallest Plate"] ),
+                                            weight: helpers.xRound( ex_.set[setNum], exercisesService.options["Smallest Plate"] ),
                                             reps: day.reps[setNum]
                                         };
 

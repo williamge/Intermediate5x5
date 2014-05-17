@@ -1,6 +1,7 @@
 define( [
-    "app"
-],  function( squatApp ) {
+    "app",
+    "helpers"
+],  function( squatApp, helpers ) {
 
         squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
             function( exerciseData, optionsData ) {
@@ -13,6 +14,40 @@ define( [
                     exerciseTypes.push( exerciseData[i].type );
                     exercises[ exerciseData[i].type ] = exerciseData[i];
                     exerciseKeyToType[ exerciseData[i].key ] = exerciseData[i].type;
+                }
+
+                /*------------------- CONSTRUCTORS ----------------------------*/
+
+                function Lift( liftName ) {
+                    this.liftName = liftName;
+                    this.set = [];
+                    this.set = [0,0,0,0];
+                }
+
+                function Day( dayName, lifts ) {
+                    this.dayName = dayName;
+                    this.lift = lifts;
+                }
+
+                function Week( number, days ) {
+                    this.number = number;
+                    this.days = days;
+                }
+
+                function Program( weeks ) {
+                    this.weeks = weeks;
+                }
+
+
+                function calcOneRM ( exercise ) {
+                    var max = exercise.weight/(1.0278-(0.0278*exercise.reps));
+                    max = max*(1+((exercise.sets-1)*0.0235));
+                    max = max.toFixed(1);
+                    return max;
+                }
+
+                function calcFiveRM ( exercise ) {
+                    return helpers.calcxRM( exercise.weight, 5 );
                 }
 
                 /*  Performs calculations of set weights based off of a previous set and the ramping percentage.
@@ -81,8 +116,8 @@ define( [
                             var lookupType = [ "weight", "reps", "sets" ];
 
                             for ( var i in lookupType ) {
-                                pushValue( 
-                                    checkForNaN( 
+                                helpers.pushValue( 
+                                    helpers.checkForNaN( 
                                         exercise[ lookupType[ i ] ], 
                                         "[" + exercise.type + "] " + lookupType[ i ],
                                         true 
@@ -105,8 +140,8 @@ define( [
                         var errors = [];
 
                         for ( var optionKey in optionsData ) {
-                            pushValue( 
-                                checkForNaN( 
+                            helpers.pushValue( 
+                                helpers.checkForNaN( 
                                     optionsData[ optionKey ],
                                     optionKey,
                                     true
@@ -131,7 +166,7 @@ define( [
                             optionsData["Smallest Plate"] *= 2 ;
                         }
 
-                        if (digitRound( optionsData["Program Length"] , 0) > 18) {
+                        if (helpers.digitRound( optionsData["Program Length"] , 0) > 18) {
                             errors.push( "Running this program for more than 18 weeks without a reset is very ambitious." );
                             return errors;
                         }
@@ -160,20 +195,6 @@ define( [
                         }
                     */
                     calcRepMaxes: function() {
-                        function calcOneRM ( exercise ) {
-                            var max = exercise.weight/(1.0278-(0.0278*exercise.reps));
-                            max = max*(1+((exercise.sets-1)*0.0235));
-                            max = max.toFixed(1);
-                            return max;
-                        }
-
-                        function calcxRM (weight, reps) {
-                            return weight*(1.0278-(0.0278*reps));
-                        }
-
-                        function calcFiveRM ( exercise ) {
-                            return calcxRM( exercise.weight, 5 );
-                        }
 
                         var repMaxes = {};
 
@@ -268,15 +289,15 @@ define( [
                                 };
                             }
 
-                            weeks[0].Week.Monday.exercises.squat.set = fillDownSets( calcxRM( squatMax , 5) * 0.925, 5, rampingPercent );
-                            weeks[0].Week.Monday.exercises.bench.set = fillDownSets( calcxRM( benchMax , 5) * 0.925, 5, rampingPercent );
-                            weeks[0].Week.Monday.exercises.row.set = fillDownSets( calcxRM( rowMax, 5) * 0.925, 5, rampingPercent );
+                            weeks[0].Week.Monday.exercises.squat.set = fillDownSets( calcFiveRM( squatMax ) * 0.925, 5, rampingPercent );
+                            weeks[0].Week.Monday.exercises.bench.set = fillDownSets( calcFiveRM( benchMax ) * 0.925, 5, rampingPercent );
+                            weeks[0].Week.Monday.exercises.row.set = fillDownSets( calcFiveRM( rowMax) * 0.925, 5, rampingPercent );
                             weeks[0].Week.Monday.reps = [5,5,5,5,5];
 
                             weeks[0].Week.Wednesday.exercises.squat.set = fillDownSets( weeks[0].Week.Monday.exercises.squat.set[2], 3, rampingPercent );
                             weeks[0].Week.Wednesday.exercises.squat.set[3] = weeks[0].Week.Monday.exercises.squat.set[2];
-                            weeks[0].Week.Wednesday.exercises.incline.set = fillDownSets( calcxRM( incMax, 5 ) * 0.925, 4, rampingPercent );
-                            weeks[0].Week.Wednesday.exercises.dead.set = fillDownSets( calcxRM( deadMax, 5) * 0.925, 4, rampingPercent );
+                            weeks[0].Week.Wednesday.exercises.incline.set = fillDownSets( calcFiveRM( incMax ) * 0.925, 4, rampingPercent );
+                            weeks[0].Week.Wednesday.exercises.dead.set = fillDownSets( calcFiveRM( deadMax ) * 0.925, 4, rampingPercent );
                             weeks[0].Week.Wednesday.reps = [5,5,5,5];
 
                             weeks[0].Week.Friday.exercises.squat.set = fillDownSets( weeks[0].Week.Monday.exercises.squat.set[4] * increasePercent, 5, rampingPercent );
