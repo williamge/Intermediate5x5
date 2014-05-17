@@ -72,4 +72,18 @@ describe("Exercises Service", function() {
     ).toThrowError();
 
   });
+
+  it("should return an exercise if it can find an exercise", function() {
+
+    expect( exercisesService.getExercise( "Squat" ).type )
+    .toEqual( "Squat" );
+
+    expect( exercisesService.getExercise( "Incline Bench" ).type )
+    .toEqual( "Incline Bench" );
+
+    expect( exercisesService.getExercise( "Incline Bench" ).weight )
+    .toEqual( 95 );
+
+  });
+
 });
