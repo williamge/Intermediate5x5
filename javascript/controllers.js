@@ -55,8 +55,9 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
             $scope.tables = [];
             $scope.resultsRows = [];
 
-            $scope.errors = exercisesService.checkInputs();
-            $scope.errors = $scope.errors.concat( exercisesService.checkOptions() );
+            var program = exercisesService.getProgram();
+
+            $scope.errors = program.errors;
 
             // Validate all user input  
             if ( $scope.errors.length ) {
@@ -67,7 +68,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
                 $scope.setMaxes( repMaxes );
 
-                var weeks = exercisesService.getProgram();
+                var weeks = program.program;
 
                 /*  Helper functions to bring the 'weeks' object returned by exercisesService.getProgram()
                     in to a better format for rendering in AngularJS.
