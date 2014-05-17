@@ -162,12 +162,16 @@
    */
   var currentWindowOnload = window.onload;
 
+  window.executeTests = function() {
+    htmlReporter.initialize();
+    env.execute();
+  };
+
   window.onload = function() {
     if (currentWindowOnload) {
       currentWindowOnload();
     }
-    htmlReporter.initialize();
-    env.execute();
+    window.executeTests();
   };
 
   /**
