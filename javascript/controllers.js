@@ -77,7 +77,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
 
                     Returns: An Array of weeks (as specified by the Object returned by "formatWeek")
                  */ 
-                function formatWeeks( weeks ) {
+                var formatWeeks = function( weeks ) {
 
                     /*  Formats a week in to a more convenient form.
                         
@@ -149,7 +149,7 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
                     function formatExercises( exercises, day ) {
                         var exercisesFormatted = [];
 
-                        for ( exKey_ in exercises ) {
+                        for ( var exKey_ in exercises ) {
                             var ex_ = exercises[ exKey_ ];
 
                             var exercise$ = {
@@ -157,11 +157,11 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
                                 sets: []
                             };
 
-                            for ( setNum in ex_.set ) {
+                            for ( var setNum in ex_.set ) {
                                 var set$ = {
                                     weight: xRound( ex_.set[setNum], exercisesService.options["Smallest Plate"] ),
                                     reps: day.reps[setNum]
-                                }
+                                };
 
                                 exercise$.sets.push( set$ );
                             }
@@ -181,11 +181,11 @@ squatApp.controller( "mainCtrl", [ "$scope", "$http", "exercisesService",
                     }
 
                     return weeks$;
-                }
+                };
 
                 $scope.tables = formatWeeks( weeks );
 
-            };
+            }
         };
     }
 ]);

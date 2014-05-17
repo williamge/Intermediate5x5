@@ -20,10 +20,10 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
             Returns:    (Array) of filled out sets calculated from topSet and rampingPercent
         */
         var fillDownSets = function( topSet, sets, rampingPercent ) {
-            var setArray = new Array();
+            var setArray = [];
             for (i=sets-1; i>-1; i--) {
                 setArray[i] = topSet * (1 - (rampingPercent*(sets-i-1)));
-            };
+            }
             return setArray;
         };
 
@@ -161,17 +161,17 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
                     max = max*(1+((exercise.sets-1)*0.0235));
                     max = max.toFixed(1);
                     return max;
-                };
+                }
 
                 function calcxRM (weight, reps) {
                     return weight*(1.0278-(0.0278*reps));
-                };
+                }
 
                 function calcFiveRM ( exercise ) {
                     return calcxRM( exercise.weight, 5 );
-                };
+                }
 
-                var repMaxes = {}
+                var repMaxes = {};
 
                 for ( var exerciseKey in exercises ) {
                     var exercise = exercises[ exerciseKey ];
@@ -179,7 +179,7 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
                     repMaxes[exerciseKey] = {
                         oneRep : calcOneRM( exercise ),
                         fiveRep : calcFiveRM( exercise )
-                    }
+                    };
                 }
 
                 return repMaxes;
@@ -232,7 +232,7 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
                                 bench: new Lift('Bench'),
                                 row: new Lift('Row'),
                             },
-                            reps: new Array(),
+                            reps: [],
                             asstWork: [
                                 "Weighted Hyperextensions - 2 sets of 8-12 reps",
                                 "Weighted Decline Situps - 4 sets of 8-15 reps"
@@ -244,7 +244,7 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
                                 incline: new Lift('Incline'),
                                 dead: new Lift('Deadlift'),
                             },
-                            reps: new Array(),
+                            reps: [],
                             asstWork: [
                                 "Situps - 3 sets of 8-15 reps"
                             ]
@@ -255,14 +255,14 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
                                 bench: new Lift('Bench'),
                                 row: new Lift('Row'),
                             },
-                            reps: new Array(),
+                            reps: [],
                             asstWork: [
                                 "Weighted Dips - 3 sets of 5-8 reps",
                                 "Barbell curls - 3 sets of 8-12 reps",
                                 "Triceps Extensions - 3 sets of 8-12 reps"
                             ]
                         };
-                    };
+                    }
 
                     weeks[0].Week.Monday.exercises.squat.set = fillDownSets( calcxRM( squatMax , 5) * 0.925, 5, rampingPercent );
                     weeks[0].Week.Monday.exercises.bench.set = fillDownSets( calcxRM( benchMax , 5) * 0.925, 5, rampingPercent );
@@ -309,6 +309,6 @@ squatApp.factory( "exercisesService", [ "exerciseData", "exerciseOptions",
                 }
                 return output;
             } 
-        }
+        };
     }
 ]);

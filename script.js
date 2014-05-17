@@ -2,19 +2,19 @@
 
 function Lift( liftName ) {
     this.liftName = liftName;
-    this.set = new Array();
+    this.set = [];
     this.set = [0,0,0,0];
-};
+}
 
 function Day( dayName, lifts ) {
     this.dayName = dayName;
     this.lift = lifts;
-};
+}
 
 function Week( number, days ) {
     this.number = number;
     this.days = days;
-};
+}
 
 function Program( weeks ) {
     this.weeks = weeks;
@@ -24,11 +24,11 @@ function Program( weeks ) {
 
 function calcxRM (weight, reps) {
     return weight*(1.0278-(0.0278*reps));
-};
+}
 
 function xRound (num, digit) {
     return (num % digit) >= (digit/2) ? parseInt(num / digit) * digit + digit : parseInt(num / digit) * digit;
-};
+}
 
 function digitRound(num, digit) {
     digit = Math.pow(10, digit);
@@ -53,7 +53,7 @@ var checkForNaN = function( number, name, warn ) {
     }
 
     return output;
-}
+};
 
 /*  Helper function to push a value in to an array only if the value is not null/undefined
     Arguments:  (anything) value: the value to be pushed in to the array
@@ -65,4 +65,4 @@ var pushValue = function( value, array ) {
         array.push( value );
     }
     return value;
-}
+};
