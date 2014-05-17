@@ -1,5 +1,6 @@
 define( [
   "angular",
+  "angular-mocks"
   "app",
   "exercisesService"
 ],  function( angular, app ) {
