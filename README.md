@@ -12,3 +12,5 @@ This project was converted from a pure JQuery based page to an AngularJS based p
 
 Demo can be found at: http://williamge.github.io/Intermediate5x5/
 
+Unit test runner can be found at: http://williamge.github.io/Intermediate5x5/tests/SpecRunner.html
+
