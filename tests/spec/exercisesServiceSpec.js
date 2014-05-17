@@ -71,6 +71,12 @@ describe("Exercises Service", function() {
       } 
     ).toThrowError();
 
+    expect( 
+      function() {
+        exercisesService.getExerciseName( "exercise that is clearly not in there" )
+      } 
+    ).toThrowError();
+
   });
 
   it("should return an exercise if it can find an exercise", function() {
@@ -84,6 +90,15 @@ describe("Exercises Service", function() {
     expect( exercisesService.getExercise( "Incline Bench" ).weight )
     .toEqual( 95 );
 
+  });
+
+  it("should return an exercise name if it can find an exercise", function() {
+
+    expect( exercisesService.getExerciseName( "squat" ) )
+    .toEqual( "Squat" );
+
+    expect( exercisesService.getExerciseName( "incline" ) )
+    .toEqual( "Incline Bench" );
   });
 
 });
