@@ -139,6 +139,7 @@ define( [
                     checkOptions: function() {
                         var errors = [];
 
+                        //check each option to ensure they are numbers
                         for ( var optionKey in optionsData ) {
                             helpers.pushValue( 
                                 helpers.checkForNaN( 
