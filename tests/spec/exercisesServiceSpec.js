@@ -170,6 +170,76 @@ define( [
           
         });
 
+        describe("should return the correct amounts for rep maximums", function() {
+
+          it("for squats", function() {
+
+            var repMaxes = exercisesService.calcRepMaxes();
+            console.log(repMaxes);
+
+            expect( repMaxes["Squat"].oneRep )
+            .toBeCloseTo(253.2, 1);
+
+            expect( repMaxes["Squat"].fiveRep )
+            .toBeCloseTo(199.98, 1);
+
+          });
+
+          it("for bench presses", function() {
+
+            var repMaxes = exercisesService.calcRepMaxes();
+            console.log(repMaxes);
+
+            expect( repMaxes["Bench Press"].oneRep )
+            .toBeCloseTo(208.1, 1);
+
+            expect( repMaxes["Bench Press"].fiveRep )
+            .toBeCloseTo(164.4, 1);
+
+          });
+
+          it("for deadlifts", function() {
+
+            var repMaxes = exercisesService.calcRepMaxes();
+            console.log(repMaxes);
+
+            expect( repMaxes["Deadlift"].oneRep )
+            .toBeCloseTo(354.4, 1);
+
+            expect( repMaxes["Deadlift"].fiveRep )
+            .toBeCloseTo(280, 1);
+
+          });
+
+          it("for barbell rows", function() {
+
+            var repMaxes = exercisesService.calcRepMaxes();
+            console.log(repMaxes);
+
+            expect( repMaxes["Barbell Row"].oneRep )
+            .toBeCloseTo(151.9, 1);
+
+            expect( repMaxes["Barbell Row"].fiveRep )
+            .toBeCloseTo(120, 1);
+
+          });
+
+          it("for incline benches", function() {
+
+            var repMaxes = exercisesService.calcRepMaxes();
+            console.log(repMaxes);
+
+            expect( repMaxes["Incline Bench"].oneRep )
+            .toBeCloseTo(106.9, 1);
+
+            expect( repMaxes["Incline Bench"].fiveRep )
+            .toBeCloseTo(84.4, 1);
+
+          });
+          
+        });
+
+
       });
 
     } 
