@@ -171,7 +171,7 @@
     if (currentWindowOnload) {
       currentWindowOnload();
     }
-    window.executeTests();
+    //window.executeTests();
   };
 
   /**
