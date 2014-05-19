@@ -290,15 +290,23 @@ define( [
                                 };
                             }
 
-                            weeks[0].Week.Monday.exercises.squat.set = fillDownSets( calcFiveRM( squatMax ) * 0.925, 5, rampingPercent );
-                            weeks[0].Week.Monday.exercises.bench.set = fillDownSets( calcFiveRM( benchMax ) * 0.925, 5, rampingPercent );
-                            weeks[0].Week.Monday.exercises.row.set = fillDownSets( calcFiveRM( rowMax) * 0.925, 5, rampingPercent );
+                            //TODO: move this to a class, this is really stupid needing this when it's used elsewhere
+                            //just a helper function to construct an exercise object
+                            var makeExercise = function ( weight ) {
+                                return {
+                                    weight: weight
+                                };
+                            };
+
+                            weeks[0].Week.Monday.exercises.squat.set = fillDownSets( calcFiveRM( makeExercise(squatMax) ) * 0.925, 5, rampingPercent );
+                            weeks[0].Week.Monday.exercises.bench.set = fillDownSets( calcFiveRM( makeExercise(benchMax) ) * 0.925, 5, rampingPercent );
+                            weeks[0].Week.Monday.exercises.row.set = fillDownSets( calcFiveRM( makeExercise(rowMax)) * 0.925, 5, rampingPercent );
                             weeks[0].Week.Monday.reps = [5,5,5,5,5];
 
                             weeks[0].Week.Wednesday.exercises.squat.set = fillDownSets( weeks[0].Week.Monday.exercises.squat.set[2], 3, rampingPercent );
                             weeks[0].Week.Wednesday.exercises.squat.set[3] = weeks[0].Week.Monday.exercises.squat.set[2];
-                            weeks[0].Week.Wednesday.exercises.incline.set = fillDownSets( calcFiveRM( incMax ) * 0.925, 4, rampingPercent );
-                            weeks[0].Week.Wednesday.exercises.dead.set = fillDownSets( calcFiveRM( deadMax ) * 0.925, 4, rampingPercent );
+                            weeks[0].Week.Wednesday.exercises.incline.set = fillDownSets( calcFiveRM( makeExercise(incMax) ) * 0.925, 4, rampingPercent );
+                            weeks[0].Week.Wednesday.exercises.dead.set = fillDownSets( calcFiveRM( makeExercise(deadMax) ) * 0.925, 4, rampingPercent );
                             weeks[0].Week.Wednesday.reps = [5,5,5,5];
 
                             weeks[0].Week.Friday.exercises.squat.set = fillDownSets( weeks[0].Week.Monday.exercises.squat.set[4] * increasePercent, 5, rampingPercent );
