@@ -12,6 +12,8 @@ define( [
 
         beforeEach( function() {
 
+          module("squatApp");
+
           module(function($provide) {
               $provide.value("exerciseData",  [
                 {
@@ -64,8 +66,6 @@ define( [
               } );
             });
 
-          module("squatApp");
-
           inject( function( $injector ) {
             exercisesService = $injector.get( "exercisesService" );
           } );
@@ -109,12 +109,65 @@ define( [
           .toEqual( "Incline Bench" );
         });
 
-        it("should return errors if the exercise inputs are bad ", function() {
+        describe("should return errors if the exercise inputs are bad ", function() {
 
-          exercisesService.getExercise( "Squat" ).weight = "string";
+          it("should return errors if a number is too high", function() {
+            exercisesService.getExercise( "Squat" ).weight = "string";
 
-          expect( exercisesService.checkInputs( "squat" ).length )
-          .toBeTruthy();
+            expect( exercisesService.checkInputs().length )
+            .toEqual(1);
+
+            expect( exercisesService.checkData().length )
+            .toEqual(1);
+          });
+
+        });
+
+        it("should not return errors if the exercise inputs are good ", function() {
+
+          expect( exercisesService.checkInputs().length )
+          .not.toBeTruthy();
+
+          expect( exercisesService.checkData().length )
+          .not.toBeTruthy();
+          
+        });
+
+        describe("should return errors if the exercise options are bad ", function() {
+
+          it("should return errors if a number is too high", function() {
+            exercisesService.options[ "Ramping %" ] = 50;
+
+            expect( exercisesService.checkOptions().length )
+            .toEqual(1);
+
+            expect( exercisesService.checkData().length )
+            .toEqual(1);
+          });
+
+          it("should return errors if an option is NaN", function() {
+            exercisesService.options[ "Program Length" ] = "string";
+            exercisesService.options[ "Ramping %" ] = "string";
+            exercisesService.options[ "Program Length" ] = "string";
+            exercisesService.options[ "Increase %" ] = "string";
+
+            expect( exercisesService.checkOptions().length )
+            .toEqual(3);
+
+            expect( exercisesService.checkData().length )
+            .toEqual(3);
+          });
+
+        });
+
+        it("should not return errors if the exercise options are good ", function() {
+
+          expect( exercisesService.checkInputs().length )
+          .not.toBeTruthy();
+
+          expect( exercisesService.checkData().length )
+          .not.toBeTruthy();
+          
         });
 
       });
