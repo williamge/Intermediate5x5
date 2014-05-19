@@ -1,6 +1,6 @@
 define( [
   "angular",
-  "angular-mocks"
+  "angular-mocks",
   "app",
   "exercisesService"
 ],  function( angular, app ) {
@@ -109,8 +109,15 @@ define( [
           .toEqual( "Incline Bench" );
         });
 
-      });
+        it("should return errors if the exercise inputs are bad ", function() {
 
+          exercisesService.getExercise( "Squat" ).weight = "string";
+
+          expect( exercisesService.checkInputs( "squat" ).length )
+          .toBeTruthy();
+        });
+
+      });
 
     } 
 );
